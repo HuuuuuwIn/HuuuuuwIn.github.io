@@ -195,6 +195,379 @@
           
           
             
+              <a class="post-title-link" href="/2015/10/14/Mathjax与LaTex公式简介/" itemprop="url">
+                Mathjax与LaTex公式简介
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-10-14T11:02:11+08:00" content="2015-10-14">
+            2015-10-14
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Mathjax/" itemprop="url" rel="index">
+                  <span itemprop="name">Mathjax</span>
+                </a>
+              </span>
+
+              
+              
+                ， 
+              
+
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Mathjax/工具/" itemprop="url" rel="index">
+                  <span itemprop="name">工具</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/10/14/Mathjax与LaTex公式简介/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/14/Mathjax与LaTex公式简介/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h2 id="本文介绍Mathjax的一些写法。">本文介绍Mathjax的一些写法。</h2><h2 id="MathJax简介">MathJax简介</h2><p><a href="https://www.mathjax.org/" target="_blank" rel="external">MathJax</a>是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。</p>
+<h2 id="基础">基础</h2><h3 id="公式标记与查看公式">公式标记与查看公式</h3><p>MathJax中的公式排版有两种方式，inline和displayed。inline表示公式嵌入到文本段中，displayed表示公式独自成为一个段落。例如，$f(x)=a+b$这是一个inline公式，而下面$$f(x)=a+b$$是一个displayed公式。<br>在MathJax中，默认的displayed公式分隔符有\$\$…\$\$,而默认的inline公式分隔符为 (…) ,当然这些都是可以自定义的，具体配置请参考<a href="http://docs.mathjax.org/en/latest/start.html#tex-and-latex-input" target="_blank" rel="external">文档</a>。下文中，使用\$\$…\$\$作为displayed分隔符，\$…\$作为inline分隔符(hexo默认也是这两种方式)。</p>
+<h3 id="希腊字母">希腊字母</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">大写</th>
+<th style="text-align:center">Tex</th>
+<th style="text-align:center">小写</th>
+<th style="text-align:center">Tex</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">alpha</td>
+<td style="text-align:center">A</td>
+<td style="text-align:center">A</td>
+<td style="text-align:center">α</td>
+<td style="text-align:center">\alpha</td>
+</tr>
+<tr>
+<td style="text-align:center">beta</td>
+<td style="text-align:center">B</td>
+<td style="text-align:center">B</td>
+<td style="text-align:center">β</td>
+<td style="text-align:center">\beta</td>
+</tr>
+<tr>
+<td style="text-align:center">gamma</td>
+<td style="text-align:center">$\Gamma$</td>
+<td style="text-align:center">\Gamma</td>
+<td style="text-align:center">$\gamma$</td>
+<td style="text-align:center">\gamma</td>
+</tr>
+<tr>
+<td style="text-align:center">delta</td>
+<td style="text-align:center">$\Delta$</td>
+<td style="text-align:center">\Delta</td>
+<td style="text-align:center">$\delta$</td>
+<td style="text-align:center">\delta</td>
+</tr>
+<tr>
+<td style="text-align:center">epsilon</td>
+<td style="text-align:center">E</td>
+<td style="text-align:center">E</td>
+<td style="text-align:center">$\epsilon$</td>
+<td style="text-align:center">\epsilon</td>
+</tr>
+<tr>
+<td style="text-align:center">zeta</td>
+<td style="text-align:center">Z</td>
+<td style="text-align:center">Z</td>
+<td style="text-align:center">$\zeta$</td>
+<td style="text-align:center">\zeta</td>
+</tr>
+<tr>
+<td style="text-align:center">eta</td>
+<td style="text-align:center">H</td>
+<td style="text-align:center">H</td>
+<td style="text-align:center">$\eta$</td>
+<td style="text-align:center">\eta</td>
+</tr>
+<tr>
+<td style="text-align:center">theta</td>
+<td style="text-align:center">$\Theta$</td>
+<td style="text-align:center">\Theta</td>
+<td style="text-align:center">$\theta$</td>
+<td style="text-align:center">\theta</td>
+</tr>
+<tr>
+<td style="text-align:center">iota</td>
+<td style="text-align:center">I</td>
+<td style="text-align:center">I</td>
+<td style="text-align:center">$\iota$</td>
+<td style="text-align:center">\iota</td>
+</tr>
+<tr>
+<td style="text-align:center">kappa</td>
+<td style="text-align:center">K</td>
+<td style="text-align:center">K</td>
+<td style="text-align:center">$\kappa$</td>
+<td style="text-align:center">\kappa</td>
+</tr>
+<tr>
+<td style="text-align:center">lambda</td>
+<td style="text-align:center">$\Lambda$</td>
+<td style="text-align:center">\Lambda</td>
+<td style="text-align:center">$\lambda$</td>
+<td style="text-align:center">\lambda</td>
+</tr>
+<tr>
+<td style="text-align:center">mu</td>
+<td style="text-align:center">M</td>
+<td style="text-align:center">M</td>
+<td style="text-align:center">$\mu$</td>
+<td style="text-align:center">\mu</td>
+</tr>
+<tr>
+<td style="text-align:center">nu</td>
+<td style="text-align:center">N</td>
+<td style="text-align:center">N</td>
+<td style="text-align:center">$\nu$</td>
+<td style="text-align:center">\nu</td>
+</tr>
+<tr>
+<td style="text-align:center">xi</td>
+<td style="text-align:center">$\Xi$</td>
+<td style="text-align:center">\Xi</td>
+<td style="text-align:center">$\xi$</td>
+<td style="text-align:center">\xi</td>
+</tr>
+<tr>
+<td style="text-align:center">omicron</td>
+<td style="text-align:center">O</td>
+<td style="text-align:center">O</td>
+<td style="text-align:center">$\omicron$</td>
+<td style="text-align:center">\omicron</td>
+</tr>
+<tr>
+<td style="text-align:center">pi</td>
+<td style="text-align:center">$\Pi$</td>
+<td style="text-align:center">\Pi</td>
+<td style="text-align:center">$\pi$</td>
+<td style="text-align:center">\pi</td>
+</tr>
+<tr>
+<td style="text-align:center">rho</td>
+<td style="text-align:center">P</td>
+<td style="text-align:center">P</td>
+<td style="text-align:center">$\rho$</td>
+<td style="text-align:center">\rho</td>
+</tr>
+<tr>
+<td style="text-align:center">sigma</td>
+<td style="text-align:center">$\Sigma$</td>
+<td style="text-align:center">\Sigma</td>
+<td style="text-align:center">$\sigma$</td>
+<td style="text-align:center">\sigma</td>
+</tr>
+<tr>
+<td style="text-align:center">tau</td>
+<td style="text-align:center">T</td>
+<td style="text-align:center">T</td>
+<td style="text-align:center">$\tau$</td>
+<td style="text-align:center">\tau</td>
+</tr>
+<tr>
+<td style="text-align:center">upsilon</td>
+<td style="text-align:center">$\Upsilon$</td>
+<td style="text-align:center">\Upsilon</td>
+<td style="text-align:center">$\upsilon$</td>
+<td style="text-align:center">\upsilon</td>
+</tr>
+<tr>
+<td style="text-align:center">phi</td>
+<td style="text-align:center">$\Phi$</td>
+<td style="text-align:center">\Phi</td>
+<td style="text-align:center">$\phi$</td>
+<td style="text-align:center">\phi</td>
+</tr>
+<tr>
+<td style="text-align:center">chi</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">$\chi$</td>
+<td style="text-align:center">\chi</td>
+</tr>
+<tr>
+<td style="text-align:center">psi</td>
+<td style="text-align:center">$\Psi$</td>
+<td style="text-align:center">\Psi</td>
+<td style="text-align:center">$\psi$</td>
+<td style="text-align:center">\psi</td>
+</tr>
+<tr>
+<td style="text-align:center">omega</td>
+<td style="text-align:center">$\Omega$</td>
+<td style="text-align:center">\Omega</td>
+<td style="text-align:center">$\omega$</td>
+<td style="text-align:center">\omega</td>
+</tr>
+</tbody>
+</table>
+<h3 id="上标与下标">上标与下标</h3><p>上标和下标分别使用^与_。例如x_i^2：$x_i^2$。<br>默认情况下，上下标符号仅仅对下一个组起作用。一个组即单个字符或者使用{..}包裹起来的内容。<br>也就是说，如果使用10^10，会得到$10^10$，而10^{10}才是$10^{10}$。同时，大括号还能消除二义性，如x^5^6将得到一个错误，必须使用大括号来界定^的结合性，如{x^5}^6：${x^5}^6$ 或者 x^{5^6}：$x^{5^6}$。<br>另外，如果要在左右两边都有上下标，可以用\sideset命令。</p>
+<p>例子：\sideset{^1_2}{^3_4}\bigotimes</p>
+<p>显示：$\sideset{^1_2}{^3_4}\bigotimes$</p>
+<h3 id="括号">括号</h3><blockquote>
+<ol>
+<li>小括号与方括号：使用原始的( )、\left、\right，[ ]即可，如(2+3)[4+4]：(2+3)[4+4]</li>
+<li>大括号：时由于大括号{}被用来分组，因此需要使用{和}表示大括号，也可以<br>使用\lbrace 和\rbrace来表示。如{a<em>b}:${a</em>b}$，\lbrace a<em>b \rbrace：$\lbrace a</em>b \rbrace$。</li>
+<li>尖括号：使用\langle 和 \rangle表示左尖括号和右尖括号。如\langle x \rangle：$\langle x \rangle$。</li>
+<li>上取整：使用\lceil 和 \rceil 表示。 如，\lceil x \rceil：$\lceil x \rceil$。</li>
+<li>下取整：使用\lfloor 和 \rfloor 表示。如，\lfloor x \rfloor：$\lfloor x \rfloor$。</li>
+<li>不可见括号：使用.表示。</li>
+</ol>
+</blockquote>
+<p>当要显示大号的括号或分隔符时，要用\left、\right和\lbrace 、\rbrace命令。<br>例子：f(x,y,z) = 3y^2z \left( 3+\frac{7x+5}{1+y^2} \right)<br>显示：$f(x,y,z) = 3y^2z \left( 3+\frac{7x+5}{1+y^2} \right)$</p>
+<h3 id="求和与积分">求和与积分</h3><p>\sum用来表示求和符号，其下标表示求和下限，上标表示上限。如，\sum_1^n：$\sum_1^n$。<br>\int用来表示积分符号，同样地，其上下标表示积分的上下限。如，\int_1^\infty：$\int_1^\infty$。<br>与此类似的符号还有，\prod：$\prod$，\bigcup:$\bigcup$，\bigcap：$\bigcap$，\iint：$\iint$。</p>
+<h3 id="分式与根式">分式与根式</h3><p>分式的表示。第一种，使用\frac ab，\frac作用于其后的两个组a，b，结果为$\frac ab$。如果你的分子或分母不是单个字符，请使用{..}来分组。第二种，使用\over来分隔一个组的前后两部分，如{a+1\over b+1}：${a+1\over b+1}$。</p>
+<p>根式使用\sqrt来表示。如，\sqrt[4]{\frac xy} ：$\sqrt[4]{\frac xy}$</p>
+<h3 id="字体">字体</h3><blockquote>
+<ul>
+<li>使用\mathbb或\Bbb显示黑板粗体字，此字体经常用来表示代表实数、整数、有理数、复数的大写字母。如，<br>$\Bbb{CHNQRZ}$。</li>
+<li>使用\mathbf显示黑体字，如，<br>$\mathbf{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$，$\mathbf{abcdefghijklmnopqrstuvwxyz}$。</li>
+<li>使用\mathtt显示打印机字体，如，<br>$\mathtt{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$，$\mathtt{abcdefghijklmnopqrstuvwxyz}$。</li>
+<li>使用\mathrm显示罗马字体，如，<br>$\mathrm{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$，$\mathrm{abcdefghijklmnopqrstuvwxyz}$。</li>
+<li>使用\mathscr显示手写体，如，<br>$\mathscr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$。</li>
+<li>使用\mathfrak显示Fraktur字母（一种德国字体），如<br>$\mathfrak{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$，$\mathfrak{abcdefghijklmnopqrstuvwxyz}$。</li>
+</ul>
+</blockquote>
+<p>要对公式的某一部分字符进行字体转换，可以用{\rm 需转换的部分字符}命令，其中\rm可以参照下表选择合适的字体。一般情况下，公式默认为意大利体。<br>\rm　　罗马体　　　　　　　\it　　意大利体<br>\bf　　黑体　　　　　　　　\cal 　花体<br>\sl　　倾斜体　　　　　　　\sf　　等线体<br>\mit 　数学斜体　　　　　　\tt　　打字机字体<br>\sc　　小体大写字母</p>
+<h3 id="特殊函数与符号">特殊函数与符号</h3><blockquote>
+<ol>
+<li>常见的三角函数，求极限符号可直接使用+缩写即可。如$sinx$,$arctanx$,$lim_{1→\infty}$。</li>
+<li>比较运算符：\lt \gt \le \ge \neq ： $\lt \gt \le \ge \neq$。可以在这些运算符前面加上\not，如\not\lt：$\not\lt$。</li>
+<li>\times \div \pm \mp表示：$\times \div \pm \mp$，\cdot表示居中的点，x \cdot y : $x \cdot y$。</li>
+<li>集合关系与运算：\cup \cap \setminus \subset \subseteq \subsetneq \supset \in \notin \emptyset \varnothing ：$\cup \cap \setminus \subset \subseteq \subsetneq \supset \in \notin \emptyset \varnothing$</li>
+<li>表示排列使用{n+1 \choose 2k} 或 \binom{n+1}{2k}，$\binom{n+1}{2k}$。</li>
+<li>箭头：\to \rightarrow \leftarrow \Rightarrow \Leftarrow \mapsto : $\to \rightarrow \leftarrow \Rightarrow \Leftarrow \mapsto$</li>
+<li>逻辑运算符：\land \lor \lnot \forall \exists \top \bot \vdash \vDash ： $\land \lor \lnot \forall \exists \top \bot \vdash \vDash$</li>
+<li>\star \ast \oplus \circ \bullet ： $\star \ast \oplus \circ \bullet$。</li>
+<li>\approx \sim \cong \equiv \prec ： $\approx \sim \cong \equiv \prec$。</li>
+<li>\infty \aleph_0    $\infty \aleph_0$<br>\nabla \partial   $\nabla \partial$<br>\Im \Re    $\Im \Re$。</li>
+<li>模运算 \pmode, 如，a\equiv b\pmod n：$a\equiv b\pmod n$。</li>
+<li>\ldots与\cdots，其区别是dots的位置不同，ldots位置稍低，cdots位置居中。a1+a2+⋯+an，a1,a2,…,an。</li>
+<li>一些希腊字母具有变体形式，如 \epsilon \varepsilon : $\epsilon \varepsilon$, \phi \varphi : $\phi \varphi$。</li>
+</ol>
+</blockquote>
+<p>###空间<br>通常MathJax通过内部策略自己管理公式内部的空间，因此a…b与a…….b（.表示空格）都会显示为ab。可以通过在ab间加入\,增加些许间隙，\;增加较宽的间隙，\quad 与 \qquad 会增加更大的间隙，如，$a\quad{b}$。</p>
+<p>###顶部符号<br>对于单字符，\hat：$\hat{x}$，多字符可以使用\widehat,$\widehat{xy}$.类似的还有\hat,\overline,\vec,\overrightarrow, \dot \ddot : $\hat{x}\overline{xyz}\vec{a}\overrightarrow{x}\dot{x} \ddot{x} $。</p>
+<p>##表格<br>使用\begin {array}{列样式}…\end{array}这样的形式来创建表格，列样式可以是clr表示居中，左，右对齐，还可以使用|表示一条竖线。表格中 各行使用\\分隔，各列使用&amp;分隔。使用\hline在本行前加入一条直线。 例如， \begin {array}{c|lcr} n &amp; \text{Left} &amp; \text{Center} &amp; \text{Right} \\ \hline 1 &amp; 0.24 &amp; 1 &amp; 125 \\ 2 &amp; -1 &amp; 189 &amp; -8 \\ 3 &amp; -20 &amp; 2000 &amp; 1+10i \\ \end{array}  结果：</p>
+<p>$$ \begin{array}{c|lcr} n &amp; \text{Left} &amp; \text{Center} &amp; \text{Right} \\ \hline 1 &amp; 0.24 &amp; 1 &amp; 125 \\ 2 &amp; -1 &amp; 189 &amp; -8 \\ 3 &amp; -20 &amp; 2000 &amp; 1+10i \\ \end{array} $$</p>
+<p>##矩阵</p>
+<p>###基本用法<br>使用\$\$\begin {matrix}…\end{matrix}\$\$这样的形式来表示矩阵，在\begin与\end之间加入矩阵中的元素即可。矩阵的行之间使用\分隔，列之间使用&amp;分隔。</p>
+<p>例如 \$\$ \begin {matrix} 1 &amp; x &amp; x^2 \\ 1 &amp; y &amp; y^2 \\ 1 &amp; z &amp; z^2 \\ \end{matrix} \$\$ 结果：</p>
+<p>$$\begin{matrix} 1 &amp; x &amp; x^2 \\ 1 &amp; y &amp; y^2 \\ 1 &amp; z &amp; z^2 \\ \end{matrix}$$</p>
+<p>###加括号<br>如果要对矩阵加括号，可以像上文中提到的一样，使用\left与\right配合表示括号符号。也可以使用特殊的matrix。即替换\begin {matrix}…\end{matrix}中的matrix为pmatrix，bmatrix，Bmatrix，vmatrix,Vmatrix.</p>
+<p>如pmatrix:$\begin{pmatrix}1&amp;2\\3&amp;4\end{pmatrix}$<br>bmatrix:$\begin{bmatrix}1&amp;2\\3&amp;4\end{bmatrix}$<br>Bmatrix:$\begin{Bmatrix}1&amp;2\\3&amp;4\end{Bmatrix}$<br>vmatrix:$\begin{vmatrix}1&amp;2\\3&amp;4\end{vmatrix}$<br>Vmatrix:$\begin{Vmatrix}1&amp;2\\3&amp;4\end{Vmatrix}$</p>
+<p>###省略元素<br>可以使用\cdots $\cdots$ \ddots $\ddots$\vdots $\vdots$来省略矩阵中的元素，如：<br>$$\begin{pmatrix}1&amp;2&amp;\cdots&amp;n\\3&amp;4&amp;\cdots&amp;n\\\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\m&amp;m+1&amp;\cdots&amp;n\end{pmatrix}$$</p>
+<p>###增广矩阵<br>增广矩阵需要使用前面的array来实现，如 \$\$ \left[ \begin {array}{cc|c} 1&amp;2&amp;3\ 4&amp;5&amp;6 \end{array} \right] \$\$ 结果：</p>
+<p>$$\left[ \begin {array}{cc|c} 1&amp;2&amp;3\\ 4&amp;5&amp;6 \end{array} \right]$$</p>
+<p>###对齐的公式</p>
+<p>有时候可能需要一系列的公式中等号对齐，如：</p>
+<p>$$\begin{align}<br>\sqrt{37} &amp; = \sqrt{\frac{73^2-1}{12^2}} \\<br> &amp; = \sqrt{\frac{73^2}{12^2}\cdot\frac{73^2-1}{73^2}} \\<br> &amp; = \sqrt{\frac{73^2}{12^2}}\sqrt{\frac{73^2-1}{73^2}} \\<br> &amp; = \frac{73}{12}\sqrt{1 - \frac{1}{73^2}} \\<br> &amp; \approx \frac{73}{12}\left(1 - \frac{1}{2\cdot73^2}\right)<br>\end{align}$$<br>这需要使用形如\begin {align}…\end{align}的格式，其中需要使用&amp;来指示需要对齐的位置。请使用右键查看上述公式的代码。</p>
+<p>###分类表达式</p>
+<p>定义函数的时候经常需要分情况给出表达式，可使用\begin {cases}…\end{cases}。其中，使用\来分类，使用&amp;指示需要对齐的位置。如：</p>
+<p>$$f(n) =<br>\begin{cases}<br>n/2,  &amp; \text{if $n$ is even} \\<br>3n+1, &amp; \text{if $n$ is odd}  \\<br>\end{cases}$$<br>上述公式的括号也可以移动到右侧，不过需要使用array来实现，如下：</p>
+<p>$$\left.<br>\begin{array}{l}<br>\text{if $n$ is even:}&amp;n/2\\<br>\text{if $n$ is odd:}&amp;3n+1<br>\end{array}<br>\right\}<br>=f(n)$$<br>最后，如果想分类之间的垂直间隔变大，可以使用[2ex]代替\来分隔不同的情况。(3ex,4ex也可以用，1ex相当于原始距离）。</p>
+<p>###数学符号查询</p>
+<p>一般而言，从一个巨大的符号表中查询所需要的特定符号是一件令人沮丧的事情。在此向大家介绍一个LATEX手写符号识别系统，尽情享用吧~ <a href="http://detexify.kirelabs.org/classify.html" target="_blank" rel="external">Detexify²</a>。</p>
+<p>##空间问题</p>
+<p>在使用Latex公式时，有一些不会影响公式正确性，但却会使其看上去很槽糕的问题。</p>
+<p>###不要在再指数或者积分中使用 \frac<br>在指数或者积分表达式中使用\frac会使表达式看起来不清晰，因此在专业的数学排版中很少被使用。应该使用一个水平的/来代替，效果如下：<br>$$\begin{array}{cc}<br>\mathrm{Bad} \\<br>\hline \\<br>e^{i\frac{\pi}2} \quad e^{\frac{i\pi}2}\\<br>\int_{-\frac\pi2}^\frac\pi2 \sin x\,dx \\<br>\end{array}$$</p>
+<p>$$\begin{array}{cc}<br>\mathrm{Better} \\<br>\hline \\<br> e^{i\pi/2} \\<br>\ \int_{-\pi/2}^{\pi/2}\sin x\,dx \\<br>\end{array}$$</p>
+<p>###使用 \mid 代替 | 作为分隔符<br>符号|作为分隔符时有排版空间大小的问题，应该使用\mid代替。效果如下：</p>
+<p>$$\begin{array}{cc}<br>\mathrm{Bad} &amp; \mathrm{Better} \\<br>\hline \\<br>{x|x^2\in\Bbb Z} &amp; {x\mid x^2\in\Bbb Z} \\<br>\end{array}$$</p>
+<p>###多重积分<br>对于多重积分，不要使用\int\int此类的表达，应该使用\iint \iiint等特殊形式。效果如下：</p>
+<p>$$\begin{array}{cc}<br>\mathrm{Bad} &amp; \mathrm{Better} \\<br>\hline \\<br>\int\int_S f(x)\,dy\,dx &amp; \iint_S f(x)\,dy\,dx \\<br>\int\int\int_V f(x)\,dz\,dy\,dx &amp; \iiint_V f(x)\,dz\,dy\,dx<br>\end{array}$$<br>此外，在微分前应该使用\,来增加些许空间，否则TEX会将微分紧凑地排列在一起。如下：</p>
+<p>$$\begin{array}{cc}<br>\mathrm{Bad} &amp; \mathrm{Better} \\<br>\hline \\<br>\iiint_V f(x)dz dy dx &amp; \iiint_V f(x)\,dz\,dy\,dx<br>\end{array}$$</p>
+<p>##连分数</p>
+<p>书写连分数表达式时，请使用\cfrac代替\frac或者\over两者效果对比如下：</p>
+<p>$$x = a_0 + \cfrac{1^2}{a_1+ \cfrac{2^2}{a_2+ \cfrac{3^2}{a_3 + \cfrac{4^4}{a_4 + \cdots}}}} \tag{\cfrac}$$<br>$$x = a_0 + \frac{1^2}{a_1+ \frac{2^2}{a_2+ \frac{3^2}{a_3 + \frac{4^4}{a_4 + \cdots}}}} \tag{\frac}$$</p>
+<p>##方程组<br>（\left{…\right.在hexo中目前不支持）<br>使用\begin {cases} … \end{cases}表达方程组，如：<br>$$\begin{cases}<br>a_1x+b_1y+c_1z=d_1 \\<br>a_2x+b_2y+c_2z=d_2 \\<br>a_3x+b_3y+c_3z=d_3<br>\end{cases}$$</p>
+<p>##公式标记与引用<br>使用\tag{yourtag}来标记公式，如果想在之后引用该公式，则还需要加上\label{yourlabel}在\tag之后，如：</p>
+<p>$$a:= x^2-y^3\tag{1-1}\label{1-1}$$</p>
+<p>为了引用公式，可以使用\eqref {rlabel}，如：<br>$$a+y^3 \stackrel{\eqref{1-1}}= x^2$$<br>可以看到，通过超链接可以跳转到被引用公式位置。</p>
+<p>##如何输入其它特殊字符</p>
+<p>关系运算符：<br>$\pm$：\pm<br>$\times$：\times<br>$\div$：\div<br>$\mid$：\mid<br>$\nmid$：\nmid<br>$\cdot$：\cdot<br>$\circ$：\circ<br>$\ast$：\ast<br>$\bigodot$：\bigodot<br>$\bigotimes$：\bigotimes<br>$\bigoplus$：\bigoplus<br>$\leq$：\leq<br>$\geq$：\geq<br>$\neq$：\neq<br>$\approx$：\approx<br>$\equiv$：\equiv<br>$\sum$：\sum<br>$\prod$：\prod<br>$\coprod$：\coprod</p>
+<p>集合运算符：<br>$\emptyset$：\emptyset<br>$\in$：\in<br>$\notin$：\notin<br>$\subset$：\subset<br>$\supset$：\supset<br>$\subseteq$：\subseteq<br>$\supseteq$：\supseteq<br>$\bigcap$：\bigcap<br>$\bigcup$：\bigcup<br>$\bigvee$：\bigvee<br>$\bigwedge$：\bigwedge<br>$\biguplus$：\biguplus<br>$\bigsqcup$：\bigsqcup</p>
+<p>对数运算符：<br>$\log$：\log<br>$\lg$：\lg<br>$\ln$：\ln</p>
+<p>三角运算符：<br>$\bot$：\bot<br>$\angle$：\angle<br>$30^\circ$：30^\circ<br>sin：\sin<br>cos：\cos<br>tan：\tan<br>cot：\cot<br>sec：\sec<br>csc：\csc</p>
+<p>微积分运算符：<br>$\prime$：\prime<br>$\int$：\int<br>$\iint$：\iint<br>$\iiint$：\iiint<br>$\iiiint$：\iiiint<br>$\oint$：\oint<br>$\lim$：\lim<br>$\infty$：\infty<br>$\nabla$：\nabla</p>
+<p>逻辑运算符：<br>$\because$：\because<br>$\therefore$：\therefore<br>$\forall$：\forall<br>$\exists$：\exists<br>$\not=$：\not=<br>$\not&gt;$：\not&gt;<br>$\not\subset$：\not\subset</p>
+<p>戴帽符号：<br>$\hat{y}$：\hat{y}<br>$\check{y}$：\check{y}<br>$\breve{y}$：\breve{y}</p>
+<p>连线符号：<br>$\overline{a+b+c+d}$：\overline{a+b+c+d}<br>$\underline{a+b+c+d}$：\underline{a+b+c+d}<br>$\overbrace{a+\underbrace{b+c}<em>{1.0}+d}^{2.0}$：\overbrace{a+\underbrace{b+c}</em>{1.0}+d}^{2.0}</p>
+<p>箭头符号：<br>$\uparrow$：\uparrow<br>$\downarrow$：\downarrow<br>$\Uparrow$：\Uparrow<br>$\Downarrow$：\Downarrow<br>$\rightarrow$：\rightarrow<br>$\leftarrow$：\leftarrow<br>$\Rightarrow$：\Rightarrow<br>$\Leftarrow$：\Leftarrow<br>$\longrightarrow$：\longrightarrow<br>$\longleftarrow$：\longleftarrow<br>$\Longrightarrow$：\Longrightarrow<br>$\Longleftarrow$：\Longleftarrow</p>
+<p>要输出字符　空格　#　$　%　&amp;　<em>　{　}　，用命令：　\空格　#　\$　\%　\&amp;　\</em>　{　}</p>
+<p>参考文章：<br><a href="http://mlworks.cn/posts/introduction-to-mathjax-and-latex-expression/" target="_blank" rel="external">Mathjax与LaTex公式简介</a><br><a href="http://iori.sinaapp.com/17.html/comment-page-1?replytocom=2" target="_blank" rel="external">MathJax使用LaTeX语法编写数学公式教程</a></p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/10/14/用spark实现基于物品共现矩阵的相似度算法/" itemprop="url">
                 用spark实现基于物品共现矩阵的相似度算法
               </a>
@@ -615,21 +988,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

@@ -1,0 +1,972 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+
+
+  <meta name="keywords" content="Mathjax,工具," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/images/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="本文介绍Mathjax的一些写法。MathJax简介MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。
+基础公式标记与查看公式MathJax中的公式排版有两种方式，inline和displayed。inline表示公式嵌入到文本段中，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mathjax与LaTex公式简介">
+<meta property="og:url" content="http://3iter.com/2015/10/14/Mathjax与LaTex公式简介/index.html">
+<meta property="og:site_name" content="Hoocoln个人博客">
+<meta property="og:description" content="本文介绍Mathjax的一些写法。MathJax简介MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。
+基础公式标记与查看公式MathJax中的公式排版有两种方式，inline和displayed。inline表示公式嵌入到文本段中，">
+<meta property="og:updated_time" content="2015-10-14T04:06:09.864Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mathjax与LaTex公式简介">
+<meta name="twitter:description" content="本文介绍Mathjax的一些写法。MathJax简介MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。
+基础公式标记与查看公式MathJax中的公式排版有两种方式，inline和displayed。inline表示公式嵌入到文本段中，">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> Mathjax与LaTex公式简介 | Hoocoln个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?eb0ae0ce3f923010eaaef69d09d15eb2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">Hoocoln个人博客</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'qHLfpz1f6fG1U_P-rhR5','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              Mathjax与LaTex公式简介
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-10-14T11:02:11+08:00" content="2015-10-14">
+            2015-10-14
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Mathjax/" itemprop="url" rel="index">
+                  <span itemprop="name">Mathjax</span>
+                </a>
+              </span>
+
+              
+              
+                ， 
+              
+
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Mathjax/工具/" itemprop="url" rel="index">
+                  <span itemprop="name">工具</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/10/14/Mathjax与LaTex公式简介/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/14/Mathjax与LaTex公式简介/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="本文介绍Mathjax的一些写法。">本文介绍Mathjax的一些写法。</h2><h2 id="MathJax简介">MathJax简介</h2><p><a href="https://www.mathjax.org/" target="_blank" rel="external">MathJax</a>是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。</p>
+<h2 id="基础">基础</h2><h3 id="公式标记与查看公式">公式标记与查看公式</h3><p>MathJax中的公式排版有两种方式，inline和displayed。inline表示公式嵌入到文本段中，displayed表示公式独自成为一个段落。例如，$f(x)=a+b$这是一个inline公式，而下面$$f(x)=a+b$$是一个displayed公式。<br>在MathJax中，默认的displayed公式分隔符有\$\$…\$\$,而默认的inline公式分隔符为 (…) ,当然这些都是可以自定义的，具体配置请参考<a href="http://docs.mathjax.org/en/latest/start.html#tex-and-latex-input" target="_blank" rel="external">文档</a>。下文中，使用\$\$…\$\$作为displayed分隔符，\$…\$作为inline分隔符(hexo默认也是这两种方式)。</p>
+<h3 id="希腊字母">希腊字母</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">大写</th>
+<th style="text-align:center">Tex</th>
+<th style="text-align:center">小写</th>
+<th style="text-align:center">Tex</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">alpha</td>
+<td style="text-align:center">A</td>
+<td style="text-align:center">A</td>
+<td style="text-align:center">α</td>
+<td style="text-align:center">\alpha</td>
+</tr>
+<tr>
+<td style="text-align:center">beta</td>
+<td style="text-align:center">B</td>
+<td style="text-align:center">B</td>
+<td style="text-align:center">β</td>
+<td style="text-align:center">\beta</td>
+</tr>
+<tr>
+<td style="text-align:center">gamma</td>
+<td style="text-align:center">$\Gamma$</td>
+<td style="text-align:center">\Gamma</td>
+<td style="text-align:center">$\gamma$</td>
+<td style="text-align:center">\gamma</td>
+</tr>
+<tr>
+<td style="text-align:center">delta</td>
+<td style="text-align:center">$\Delta$</td>
+<td style="text-align:center">\Delta</td>
+<td style="text-align:center">$\delta$</td>
+<td style="text-align:center">\delta</td>
+</tr>
+<tr>
+<td style="text-align:center">epsilon</td>
+<td style="text-align:center">E</td>
+<td style="text-align:center">E</td>
+<td style="text-align:center">$\epsilon$</td>
+<td style="text-align:center">\epsilon</td>
+</tr>
+<tr>
+<td style="text-align:center">zeta</td>
+<td style="text-align:center">Z</td>
+<td style="text-align:center">Z</td>
+<td style="text-align:center">$\zeta$</td>
+<td style="text-align:center">\zeta</td>
+</tr>
+<tr>
+<td style="text-align:center">eta</td>
+<td style="text-align:center">H</td>
+<td style="text-align:center">H</td>
+<td style="text-align:center">$\eta$</td>
+<td style="text-align:center">\eta</td>
+</tr>
+<tr>
+<td style="text-align:center">theta</td>
+<td style="text-align:center">$\Theta$</td>
+<td style="text-align:center">\Theta</td>
+<td style="text-align:center">$\theta$</td>
+<td style="text-align:center">\theta</td>
+</tr>
+<tr>
+<td style="text-align:center">iota</td>
+<td style="text-align:center">I</td>
+<td style="text-align:center">I</td>
+<td style="text-align:center">$\iota$</td>
+<td style="text-align:center">\iota</td>
+</tr>
+<tr>
+<td style="text-align:center">kappa</td>
+<td style="text-align:center">K</td>
+<td style="text-align:center">K</td>
+<td style="text-align:center">$\kappa$</td>
+<td style="text-align:center">\kappa</td>
+</tr>
+<tr>
+<td style="text-align:center">lambda</td>
+<td style="text-align:center">$\Lambda$</td>
+<td style="text-align:center">\Lambda</td>
+<td style="text-align:center">$\lambda$</td>
+<td style="text-align:center">\lambda</td>
+</tr>
+<tr>
+<td style="text-align:center">mu</td>
+<td style="text-align:center">M</td>
+<td style="text-align:center">M</td>
+<td style="text-align:center">$\mu$</td>
+<td style="text-align:center">\mu</td>
+</tr>
+<tr>
+<td style="text-align:center">nu</td>
+<td style="text-align:center">N</td>
+<td style="text-align:center">N</td>
+<td style="text-align:center">$\nu$</td>
+<td style="text-align:center">\nu</td>
+</tr>
+<tr>
+<td style="text-align:center">xi</td>
+<td style="text-align:center">$\Xi$</td>
+<td style="text-align:center">\Xi</td>
+<td style="text-align:center">$\xi$</td>
+<td style="text-align:center">\xi</td>
+</tr>
+<tr>
+<td style="text-align:center">omicron</td>
+<td style="text-align:center">O</td>
+<td style="text-align:center">O</td>
+<td style="text-align:center">$\omicron$</td>
+<td style="text-align:center">\omicron</td>
+</tr>
+<tr>
+<td style="text-align:center">pi</td>
+<td style="text-align:center">$\Pi$</td>
+<td style="text-align:center">\Pi</td>
+<td style="text-align:center">$\pi$</td>
+<td style="text-align:center">\pi</td>
+</tr>
+<tr>
+<td style="text-align:center">rho</td>
+<td style="text-align:center">P</td>
+<td style="text-align:center">P</td>
+<td style="text-align:center">$\rho$</td>
+<td style="text-align:center">\rho</td>
+</tr>
+<tr>
+<td style="text-align:center">sigma</td>
+<td style="text-align:center">$\Sigma$</td>
+<td style="text-align:center">\Sigma</td>
+<td style="text-align:center">$\sigma$</td>
+<td style="text-align:center">\sigma</td>
+</tr>
+<tr>
+<td style="text-align:center">tau</td>
+<td style="text-align:center">T</td>
+<td style="text-align:center">T</td>
+<td style="text-align:center">$\tau$</td>
+<td style="text-align:center">\tau</td>
+</tr>
+<tr>
+<td style="text-align:center">upsilon</td>
+<td style="text-align:center">$\Upsilon$</td>
+<td style="text-align:center">\Upsilon</td>
+<td style="text-align:center">$\upsilon$</td>
+<td style="text-align:center">\upsilon</td>
+</tr>
+<tr>
+<td style="text-align:center">phi</td>
+<td style="text-align:center">$\Phi$</td>
+<td style="text-align:center">\Phi</td>
+<td style="text-align:center">$\phi$</td>
+<td style="text-align:center">\phi</td>
+</tr>
+<tr>
+<td style="text-align:center">chi</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">$\chi$</td>
+<td style="text-align:center">\chi</td>
+</tr>
+<tr>
+<td style="text-align:center">psi</td>
+<td style="text-align:center">$\Psi$</td>
+<td style="text-align:center">\Psi</td>
+<td style="text-align:center">$\psi$</td>
+<td style="text-align:center">\psi</td>
+</tr>
+<tr>
+<td style="text-align:center">omega</td>
+<td style="text-align:center">$\Omega$</td>
+<td style="text-align:center">\Omega</td>
+<td style="text-align:center">$\omega$</td>
+<td style="text-align:center">\omega</td>
+</tr>
+</tbody>
+</table>
+<h3 id="上标与下标">上标与下标</h3><p>上标和下标分别使用^与_。例如x_i^2：$x_i^2$。<br>默认情况下，上下标符号仅仅对下一个组起作用。一个组即单个字符或者使用{..}包裹起来的内容。<br>也就是说，如果使用10^10，会得到$10^10$，而10^{10}才是$10^{10}$。同时，大括号还能消除二义性，如x^5^6将得到一个错误，必须使用大括号来界定^的结合性，如{x^5}^6：${x^5}^6$ 或者 x^{5^6}：$x^{5^6}$。<br>另外，如果要在左右两边都有上下标，可以用\sideset命令。</p>
+<p>例子：\sideset{^1_2}{^3_4}\bigotimes</p>
+<p>显示：$\sideset{^1_2}{^3_4}\bigotimes$</p>
+<h3 id="括号">括号</h3><blockquote>
+<ol>
+<li>小括号与方括号：使用原始的( )、\left、\right，[ ]即可，如(2+3)[4+4]：(2+3)[4+4]</li>
+<li>大括号：时由于大括号{}被用来分组，因此需要使用{和}表示大括号，也可以<br>使用\lbrace 和\rbrace来表示。如{a<em>b}:${a</em>b}$，\lbrace a<em>b \rbrace：$\lbrace a</em>b \rbrace$。</li>
+<li>尖括号：使用\langle 和 \rangle表示左尖括号和右尖括号。如\langle x \rangle：$\langle x \rangle$。</li>
+<li>上取整：使用\lceil 和 \rceil 表示。 如，\lceil x \rceil：$\lceil x \rceil$。</li>
+<li>下取整：使用\lfloor 和 \rfloor 表示。如，\lfloor x \rfloor：$\lfloor x \rfloor$。</li>
+<li>不可见括号：使用.表示。</li>
+</ol>
+</blockquote>
+<p>当要显示大号的括号或分隔符时，要用\left、\right和\lbrace 、\rbrace命令。<br>例子：f(x,y,z) = 3y^2z \left( 3+\frac{7x+5}{1+y^2} \right)<br>显示：$f(x,y,z) = 3y^2z \left( 3+\frac{7x+5}{1+y^2} \right)$</p>
+<h3 id="求和与积分">求和与积分</h3><p>\sum用来表示求和符号，其下标表示求和下限，上标表示上限。如，\sum_1^n：$\sum_1^n$。<br>\int用来表示积分符号，同样地，其上下标表示积分的上下限。如，\int_1^\infty：$\int_1^\infty$。<br>与此类似的符号还有，\prod：$\prod$，\bigcup:$\bigcup$，\bigcap：$\bigcap$，\iint：$\iint$。</p>
+<h3 id="分式与根式">分式与根式</h3><p>分式的表示。第一种，使用\frac ab，\frac作用于其后的两个组a，b，结果为$\frac ab$。如果你的分子或分母不是单个字符，请使用{..}来分组。第二种，使用\over来分隔一个组的前后两部分，如{a+1\over b+1}：${a+1\over b+1}$。</p>
+<p>根式使用\sqrt来表示。如，\sqrt[4]{\frac xy} ：$\sqrt[4]{\frac xy}$</p>
+<h3 id="字体">字体</h3><blockquote>
+<ul>
+<li>使用\mathbb或\Bbb显示黑板粗体字，此字体经常用来表示代表实数、整数、有理数、复数的大写字母。如，<br>$\Bbb{CHNQRZ}$。</li>
+<li>使用\mathbf显示黑体字，如，<br>$\mathbf{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$，$\mathbf{abcdefghijklmnopqrstuvwxyz}$。</li>
+<li>使用\mathtt显示打印机字体，如，<br>$\mathtt{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$，$\mathtt{abcdefghijklmnopqrstuvwxyz}$。</li>
+<li>使用\mathrm显示罗马字体，如，<br>$\mathrm{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$，$\mathrm{abcdefghijklmnopqrstuvwxyz}$。</li>
+<li>使用\mathscr显示手写体，如，<br>$\mathscr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$。</li>
+<li>使用\mathfrak显示Fraktur字母（一种德国字体），如<br>$\mathfrak{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$，$\mathfrak{abcdefghijklmnopqrstuvwxyz}$。</li>
+</ul>
+</blockquote>
+<p>要对公式的某一部分字符进行字体转换，可以用{\rm 需转换的部分字符}命令，其中\rm可以参照下表选择合适的字体。一般情况下，公式默认为意大利体。<br>\rm　　罗马体　　　　　　　\it　　意大利体<br>\bf　　黑体　　　　　　　　\cal 　花体<br>\sl　　倾斜体　　　　　　　\sf　　等线体<br>\mit 　数学斜体　　　　　　\tt　　打字机字体<br>\sc　　小体大写字母</p>
+<h3 id="特殊函数与符号">特殊函数与符号</h3><blockquote>
+<ol>
+<li>常见的三角函数，求极限符号可直接使用+缩写即可。如$sinx$,$arctanx$,$lim_{1→\infty}$。</li>
+<li>比较运算符：\lt \gt \le \ge \neq ： $\lt \gt \le \ge \neq$。可以在这些运算符前面加上\not，如\not\lt：$\not\lt$。</li>
+<li>\times \div \pm \mp表示：$\times \div \pm \mp$，\cdot表示居中的点，x \cdot y : $x \cdot y$。</li>
+<li>集合关系与运算：\cup \cap \setminus \subset \subseteq \subsetneq \supset \in \notin \emptyset \varnothing ：$\cup \cap \setminus \subset \subseteq \subsetneq \supset \in \notin \emptyset \varnothing$</li>
+<li>表示排列使用{n+1 \choose 2k} 或 \binom{n+1}{2k}，$\binom{n+1}{2k}$。</li>
+<li>箭头：\to \rightarrow \leftarrow \Rightarrow \Leftarrow \mapsto : $\to \rightarrow \leftarrow \Rightarrow \Leftarrow \mapsto$</li>
+<li>逻辑运算符：\land \lor \lnot \forall \exists \top \bot \vdash \vDash ： $\land \lor \lnot \forall \exists \top \bot \vdash \vDash$</li>
+<li>\star \ast \oplus \circ \bullet ： $\star \ast \oplus \circ \bullet$。</li>
+<li>\approx \sim \cong \equiv \prec ： $\approx \sim \cong \equiv \prec$。</li>
+<li>\infty \aleph_0    $\infty \aleph_0$<br>\nabla \partial   $\nabla \partial$<br>\Im \Re    $\Im \Re$。</li>
+<li>模运算 \pmode, 如，a\equiv b\pmod n：$a\equiv b\pmod n$。</li>
+<li>\ldots与\cdots，其区别是dots的位置不同，ldots位置稍低，cdots位置居中。a1+a2+⋯+an，a1,a2,…,an。</li>
+<li>一些希腊字母具有变体形式，如 \epsilon \varepsilon : $\epsilon \varepsilon$, \phi \varphi : $\phi \varphi$。</li>
+</ol>
+</blockquote>
+<p>###空间<br>通常MathJax通过内部策略自己管理公式内部的空间，因此a…b与a…….b（.表示空格）都会显示为ab。可以通过在ab间加入\,增加些许间隙，\;增加较宽的间隙，\quad 与 \qquad 会增加更大的间隙，如，$a\quad{b}$。</p>
+<p>###顶部符号<br>对于单字符，\hat：$\hat{x}$，多字符可以使用\widehat,$\widehat{xy}$.类似的还有\hat,\overline,\vec,\overrightarrow, \dot \ddot : $\hat{x}\overline{xyz}\vec{a}\overrightarrow{x}\dot{x} \ddot{x} $。</p>
+<p>##表格<br>使用\begin {array}{列样式}…\end{array}这样的形式来创建表格，列样式可以是clr表示居中，左，右对齐，还可以使用|表示一条竖线。表格中 各行使用\\分隔，各列使用&amp;分隔。使用\hline在本行前加入一条直线。 例如， \begin {array}{c|lcr} n &amp; \text{Left} &amp; \text{Center} &amp; \text{Right} \\ \hline 1 &amp; 0.24 &amp; 1 &amp; 125 \\ 2 &amp; -1 &amp; 189 &amp; -8 \\ 3 &amp; -20 &amp; 2000 &amp; 1+10i \\ \end{array}  结果：</p>
+<p>$$ \begin{array}{c|lcr} n &amp; \text{Left} &amp; \text{Center} &amp; \text{Right} \\ \hline 1 &amp; 0.24 &amp; 1 &amp; 125 \\ 2 &amp; -1 &amp; 189 &amp; -8 \\ 3 &amp; -20 &amp; 2000 &amp; 1+10i \\ \end{array} $$</p>
+<p>##矩阵</p>
+<p>###基本用法<br>使用\$\$\begin {matrix}…\end{matrix}\$\$这样的形式来表示矩阵，在\begin与\end之间加入矩阵中的元素即可。矩阵的行之间使用\分隔，列之间使用&amp;分隔。</p>
+<p>例如 \$\$ \begin {matrix} 1 &amp; x &amp; x^2 \\ 1 &amp; y &amp; y^2 \\ 1 &amp; z &amp; z^2 \\ \end{matrix} \$\$ 结果：</p>
+<p>$$\begin{matrix} 1 &amp; x &amp; x^2 \\ 1 &amp; y &amp; y^2 \\ 1 &amp; z &amp; z^2 \\ \end{matrix}$$</p>
+<p>###加括号<br>如果要对矩阵加括号，可以像上文中提到的一样，使用\left与\right配合表示括号符号。也可以使用特殊的matrix。即替换\begin {matrix}…\end{matrix}中的matrix为pmatrix，bmatrix，Bmatrix，vmatrix,Vmatrix.</p>
+<p>如pmatrix:$\begin{pmatrix}1&amp;2\\3&amp;4\end{pmatrix}$<br>bmatrix:$\begin{bmatrix}1&amp;2\\3&amp;4\end{bmatrix}$<br>Bmatrix:$\begin{Bmatrix}1&amp;2\\3&amp;4\end{Bmatrix}$<br>vmatrix:$\begin{vmatrix}1&amp;2\\3&amp;4\end{vmatrix}$<br>Vmatrix:$\begin{Vmatrix}1&amp;2\\3&amp;4\end{Vmatrix}$</p>
+<p>###省略元素<br>可以使用\cdots $\cdots$ \ddots $\ddots$\vdots $\vdots$来省略矩阵中的元素，如：<br>$$\begin{pmatrix}1&amp;2&amp;\cdots&amp;n\\3&amp;4&amp;\cdots&amp;n\\\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\m&amp;m+1&amp;\cdots&amp;n\end{pmatrix}$$</p>
+<p>###增广矩阵<br>增广矩阵需要使用前面的array来实现，如 \$\$ \left[ \begin {array}{cc|c} 1&amp;2&amp;3\ 4&amp;5&amp;6 \end{array} \right] \$\$ 结果：</p>
+<p>$$\left[ \begin {array}{cc|c} 1&amp;2&amp;3\\ 4&amp;5&amp;6 \end{array} \right]$$</p>
+<p>###对齐的公式</p>
+<p>有时候可能需要一系列的公式中等号对齐，如：</p>
+<p>$$\begin{align}<br>\sqrt{37} &amp; = \sqrt{\frac{73^2-1}{12^2}} \\<br> &amp; = \sqrt{\frac{73^2}{12^2}\cdot\frac{73^2-1}{73^2}} \\<br> &amp; = \sqrt{\frac{73^2}{12^2}}\sqrt{\frac{73^2-1}{73^2}} \\<br> &amp; = \frac{73}{12}\sqrt{1 - \frac{1}{73^2}} \\<br> &amp; \approx \frac{73}{12}\left(1 - \frac{1}{2\cdot73^2}\right)<br>\end{align}$$<br>这需要使用形如\begin {align}…\end{align}的格式，其中需要使用&amp;来指示需要对齐的位置。请使用右键查看上述公式的代码。</p>
+<p>###分类表达式</p>
+<p>定义函数的时候经常需要分情况给出表达式，可使用\begin {cases}…\end{cases}。其中，使用\来分类，使用&amp;指示需要对齐的位置。如：</p>
+<p>$$f(n) =<br>\begin{cases}<br>n/2,  &amp; \text{if $n$ is even} \\<br>3n+1, &amp; \text{if $n$ is odd}  \\<br>\end{cases}$$<br>上述公式的括号也可以移动到右侧，不过需要使用array来实现，如下：</p>
+<p>$$\left.<br>\begin{array}{l}<br>\text{if $n$ is even:}&amp;n/2\\<br>\text{if $n$ is odd:}&amp;3n+1<br>\end{array}<br>\right\}<br>=f(n)$$<br>最后，如果想分类之间的垂直间隔变大，可以使用[2ex]代替\来分隔不同的情况。(3ex,4ex也可以用，1ex相当于原始距离）。</p>
+<p>###数学符号查询</p>
+<p>一般而言，从一个巨大的符号表中查询所需要的特定符号是一件令人沮丧的事情。在此向大家介绍一个LATEX手写符号识别系统，尽情享用吧~ <a href="http://detexify.kirelabs.org/classify.html" target="_blank" rel="external">Detexify²</a>。</p>
+<p>##空间问题</p>
+<p>在使用Latex公式时，有一些不会影响公式正确性，但却会使其看上去很槽糕的问题。</p>
+<p>###不要在再指数或者积分中使用 \frac<br>在指数或者积分表达式中使用\frac会使表达式看起来不清晰，因此在专业的数学排版中很少被使用。应该使用一个水平的/来代替，效果如下：<br>$$\begin{array}{cc}<br>\mathrm{Bad} \\<br>\hline \\<br>e^{i\frac{\pi}2} \quad e^{\frac{i\pi}2}\\<br>\int_{-\frac\pi2}^\frac\pi2 \sin x\,dx \\<br>\end{array}$$</p>
+<p>$$\begin{array}{cc}<br>\mathrm{Better} \\<br>\hline \\<br> e^{i\pi/2} \\<br>\ \int_{-\pi/2}^{\pi/2}\sin x\,dx \\<br>\end{array}$$</p>
+<p>###使用 \mid 代替 | 作为分隔符<br>符号|作为分隔符时有排版空间大小的问题，应该使用\mid代替。效果如下：</p>
+<p>$$\begin{array}{cc}<br>\mathrm{Bad} &amp; \mathrm{Better} \\<br>\hline \\<br>{x|x^2\in\Bbb Z} &amp; {x\mid x^2\in\Bbb Z} \\<br>\end{array}$$</p>
+<p>###多重积分<br>对于多重积分，不要使用\int\int此类的表达，应该使用\iint \iiint等特殊形式。效果如下：</p>
+<p>$$\begin{array}{cc}<br>\mathrm{Bad} &amp; \mathrm{Better} \\<br>\hline \\<br>\int\int_S f(x)\,dy\,dx &amp; \iint_S f(x)\,dy\,dx \\<br>\int\int\int_V f(x)\,dz\,dy\,dx &amp; \iiint_V f(x)\,dz\,dy\,dx<br>\end{array}$$<br>此外，在微分前应该使用\,来增加些许空间，否则TEX会将微分紧凑地排列在一起。如下：</p>
+<p>$$\begin{array}{cc}<br>\mathrm{Bad} &amp; \mathrm{Better} \\<br>\hline \\<br>\iiint_V f(x)dz dy dx &amp; \iiint_V f(x)\,dz\,dy\,dx<br>\end{array}$$</p>
+<p>##连分数</p>
+<p>书写连分数表达式时，请使用\cfrac代替\frac或者\over两者效果对比如下：</p>
+<p>$$x = a_0 + \cfrac{1^2}{a_1+ \cfrac{2^2}{a_2+ \cfrac{3^2}{a_3 + \cfrac{4^4}{a_4 + \cdots}}}} \tag{\cfrac}$$<br>$$x = a_0 + \frac{1^2}{a_1+ \frac{2^2}{a_2+ \frac{3^2}{a_3 + \frac{4^4}{a_4 + \cdots}}}} \tag{\frac}$$</p>
+<p>##方程组<br>（\left{…\right.在hexo中目前不支持）<br>使用\begin {cases} … \end{cases}表达方程组，如：<br>$$\begin{cases}<br>a_1x+b_1y+c_1z=d_1 \\<br>a_2x+b_2y+c_2z=d_2 \\<br>a_3x+b_3y+c_3z=d_3<br>\end{cases}$$</p>
+<p>##公式标记与引用<br>使用\tag{yourtag}来标记公式，如果想在之后引用该公式，则还需要加上\label{yourlabel}在\tag之后，如：</p>
+<p>$$a:= x^2-y^3\tag{1-1}\label{1-1}$$</p>
+<p>为了引用公式，可以使用\eqref {rlabel}，如：<br>$$a+y^3 \stackrel{\eqref{1-1}}= x^2$$<br>可以看到，通过超链接可以跳转到被引用公式位置。</p>
+<p>##如何输入其它特殊字符</p>
+<p>关系运算符：<br>$\pm$：\pm<br>$\times$：\times<br>$\div$：\div<br>$\mid$：\mid<br>$\nmid$：\nmid<br>$\cdot$：\cdot<br>$\circ$：\circ<br>$\ast$：\ast<br>$\bigodot$：\bigodot<br>$\bigotimes$：\bigotimes<br>$\bigoplus$：\bigoplus<br>$\leq$：\leq<br>$\geq$：\geq<br>$\neq$：\neq<br>$\approx$：\approx<br>$\equiv$：\equiv<br>$\sum$：\sum<br>$\prod$：\prod<br>$\coprod$：\coprod</p>
+<p>集合运算符：<br>$\emptyset$：\emptyset<br>$\in$：\in<br>$\notin$：\notin<br>$\subset$：\subset<br>$\supset$：\supset<br>$\subseteq$：\subseteq<br>$\supseteq$：\supseteq<br>$\bigcap$：\bigcap<br>$\bigcup$：\bigcup<br>$\bigvee$：\bigvee<br>$\bigwedge$：\bigwedge<br>$\biguplus$：\biguplus<br>$\bigsqcup$：\bigsqcup</p>
+<p>对数运算符：<br>$\log$：\log<br>$\lg$：\lg<br>$\ln$：\ln</p>
+<p>三角运算符：<br>$\bot$：\bot<br>$\angle$：\angle<br>$30^\circ$：30^\circ<br>sin：\sin<br>cos：\cos<br>tan：\tan<br>cot：\cot<br>sec：\sec<br>csc：\csc</p>
+<p>微积分运算符：<br>$\prime$：\prime<br>$\int$：\int<br>$\iint$：\iint<br>$\iiint$：\iiint<br>$\iiiint$：\iiiint<br>$\oint$：\oint<br>$\lim$：\lim<br>$\infty$：\infty<br>$\nabla$：\nabla</p>
+<p>逻辑运算符：<br>$\because$：\because<br>$\therefore$：\therefore<br>$\forall$：\forall<br>$\exists$：\exists<br>$\not=$：\not=<br>$\not&gt;$：\not&gt;<br>$\not\subset$：\not\subset</p>
+<p>戴帽符号：<br>$\hat{y}$：\hat{y}<br>$\check{y}$：\check{y}<br>$\breve{y}$：\breve{y}</p>
+<p>连线符号：<br>$\overline{a+b+c+d}$：\overline{a+b+c+d}<br>$\underline{a+b+c+d}$：\underline{a+b+c+d}<br>$\overbrace{a+\underbrace{b+c}<em>{1.0}+d}^{2.0}$：\overbrace{a+\underbrace{b+c}</em>{1.0}+d}^{2.0}</p>
+<p>箭头符号：<br>$\uparrow$：\uparrow<br>$\downarrow$：\downarrow<br>$\Uparrow$：\Uparrow<br>$\Downarrow$：\Downarrow<br>$\rightarrow$：\rightarrow<br>$\leftarrow$：\leftarrow<br>$\Rightarrow$：\Rightarrow<br>$\Leftarrow$：\Leftarrow<br>$\longrightarrow$：\longrightarrow<br>$\longleftarrow$：\longleftarrow<br>$\Longrightarrow$：\Longrightarrow<br>$\Longleftarrow$：\Longleftarrow</p>
+<p>要输出字符　空格　#　$　%　&amp;　<em>　{　}　，用命令：　\空格　#　\$　\%　\&amp;　\</em>　{　}</p>
+<p>参考文章：<br><a href="http://mlworks.cn/posts/introduction-to-mathjax-and-latex-expression/" target="_blank" rel="external">Mathjax与LaTex公式简介</a><br><a href="http://iori.sinaapp.com/17.html/comment-page-1?replytocom=2" target="_blank" rel="external">MathJax使用LaTeX语法编写数学公式教程</a></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Mathjax/" rel="tag">#Mathjax</a>
+          
+            <a href="/tags/工具/" rel="tag">#工具</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/14/用spark实现基于物品共现矩阵的相似度算法/" rel="next">用spark实现基于物品共现矩阵的相似度算法</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+            <!-- 多说热评文章-->
+            <p>热评文章</p>
+            <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2015/10/14/Mathjax与LaTex公式简介/"
+                   data-title="Mathjax与LaTex公式简介" data-url="http://3iter.com/2015/10/14/Mathjax与LaTex公式简介/">
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Hoocoln" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Hoocoln</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本文介绍Mathjax的一些写法。"><span class="nav-number">1.</span> <span class="nav-text">本文介绍Mathjax的一些写法。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MathJax简介"><span class="nav-number">2.</span> <span class="nav-text">MathJax简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">3.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#公式标记与查看公式"><span class="nav-number">3.1.</span> <span class="nav-text">公式标记与查看公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#希腊字母"><span class="nav-number">3.2.</span> <span class="nav-text">希腊字母</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上标与下标"><span class="nav-number">3.3.</span> <span class="nav-text">上标与下标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#括号"><span class="nav-number">3.4.</span> <span class="nav-text">括号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#求和与积分"><span class="nav-number">3.5.</span> <span class="nav-text">求和与积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分式与根式"><span class="nav-number">3.6.</span> <span class="nav-text">分式与根式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字体"><span class="nav-number">3.7.</span> <span class="nav-text">字体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊函数与符号"><span class="nav-number">3.8.</span> <span class="nav-text">特殊函数与符号</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hoocoln</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"3iter"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>
