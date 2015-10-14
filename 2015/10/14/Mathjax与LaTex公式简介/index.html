@@ -37,19 +37,28 @@
   <link rel="shorticon icon" type="image/x-icon" href="/images/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="&amp;gt; 本文介绍Mathjax的一些写法。MathJax简介MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。
-基础公式标记与查看公式MathJax中的公式排版有两种方式，inline和displayed。inline表示公式嵌入到">
+<meta name="description" content="本文介绍Mathjax的一些写法。
+
+
+MathJax简介MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。
+基础公式标记与查看公式MathJax中的公式排版有两种方式，inline和displayed。inline表示公式嵌入到文本">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mathjax与LaTex公式简介">
 <meta property="og:url" content="http://3iter.com/2015/10/14/Mathjax与LaTex公式简介/index.html">
 <meta property="og:site_name" content="Hoocoln个人博客">
-<meta property="og:description" content="&amp;gt; 本文介绍Mathjax的一些写法。MathJax简介MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。
-基础公式标记与查看公式MathJax中的公式排版有两种方式，inline和displayed。inline表示公式嵌入到">
-<meta property="og:updated_time" content="2015-10-14T04:07:10.543Z">
+<meta property="og:description" content="本文介绍Mathjax的一些写法。
+
+
+MathJax简介MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。
+基础公式标记与查看公式MathJax中的公式排版有两种方式，inline和displayed。inline表示公式嵌入到文本">
+<meta property="og:updated_time" content="2015-10-14T04:07:50.175Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mathjax与LaTex公式简介">
-<meta name="twitter:description" content="&amp;gt; 本文介绍Mathjax的一些写法。MathJax简介MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。
-基础公式标记与查看公式MathJax中的公式排版有两种方式，inline和displayed。inline表示公式嵌入到">
+<meta name="twitter:description" content="本文介绍Mathjax的一些写法。
+
+
+MathJax简介MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。
+基础公式标记与查看公式MathJax中的公式排版有两种方式，inline和displayed。inline表示公式嵌入到文本">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -259,7 +268,11 @@
       
 
       
-        <span itemprop="articleBody"><h2 id="&gt;_本文介绍Mathjax的一些写法。">&gt; 本文介绍Mathjax的一些写法。</h2><h2 id="MathJax简介">MathJax简介</h2><p><a href="https://www.mathjax.org/" target="_blank" rel="external">MathJax</a>是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。</p>
+        <span itemprop="articleBody"><blockquote>
+<p>本文介绍Mathjax的一些写法。</p>
+</blockquote>
+<hr>
+<h2 id="MathJax简介">MathJax简介</h2><p><a href="https://www.mathjax.org/" target="_blank" rel="external">MathJax</a>是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。目前，MathJax可以解析Latex、MathML和ASCIIMathML的标记语言。</p>
 <h2 id="基础">基础</h2><h3 id="公式标记与查看公式">公式标记与查看公式</h3><p>MathJax中的公式排版有两种方式，inline和displayed。inline表示公式嵌入到文本段中，displayed表示公式独自成为一个段落。例如，$f(x)=a+b$这是一个inline公式，而下面$$f(x)=a+b$$是一个displayed公式。<br>在MathJax中，默认的displayed公式分隔符有\$\$…\$\$,而默认的inline公式分隔符为 (…) ,当然这些都是可以自定义的，具体配置请参考<a href="http://docs.mathjax.org/en/latest/start.html#tex-and-latex-input" target="_blank" rel="external">文档</a>。下文中，使用\$\$…\$\$作为displayed分隔符，\$…\$作为inline分隔符(hexo默认也是这两种方式)。</p>
 <h3 id="希腊字母">希腊字母</h3><table>
 <thead>
@@ -672,7 +685,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#>_本文介绍Mathjax的一些写法。"><span class="nav-number">1.</span> <span class="nav-text">> 本文介绍Mathjax的一些写法。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MathJax简介"><span class="nav-number">2.</span> <span class="nav-text">MathJax简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">3.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#公式标记与查看公式"><span class="nav-number">3.1.</span> <span class="nav-text">公式标记与查看公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#希腊字母"><span class="nav-number">3.2.</span> <span class="nav-text">希腊字母</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上标与下标"><span class="nav-number">3.3.</span> <span class="nav-text">上标与下标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#括号"><span class="nav-number">3.4.</span> <span class="nav-text">括号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#求和与积分"><span class="nav-number">3.5.</span> <span class="nav-text">求和与积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分式与根式"><span class="nav-number">3.6.</span> <span class="nav-text">分式与根式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字体"><span class="nav-number">3.7.</span> <span class="nav-text">字体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊函数与符号"><span class="nav-number">3.8.</span> <span class="nav-text">特殊函数与符号</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MathJax简介"><span class="nav-number">1.</span> <span class="nav-text">MathJax简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">2.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#公式标记与查看公式"><span class="nav-number">2.1.</span> <span class="nav-text">公式标记与查看公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#希腊字母"><span class="nav-number">2.2.</span> <span class="nav-text">希腊字母</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上标与下标"><span class="nav-number">2.3.</span> <span class="nav-text">上标与下标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#括号"><span class="nav-number">2.4.</span> <span class="nav-text">括号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#求和与积分"><span class="nav-number">2.5.</span> <span class="nav-text">求和与积分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分式与根式"><span class="nav-number">2.6.</span> <span class="nav-text">分式与根式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字体"><span class="nav-number">2.7.</span> <span class="nav-text">字体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊函数与符号"><span class="nav-number">2.8.</span> <span class="nav-text">特殊函数与符号</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
