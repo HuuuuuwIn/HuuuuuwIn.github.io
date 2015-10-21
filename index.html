@@ -195,6 +195,218 @@
           
           
             
+              <a class="post-title-link" href="/2015/10/21/Spark-RDD-API/" itemprop="url">
+                Spark RDD API
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-10-21T16:49:20+08:00" content="2015-10-21">
+            2015-10-21
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/spark/" itemprop="url" rel="index">
+                  <span itemprop="name">spark</span>
+                </a>
+              </span>
+
+              
+              
+                ， 
+              
+
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/spark/spark基础/" itemprop="url" rel="index">
+                  <span itemprop="name">spark基础</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/10/21/Spark-RDD-API/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/21/Spark-RDD-API/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><blockquote>
+<p>为了加深对sparkRDD的理解，写一篇文章讲解下RDD各API的用法。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Actions</th>
+<th style="text-align:center">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">map(f: T=&gt;U)</td>
+<td style="text-align:center">RDD[T] =&gt; RDD[U]</td>
+</tr>
+<tr>
+<td style="text-align:left">flatMap(f: T=&gt;Seq[U])</td>
+<td style="text-align:center">RDD[T] =&gt; RDD[U]</td>
+</tr>
+<tr>
+<td style="text-align:left">filter(f: T=&gt;Bool)</td>
+<td style="text-align:center">RDD[T] =&gt; RDD[T]</td>
+</tr>
+<tr>
+<td style="text-align:left">disdict()</td>
+<td style="text-align:center">RDD[T] =&gt; RDD[T]</td>
+</tr>
+<tr>
+<td style="text-align:left">sample(fract:Float)</td>
+<td style="text-align:center">RDD[T] =&gt; RDD[T]</td>
+</tr>
+<tr>
+<td style="text-align:left">groupByKey()</td>
+<td style="text-align:center">RDD[(K,V)] =&gt; RDD[(K,Seq[V])]</td>
+</tr>
+<tr>
+<td style="text-align:left">combineByKey()</td>
+<td style="text-align:center">RDD[(K,V)] =&gt; RDD[(K,Seq[V])]</td>
+</tr>
+<tr>
+<td style="text-align:left">reduceByKey(f: (V,V)=&gt;V)</td>
+<td style="text-align:center">RDD[(K,V)] =&gt; RDD[(K,V)]</td>
+</tr>
+<tr>
+<td style="text-align:left">union()</td>
+<td style="text-align:center">(RDD[T],RDD[T]) =&gt; RDD[T]</td>
+</tr>
+<tr>
+<td style="text-align:left">join()</td>
+<td style="text-align:center">(RDD[(K,V)],RDD[(K,W)]) =&gt; RDD[(K,(V,W))]</td>
+</tr>
+<tr>
+<td style="text-align:left">cogroup()</td>
+<td style="text-align:center">(RDD[(K,V)],RDD[(K,W)]) =&gt; RDD[(K,(Seq[V],Seq[W]))]</td>
+</tr>
+<tr>
+<td style="text-align:left">mapValue(f: V=&gt;W)</td>
+<td style="text-align:center">RDD[(K,V)] =&gt; RDD[(K,W)]</td>
+</tr>
+<tr>
+<td style="text-align:left">sort(c:Comparator[K])</td>
+<td style="text-align:center">RDD[(K,V)] =&gt; RDD[(K,V)]</td>
+</tr>
+<tr>
+<td style="text-align:left">cartesian()</td>
+<td style="text-align:center">(RDD[(K,V)],RDD[(X,W)]) =&gt; RDD[((K,X),(V,W))]</td>
+</tr>
+<tr>
+<td style="text-align:left">count()</td>
+<td style="text-align:center">RDD[(K,V)] =&gt; Long</td>
+</tr>
+<tr>
+<td style="text-align:left">collect()</td>
+<td style="text-align:center">RDD[(K,V)] =&gt; Seq[T]</td>
+</tr>
+<tr>
+<td style="text-align:left">reduce(f:(T,T)=&gt;T)</td>
+<td style="text-align:center">RDD[T] =&gt; T</td>
+</tr>
+<tr>
+<td style="text-align:left">lookup(k:K)</td>
+<td style="text-align:center">RDD[(K,V)] =&gt; Seq[V]</td>
+</tr>
+</tbody>
+</table>
+<p>各个方法的实例如下</p>
+<h2 id="map">map</h2><p>map执行数据集的转换操作<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr</span> =</span> <span class="type">Array</span>((<span class="number">1</span>,<span class="string">"a"</span>),(<span class="number">2</span>,<span class="string">"b"</span>),(<span class="number">3</span>,<span class="string">"c"</span>),(<span class="number">4</span>,<span class="string">"d"</span>),(<span class="number">5</span>,<span class="string">"e"</span>),(<span class="number">6</span>,<span class="string">"f"</span>),(<span class="number">7</span>,<span class="string">"g"</span>))</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd</span> =</span> sc.parallelize(arr).map(f=&gt;(<span class="string">"A"</span>+f._1*<span class="number">10</span>,f._2+<span class="string">"#"</span>))</span><br><span class="line"></span><br><span class="line">println(rdd.collect().mkString(<span class="string">","</span>))</span><br><span class="line"><span class="comment">//(A10,a#),(A20,b#),(A30,c#),(A40,d#),(A50,e#),(A60,f#),(A70,g#)</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="flatMap">flatMap</h2><p>作用同map，不过一个元素可能生成多个结果数据。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr</span> =</span> <span class="type">Array</span>(<span class="string">"1#2#3"</span>,<span class="string">"4#5"</span>,<span class="string">"6"</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd</span> =</span> sc.parallelize(arr).flatMap(f=&gt;f.split(<span class="string">"#"</span>))</span><br><span class="line"></span><br><span class="line">println(rdd.collect().mkString(<span class="string">","</span>))</span><br><span class="line"><span class="comment">//1,2,3,4,5,6</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="filter">filter</h2><p>过滤操作。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr</span> =</span> <span class="type">Array</span>(<span class="string">"1#2#3"</span>,<span class="string">"4#5"</span>,<span class="string">"6"</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd</span> =</span> sc.parallelize(arr).filter(f=&gt;f.length&gt;=<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">println(rdd.collect().mkString(<span class="string">","</span>))</span><br><span class="line"><span class="comment">//1#2#3,4#5</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="distinct">distinct</h2><p>去重操作。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr</span> =</span> <span class="type">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">6</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd</span> =</span> sc.parallelize(arr).distinct()</span><br><span class="line"></span><br><span class="line">println(rdd.collect().mkString(<span class="string">","</span>))</span><br><span class="line"><span class="comment">//4,1,6,3,5,2</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="sample">sample</h2><p>随机取样本。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr</span> =</span> <span class="number">1</span> to <span class="number">20</span></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd</span> =</span> sc.parallelize(arr,<span class="number">3</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> rdd.sample(<span class="literal">true</span>,<span class="number">0.5</span>,<span class="number">10</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">b</span> =</span> rdd.sample(<span class="literal">false</span>,<span class="number">0.5</span>,<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">println(<span class="string">"a:"</span>+a.collect().mkString(<span class="string">","</span>))</span><br><span class="line">println(<span class="string">"b:"</span>+b.collect().mkString(<span class="string">","</span>))</span><br><span class="line"><span class="comment">//a:2,7,11,12,12,15,15,18</span></span><br><span class="line"><span class="comment">//b:1,4,7,8,10,11,15,16,17,18,20</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>第一个参数如果为true,可能会有重复的元素，如果为false，不会有重复的元素；<br>第二个参数取值为[0,1]，最后的数据个数大约等于第二个参数乘总数；<br>第三个参数为随机因子。</p>
+</blockquote>
+<h2 id="groupByKey">groupByKey</h2><p>相同key值集合到一起<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr</span> =</span> <span class="type">Array</span>((<span class="number">1</span>,<span class="string">"a"</span>),(<span class="number">2</span>,<span class="string">"b"</span>),(<span class="number">2</span>,<span class="string">"c"</span>),(<span class="number">1</span>,<span class="string">"b"</span>),(<span class="number">3</span>,<span class="string">"c"</span>),(<span class="number">4</span>,<span class="string">"d"</span>),(<span class="number">2</span>,<span class="string">"d"</span>))</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd</span> =</span> sc.parallelize(arr,<span class="number">3</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> rdd.groupByKey()</span><br><span class="line"></span><br><span class="line">println(a.collect().mkString(<span class="string">","</span>))</span><br><span class="line"><span class="comment">//(3,CompactBuffer(c)),(4,CompactBuffer(d)),(1,CompactBuffer(a, b)),(2,CompactBuffer(b, c, d))</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="combineByKey">combineByKey</h2><p>对相同的key值的元素执行处理和聚合操作<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr</span> =</span> <span class="type">Array</span>((<span class="number">1</span>,<span class="string">"a"</span>),(<span class="number">2</span>,<span class="string">"c"</span>),(<span class="number">2</span>,<span class="string">"b"</span>),(<span class="number">1</span>,<span class="string">"b"</span>),(<span class="number">3</span>,<span class="string">"c"</span>),(<span class="number">4</span>,<span class="string">"d"</span>),(<span class="number">2</span>,<span class="string">"d"</span>))</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd</span> =</span> sc.parallelize(arr,<span class="number">3</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> rdd.combineByKey(f=&gt;<span class="keyword">new</span> <span class="type">StringBuffer</span>(f),</span><br><span class="line">            (a:<span class="type">StringBuffer</span>,b:<span class="type">String</span>)=&gt;(a.append(b)),</span><br><span class="line">            (c:<span class="type">StringBuffer</span>,d:<span class="type">StringBuffer</span>)=&gt;(c.append(d)))</span><br><span class="line"></span><br><span class="line">println(a.collect().mkString(<span class="string">","</span>))</span><br><span class="line"><span class="comment">//(3,c),(4,d),(1,ab),(2,cbd)</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>combineByKey三个参数<br>createCombiner: V =&gt; C,相同key的第一个元素的进入的时候调用<br>mergeValue: (C, V) =&gt; C,相同key的第N个元素（N$\geq$2）进入的时候与第一个函数结果进行合并的函数<br>mergeCombiners: (C, C) =&gt; C，相同key不同分区生成的第二个函数结果的合并函数</p>
+</blockquote>
+<h2 id="reduceByKey">reduceByKey</h2><p>相同的key执行reduce操作<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr</span> =</span> <span class="type">Array</span>((<span class="number">1</span>,<span class="string">"a"</span>),(<span class="number">2</span>,<span class="string">"c"</span>),(<span class="number">2</span>,<span class="string">"b"</span>),(<span class="number">1</span>,<span class="string">"b"</span>),(<span class="number">3</span>,<span class="string">"c"</span>),(<span class="number">4</span>,<span class="string">"d"</span>),(<span class="number">2</span>,<span class="string">"d"</span>))</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd</span> =</span> sc.parallelize(arr,<span class="number">3</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> rdd.reduceByKey((a,b)=&gt;a+<span class="string">"|"</span>+b)</span><br><span class="line"></span><br><span class="line">println(a.collect().mkString(<span class="string">","</span>))</span><br><span class="line"><span class="comment">//(3,c),(4,d),(1,a|b),(2,c|b|d)</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="union">union</h2><p>两个RDD聚合<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr</span> =</span> <span class="type">Array</span>((<span class="number">1</span>,<span class="string">"a"</span>),(<span class="number">2</span>,<span class="string">"c"</span>),(<span class="number">2</span>,<span class="string">"b"</span>))</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr2</span> =</span> <span class="type">Array</span>((<span class="number">1</span>,<span class="string">"b"</span>),(<span class="number">3</span>,<span class="string">"c"</span>),(<span class="number">4</span>,<span class="string">"d"</span>),(<span class="number">2</span>,<span class="string">"d"</span>))</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd1</span> =</span> sc.parallelize(arr,<span class="number">3</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd2</span> =</span> sc.parallelize(arr2)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> rdd1.union(rdd2)</span><br><span class="line"></span><br><span class="line">println(a.collect().mkString(<span class="string">","</span>))</span><br><span class="line"><span class="comment">//(1,a),(2,c),(2,b),(1,b),(3,c),(4,d),(2,d)</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="join">join</h2><p>两个RDD以key聚合<br>join 包含 join , fullOuterJoin , leftOuterJoin , rightOuterJoin 等多个方法，用法类似于SQL操作。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr</span> =</span> <span class="type">Array</span>((<span class="number">1</span>,<span class="string">"a"</span>),(<span class="number">2</span>,<span class="string">"c"</span>),(<span class="number">2</span>,<span class="string">"b"</span>),(<span class="number">5</span>,<span class="string">"g"</span>))</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr2</span> =</span> <span class="type">Array</span>((<span class="number">1</span>,<span class="string">"B"</span>),(<span class="number">3</span>,<span class="string">"C"</span>),(<span class="number">4</span>,<span class="string">"D"</span>),(<span class="number">2</span>,<span class="string">"D"</span>),(<span class="number">2</span>,<span class="string">"E"</span>))</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd1</span> =</span> sc.parallelize(arr,<span class="number">3</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd2</span> =</span> sc.parallelize(arr2)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> rdd1.join(rdd2)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">b</span> =</span> rdd1.fullOuterJoin(rdd2)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">c</span> =</span> rdd1.leftOuterJoin(rdd2)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">d</span> =</span> rdd1.rightOuterJoin(rdd2)</span><br><span class="line"></span><br><span class="line">println(<span class="string">"join:"</span>+a.collect().mkString(<span class="string">","</span>))</span><br><span class="line">println(<span class="string">"fullOuterJoin:"</span>+b.collect().mkString(<span class="string">","</span>))</span><br><span class="line">println(<span class="string">"leftOuterJoin:"</span>+c.collect().mkString(<span class="string">","</span>))</span><br><span class="line">println(<span class="string">"rightOuterJoin:"</span>+d.collect().mkString(<span class="string">","</span>))</span><br><span class="line"><span class="comment">//join:(1,(a,B)),(2,(c,D)),(2,(c,E)),(2,(b,D)),(2,(b,E))</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//fullOuterJoin:(3,(None,Some(C))),(4,(None,Some(D))),(1,(Some(a),Some(B))),(5,(Some(g),None)),(2,(Some(c),Some(D))),(2,(Some(c),Some(E))),(2,(Some(b),Some(D))),(2,(Some(b),Some(E)))</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//leftOuterJoin:(1,(a,Some(B))),(5,(g,None)),(2,(c,Some(D))),(2,(c,Some(E))),(2,(b,Some(D))),(2,(b,Some(E)))</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//rightOuterJoin:(3,(None,C)),(4,(None,D)),(1,(Some(a),B)),(2,(Some(c),D)),(2,(Some(c),E)),(2,(Some(b),D)),(2,(Some(b),E))</span></span><br></pre></td></tr></table></figure>
+<h2 id="cogroup">cogroup</h2><p>多个RDD聚合<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr</span> =</span> <span class="type">Array</span>((<span class="number">1</span>,<span class="string">"a"</span>),(<span class="number">2</span>,<span class="string">"c"</span>))</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr2</span> =</span> <span class="type">Array</span>((<span class="number">1</span>,<span class="string">"B"</span>),(<span class="number">3</span>,<span class="string">"C"</span>))</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr3</span> =</span> <span class="type">Array</span>((<span class="number">1</span>,<span class="string">"C"</span>),(<span class="number">3</span>,<span class="string">"D"</span>))</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd1</span> =</span> sc.parallelize(arr,<span class="number">3</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd2</span> =</span> sc.parallelize(arr2)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd3</span> =</span> sc.parallelize(arr3)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> rdd1.cogroup(rdd2,rdd3)<span class="comment">//支持1-3个RDD参数</span></span><br><span class="line"></span><br><span class="line">println(a.collect().mkString(<span class="string">","</span>))</span><br><span class="line"><span class="comment">//(3,(CompactBuffer(),CompactBuffer(C),CompactBuffer(D))),(1,(CompactBuffer(a),CompactBuffer(B),CompactBuffer(C))),(2,(CompactBuffer(c),CompactBuffer(),CompactBuffer()))</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>demo结果显示，如果key不匹配会默认给一个空值</p>
+</blockquote>
+<h2 id="mapValue">mapValue</h2><p>对key，value结构数据（二元组）的value执行map<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr</span> =</span> <span class="type">Array</span>((<span class="number">1</span>,<span class="string">"a"</span>),(<span class="number">2</span>,<span class="string">"c"</span>),(<span class="number">2</span>,<span class="string">"b"</span>),(<span class="number">5</span>,<span class="string">"g"</span>))</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd1</span> =</span> sc.parallelize(arr,<span class="number">3</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> rdd1.mapValues(f=&gt;f.toUpperCase())</span><br><span class="line"></span><br><span class="line">println(a.collect().mkString(<span class="string">","</span>))</span><br><span class="line"><span class="comment">//(1,A),(2,C),(2,B),(5,G)</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="sort">sort</h2><p>RDD排序，sort 提供 sortBy 和sortByKey 等多个方法。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr</span> =</span> <span class="type">Array</span>((<span class="number">1</span>,<span class="string">"a"</span>),(<span class="number">2</span>,<span class="string">"c"</span>),(<span class="number">3</span>,<span class="string">"b"</span>),(<span class="number">5</span>,<span class="string">"g"</span>))</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd1</span> =</span> sc.parallelize(arr,<span class="number">3</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> rdd1.sortByKey(<span class="literal">true</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">b</span> =</span> rdd1.sortByKey(<span class="literal">false</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">c</span> =</span> rdd1.sortBy(f=&gt;f._2,<span class="literal">true</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">d</span> =</span> rdd1.sortBy(f=&gt;f._2,<span class="literal">false</span>)</span><br><span class="line"></span><br><span class="line">println(a.collect().mkString(<span class="string">","</span>))</span><br><span class="line">println(b.collect().mkString(<span class="string">","</span>))</span><br><span class="line">println(c.collect().mkString(<span class="string">","</span>))</span><br><span class="line">println(d.collect().mkString(<span class="string">","</span>))</span><br><span class="line"><span class="comment">//(1,a),(2,c),(3,b),(5,g)</span></span><br><span class="line"><span class="comment">//(5,g),(3,b),(2,c),(1,a)</span></span><br><span class="line"><span class="comment">//(1,a),(3,b),(2,c),(5,g)</span></span><br><span class="line"><span class="comment">//(5,g),(2,c),(3,b),(1,a)</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>第二个参数为倒序控制</p>
+</blockquote>
+<h2 id="cartesian">cartesian</h2><p>cartesian进行笛卡尔积运算<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr</span> =</span> <span class="type">Array</span>((<span class="number">1</span>,<span class="string">"a"</span>),(<span class="number">2</span>,<span class="string">"c"</span>))</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr2</span> =</span> <span class="type">Array</span>((<span class="number">3</span>,<span class="string">"C"</span>),(<span class="number">4</span>,<span class="string">"D"</span>),(<span class="number">5</span>,<span class="string">"E"</span>))</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd1</span> =</span> sc.parallelize(arr,<span class="number">3</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd2</span> =</span> sc.parallelize(arr2)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> rdd1.cartesian(rdd2)</span><br><span class="line"></span><br><span class="line">println(a.collect().mkString(<span class="string">"\n"</span>))</span><br><span class="line"><span class="comment">//((1,a),(3,C))</span></span><br><span class="line"><span class="comment">//((1,a),(4,D))</span></span><br><span class="line"><span class="comment">//((1,a),(5,E))</span></span><br><span class="line"><span class="comment">//((2,c),(3,C))</span></span><br><span class="line"><span class="comment">//((2,c),(4,D))</span></span><br><span class="line"><span class="comment">//((2,c),(5,E))</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="count">count</h2><p>count 返回RDD的长度<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr</span> =</span> <span class="type">Array</span>((<span class="number">1</span>,<span class="string">"a"</span>),(<span class="number">2</span>,<span class="string">"c"</span>),(<span class="number">2</span>,<span class="string">"c"</span>))</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd1</span> =</span> sc.parallelize(arr,<span class="number">3</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> rdd1.count()</span><br><span class="line"></span><br><span class="line">println(a)</span><br><span class="line"><span class="comment">//3</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="collect">collect</h2><p>collect会触发数据的执行，生成结果集</p>
+<h2 id="reduce">reduce</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr</span> =</span> <span class="type">Array</span>((<span class="number">1</span>,<span class="string">"a"</span>),(<span class="number">2</span>,<span class="string">"c"</span>),(<span class="number">2</span>,<span class="string">"D"</span>))</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd1</span> =</span> sc.parallelize(arr,<span class="number">3</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> rdd1.reduce((a,b)=&gt;(a._1+b._1,a._2+b._2))</span><br><span class="line"></span><br><span class="line">println(a)</span><br><span class="line"><span class="comment">//（5，acD）</span></span><br></pre></td></tr></table></figure>
+<h2 id="lookup">lookup</h2><p>lookup查询key为入参的所有数据集<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">arr</span> =</span> <span class="type">Array</span>((<span class="number">1</span>,<span class="string">"a"</span>),(<span class="number">2</span>,<span class="string">"c"</span>),(<span class="number">2</span>,<span class="string">"D"</span>))</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd1</span> =</span> sc.parallelize(arr,<span class="number">3</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> rdd1.lookup(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">println(a.mkString(<span class="string">","</span>))</span><br><span class="line"><span class="comment">//c,D</span></span><br></pre></td></tr></table></figure></p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/10/14/Mathjax与LaTex公式简介/" itemprop="url">
                 Mathjax与LaTex公式简介
               </a>
@@ -985,21 +1197,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
