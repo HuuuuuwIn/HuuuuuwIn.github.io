@@ -195,6 +195,109 @@
           
           
             
+              <a class="post-title-link" href="/2015/12/16/IMSI与MSISDN对应规则/" itemprop="url">
+                IMSI与MSISDN对应规则
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-16T18:15:44+08:00" content="2015-12-16">
+            2015-12-16
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/其他/" itemprop="url" rel="index">
+                  <span itemprop="name">其他</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/12/16/IMSI与MSISDN对应规则/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/16/IMSI与MSISDN对应规则/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><blockquote>
+<p>正好项目中有用到imsi与msisdn对应规则，在此记录一下。</p>
+</blockquote>
+<h2 id="简介">简介</h2><ul>
+<li>IMSI(International Mobile Subscriber Identity)：<br>IMSI=MCC（移动国家码）+MNC（移动网号）+MSIN（ PLMN中唯一识别MS）</li>
+<li>MSISDN(Mobile Subscriber International ISDN/PSTN number)：<br>MSISDN=CC（国家码）+NDC（国内接入号）+SN（用户号码）<h2 id="IMSI">IMSI</h2>IMSI是区别移动用户的标志，储存在SIM卡中，可用于区别移动用户的有效信息。其总长度不超过15位，同样使用0～9的数字。<h3 id="MCC">MCC</h3>MCC是移动用户所属国家代号，占3位数字，中国的MCC规定为460。<h3 id="MNC">MNC</h3>MNC为移动网络码，共2-3位，中国国内当前如为下表所示：<br>|运营商|MNC号码|<br>|:-:|:-|<br>|移动|00, 02, 07|<br>|联通|01, 06|<br>|电信|03, 05|<br>|电信4G|11|<br>|铁通|20|</li>
+</ul>
+<h3 id="MSIN">MSIN</h3><p>MSIN为移动用户识别号码，10-11位，其结构如下：<br>$$CC+M0M1M2M3+ABCD$$<br>CC由不同运营商分配，其中的M0M1M2M3和MDN号码中的H0H1H2H3可存在对应关系，ABCD四位为自由分配。</p>
+<h2 id="MSISDN">MSISDN</h2><p>其实MSISDN就是我们平时所说的手机号码。<br>$$MSISDN=CC+NDC+SN$$</p>
+<blockquote>
+<p>其中：<br>CC=国家码 (中国为86)<br>NDC=国内目的码<br>SN=用户号码</p>
+</blockquote>
+<p>NDC为：<br>每个GSM的网络均分配一个国内目的码(NDC)。也可以要求分配两个以上的NDC号。MSISDN的号长是可变的（取决于网络结构与编号计划），不包括字冠，最长可以达到15位，我国GSM的国内身份号码为11位。<br>$$NDC=N1N2N3(接入号)+H1H2H3H4(HLR的识别号)$$<br>接入号用于识别网络，我们目前采用：139、138……。<br>HLR识别号表示用户归属的HLR，也表示移动业务本地网号。</p>
+<blockquote>
+<p>例如：133-3333</p>
+</blockquote>
+<h2 id="IMSI与MSISDN对应关系">IMSI与MSISDN对应关系</h2><p>切记IMSI与MSISDN不一定完全有对应关系，但是有一些可以作为借鉴。<br>当前收集了移动和联通的对应关系，其他暂时无法获取，且无法推导。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s130</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)[0,1]\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s131</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)9\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s132</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)2\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s134</span> =</span> <span class="string">"""^460020(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s13x0</span> =</span> <span class="string">"""^46000(\d&#123;3&#125;)([5,6,7,8,9])\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s13x</span> =</span> <span class="string">"""^46000(\d&#123;3&#125;)([0,1,2,3,4])(\d)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s150</span> =</span> <span class="string">"""^460023(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s151</span> =</span> <span class="string">"""^460021(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s152</span> =</span> <span class="string">"""^460022(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s155</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)4\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s156</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)3\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s157</span> =</span> <span class="string">"""^460077(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s158</span> =</span> <span class="string">"""^460028(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s159</span> =</span> <span class="string">"""^460029(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s147</span> =</span> <span class="string">"""^460079(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s185</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)5\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s186</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)6\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s187</span> =</span> <span class="string">"""^460027(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s188</span> =</span> <span class="string">"""^460078(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s1705</span> =</span> <span class="string">"""^460070(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s170x</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)8\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s178</span> =</span> <span class="string">"""^460075(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s145</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)7\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s182</span> =</span> <span class="string">"""^460026(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s183</span> =</span> <span class="string">"""^460025(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s184</span> =</span> <span class="string">"""^460024(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">calphone</span> =</span> imsi <span class="keyword">match</span> &#123;</span><br><span class="line">  <span class="keyword">case</span> s130(bcd,a) =&gt; <span class="string">"130"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s131(bcd,a) =&gt; <span class="string">"131"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s132(bcd,a) =&gt; <span class="string">"132"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s134(a,bcd) =&gt; <span class="string">"134"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s13x0(bcd,s) =&gt; <span class="string">"13"</span>+s+<span class="string">"0"</span>+bcd</span><br><span class="line">  <span class="keyword">case</span> s13x(bcd,s,a) =&gt; <span class="string">"13"</span>+(s.toInt+<span class="number">5</span>)+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s150(a,bcd) =&gt; <span class="string">"150"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s151(a,bcd) =&gt; <span class="string">"151"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s152(a,bcd) =&gt; <span class="string">"152"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s155(bcd,a) =&gt; <span class="string">"155"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s156(bcd,a) =&gt; <span class="string">"156"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s157(a,bcd) =&gt; <span class="string">"157"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s158(a,bcd) =&gt; <span class="string">"158"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s159(a,bcd) =&gt; <span class="string">"159"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s147(a,bcd) =&gt; <span class="string">"147"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s185(bcd,a) =&gt; <span class="string">"185"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s186(bcd,a) =&gt; <span class="string">"186"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s187(a,bcd) =&gt; <span class="string">"187"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s188(a,bcd) =&gt; <span class="string">"188"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s1705(a,bcd) =&gt; <span class="string">"170"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s170x(bcd,a) =&gt; <span class="string">"170"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s178(a,bcd) =&gt; <span class="string">"178"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s145(bcd,a) =&gt; <span class="string">"145"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s182(a,bcd) =&gt; <span class="string">"182"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s183(a,bcd) =&gt; <span class="string">"183"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s184(a,bcd) =&gt; <span class="string">"184"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> _ =&gt; <span class="string">"0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>再次提醒，当前两者之间关系并非一定如此，仅作参考。</p>
+</blockquote>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/12/10/Spark-SQL-读写MySQL/" itemprop="url">
                 Spark SQL 读写MySQL
               </a>
@@ -1791,21 +1894,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

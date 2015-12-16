@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="spark,推荐系统," />
+  <meta name="keywords" content="其他," />
 
 
 
@@ -37,22 +37,28 @@
   <link rel="shorticon icon" type="image/x-icon" href="/images/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="最近使用spark ALS做推荐，故写一篇文章记录所得。
+<meta name="description" content="正好项目中有用到imsi与msisdn对应规则，在此记录一下。
 
-算法介绍spark实现的推荐算法是基于矩阵分解的ALS-WR(alternating-least-squares with weighted-λ-regularization)的协同过滤算法。矩阵r表示用户对物品的评分矩阵，矩阵u,m表示用户和物品的特征矩阵。$$r\approx u \cdot m$$损失函数为$$f(U,M)=\sum">
+简介
+IMSI(International Mobile Subscriber Identity)：IMSI=MCC（移动国家码）+MNC（移动网号）+MSIN（ PLMN中唯一识别MS）
+MSISDN(Mobile Subscriber International ISDN/PSTN number)：MSISDN=CC（国家码）+">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spark ALS学习">
-<meta property="og:url" content="http://3iter.com/2015/11/19/spark-ALS学习/index.html">
+<meta property="og:title" content="IMSI与MSISDN对应规则">
+<meta property="og:url" content="http://3iter.com/2015/12/16/IMSI与MSISDN对应规则/index.html">
 <meta property="og:site_name" content="Hoocoln个人博客">
-<meta property="og:description" content="最近使用spark ALS做推荐，故写一篇文章记录所得。
+<meta property="og:description" content="正好项目中有用到imsi与msisdn对应规则，在此记录一下。
 
-算法介绍spark实现的推荐算法是基于矩阵分解的ALS-WR(alternating-least-squares with weighted-λ-regularization)的协同过滤算法。矩阵r表示用户对物品的评分矩阵，矩阵u,m表示用户和物品的特征矩阵。$$r\approx u \cdot m$$损失函数为$$f(U,M)=\sum">
-<meta property="og:updated_time" content="2015-11-19T09:27:53.478Z">
+简介
+IMSI(International Mobile Subscriber Identity)：IMSI=MCC（移动国家码）+MNC（移动网号）+MSIN（ PLMN中唯一识别MS）
+MSISDN(Mobile Subscriber International ISDN/PSTN number)：MSISDN=CC（国家码）+">
+<meta property="og:updated_time" content="2015-12-16T10:19:55.474Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spark ALS学习">
-<meta name="twitter:description" content="最近使用spark ALS做推荐，故写一篇文章记录所得。
+<meta name="twitter:title" content="IMSI与MSISDN对应规则">
+<meta name="twitter:description" content="正好项目中有用到imsi与msisdn对应规则，在此记录一下。
 
-算法介绍spark实现的推荐算法是基于矩阵分解的ALS-WR(alternating-least-squares with weighted-λ-regularization)的协同过滤算法。矩阵r表示用户对物品的评分矩阵，矩阵u,m表示用户和物品的特征矩阵。$$r\approx u \cdot m$$损失函数为$$f(U,M)=\sum">
+简介
+IMSI(International Mobile Subscriber Identity)：IMSI=MCC（移动国家码）+MNC（移动网号）+MSIN（ PLMN中唯一识别MS）
+MSISDN(Mobile Subscriber International ISDN/PSTN number)：MSISDN=CC（国家码）+">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -62,7 +68,7 @@
   };
 </script>
 
-  <title> spark ALS学习 | Hoocoln个人博客 </title>
+  <title> IMSI与MSISDN对应规则 | Hoocoln个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -200,7 +206,7 @@
           
           
             
-              spark ALS学习
+              IMSI与MSISDN对应规则
             
           
         </h1>
@@ -209,8 +215,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-11-19T17:20:15+08:00" content="2015-11-19">
-            2015-11-19
+          <time itemprop="dateCreated" datetime="2015-12-16T18:15:44+08:00" content="2015-12-16">
+            2015-12-16
           </time>
         </span>
 
@@ -219,20 +225,8 @@
             &nbsp; | &nbsp; 分类于
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/spark/" itemprop="url" rel="index">
-                  <span itemprop="name">spark</span>
-                </a>
-              </span>
-
-              
-              
-                ， 
-              
-
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/spark/推荐系统/" itemprop="url" rel="index">
-                  <span itemprop="name">推荐系统</span>
+                <a href="/categories/其他/" itemprop="url" rel="index">
+                  <span itemprop="name">其他</span>
                 </a>
               </span>
 
@@ -247,8 +241,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/11/19/spark-ALS学习/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/19/spark-ALS学习/" itemprop="commentsCount"></span>
+              <a href="/2015/12/16/IMSI与MSISDN对应规则/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/16/IMSI与MSISDN对应规则/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -263,16 +257,25 @@
 
       
         <span itemprop="articleBody"><blockquote>
-<p>最近使用spark ALS做推荐，故写一篇文章记录所得。</p>
+<p>正好项目中有用到imsi与msisdn对应规则，在此记录一下。</p>
 </blockquote>
-<h2 id="算法介绍">算法介绍</h2><p>spark实现的推荐算法是基于矩阵分解的ALS-WR(alternating-least-squares with weighted-λ-regularization)的协同过滤算法。<br>矩阵r表示用户对物品的评分矩阵，矩阵u,m表示用户和物品的特征矩阵。<br>$$r\approx u \cdot m$$<br>损失函数为<br>$$f(U,M)=\sum(r_{ij}-u_i^T m_j)^2+\lambda(\sum n_{u_i} ||u_i||^2+\sum n_{m_j}||m_j||^2)$$<br>$n_{u_i}$和$n_{m_i}$分别表示user评分数和电影数，$I_i$表示user i评分过的物品，$I_j$表示评论过物品j的所有用户。<br>损失函数前一部分为真实值与分解矩阵计算值得误差平方和，后一部分为正则范数，防止过拟合，目的即变成求f函数的最小值。<br>每次迭代，<br>固定M，逐个更新每个user的特征u(对u求偏导，令偏导为0求解)。<br>固定U，逐个更新每个item的特征m(对m求偏导，令偏导为0求解)。<br>给定的U的一列，称为$u_i$，由解正则化线性最小平方问题得到，这个问题由user i评分记录，以及i评分过的电影的特征向量组成</p>
+<h2 id="简介">简介</h2><ul>
+<li>IMSI(International Mobile Subscriber Identity)：<br>IMSI=MCC（移动国家码）+MNC（移动网号）+MSIN（ PLMN中唯一识别MS）</li>
+<li>MSISDN(Mobile Subscriber International ISDN/PSTN number)：<br>MSISDN=CC（国家码）+NDC（国内接入号）+SN（用户号码）<h2 id="IMSI">IMSI</h2>IMSI是区别移动用户的标志，储存在SIM卡中，可用于区别移动用户的有效信息。其总长度不超过15位，同样使用0～9的数字。<h3 id="MCC">MCC</h3>MCC是移动用户所属国家代号，占3位数字，中国的MCC规定为460。<h3 id="MNC">MNC</h3>MNC为移动网络码，共2-3位，中国国内当前如为下表所示：<br>|运营商|MNC号码|<br>|:-:|:-|<br>|移动|00, 02, 07|<br>|联通|01, 06|<br>|电信|03, 05|<br>|电信4G|11|<br>|铁通|20|</li>
+</ul>
+<h3 id="MSIN">MSIN</h3><p>MSIN为移动用户识别号码，10-11位，其结构如下：<br>$$CC+M0M1M2M3+ABCD$$<br>CC由不同运营商分配，其中的M0M1M2M3和MDN号码中的H0H1H2H3可存在对应关系，ABCD四位为自由分配。</p>
+<h2 id="MSISDN">MSISDN</h2><p>其实MSISDN就是我们平时所说的手机号码。<br>$$MSISDN=CC+NDC+SN$$</p>
 <blockquote>
-<p>$\frac 1 2\frac{\partial f}{\partial u_{ki}}=0,\forall{i,k}\tag 1$<br>$\Rightarrow \sum_{j\in I_i}(u_i^Tm_j-r_{ij})m_{kj}+\lambda n_{ui}u_{ki}=0,\forall{i,k}\tag 2$<br>$\Rightarrow \sum_{j\in I_i}m_{kj}m_j^Tu_i+\lambda n_{ui}u_{ki}=\sum_{j\in I_i}m_{kj}r_{ij},\forall{i,k}\tag 3$<br>$\Rightarrow (M_{I_i}M_{I_i}^T+\lambda n_{u_i}E)u_i=M_{I_i}R^T(i,I_i),\forall i \tag 4$<br>$\Rightarrow u_i=A_i^{-1}V_i,\forall i\tag 5$</p>
+<p>其中：<br>CC=国家码 (中国为86)<br>NDC=国内目的码<br>SN=用户号码</p>
 </blockquote>
-<p>其中$A_i=M_{I_i}M_{I_i}^T+\lambda n_{u_i}E=M_{I_i}R^T(i,I_i)$E是单位矩阵,$M_{I_i}$表示M的子矩阵，它的列是user i评分过的物品，$R(i,I_i)$是以评分物品为列的矩阵R的第i行向量。<br>同理$m_j=A_j^{-1}V_j$</p>
-<h2 id="代码实现">代码实现</h2><p>本文从spark中的LocalALS分析（SparkALS与其原理一样，只不过用RDD实现并行计算处理）<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ITERATIONS 为迭代次数</span></span><br><span class="line"><span class="keyword">for</span> (iter &lt;- <span class="number">1</span> to <span class="type">ITERATIONS</span>) &#123;</span><br><span class="line">  println(s<span class="string">"Iteration $iter:"</span>)</span><br><span class="line">  <span class="comment">//固定用户,逐个更新所有物品的特征</span></span><br><span class="line">  ms = (<span class="number">0</span> until <span class="type">M</span>).map(i =&gt; updateMovie(i, ms(i), us, <span class="type">R</span>)).toArray</span><br><span class="line">  <span class="comment">//固定物品,逐个更新所有用户的特征</span></span><br><span class="line">  us = (<span class="number">0</span> until <span class="type">U</span>).map(j =&gt; updateUser(j, us(j), ms, <span class="type">R</span>)).toArray</span><br><span class="line">  <span class="comment">//计算均方根误差</span></span><br><span class="line">  println(<span class="string">"RMSE = "</span> + rmse(<span class="type">R</span>, ms, us))</span><br><span class="line">  println()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>迭代更新的方法为updateMovie和updateUser，实现原理一致，取其一介绍<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">updateUser</span>(</span>j: <span class="type">Int</span>, u: <span class="type">RealVector</span>, ms: <span class="type">Array</span>[<span class="type">RealVector</span>], <span class="type">R</span>:<span class="type">RealMatrix</span>) : <span class="type">RealVector</span> = &#123;</span><br><span class="line">    <span class="comment">//F为隐性因子的个数，M为电影的总数，U为用户的总数</span></span><br><span class="line">    <span class="keyword">var</span> <span class="type">XtX</span>: <span class="type">RealMatrix</span> = <span class="keyword">new</span> <span class="type">Array2DRowRealMatrix</span>(<span class="type">F</span>, <span class="type">F</span>)</span><br><span class="line">    <span class="keyword">var</span> <span class="type">Xty</span>: <span class="type">RealVector</span> = <span class="keyword">new</span> <span class="type">ArrayRealVector</span>(<span class="type">F</span>)</span><br><span class="line">    <span class="comment">// For each movie that the user rated</span></span><br><span class="line">    <span class="comment">// 迭代所有电影，应取该用户评论过的电影集</span></span><br><span class="line">    <span class="keyword">for</span> (i &lt;- <span class="number">0</span> until <span class="type">M</span>) &#123;</span><br><span class="line">      <span class="function"><span class="keyword">val</span> <span class="title">m</span> =</span> ms(i)<span class="comment">//取出电影的特征向量</span></span><br><span class="line">      <span class="comment">// Add m * m^t to XtX</span></span><br><span class="line">      <span class="comment">// outProduct即为矩阵叉乘另一个矩阵的转置矩阵</span></span><br><span class="line">      <span class="comment">// add方法会把两个矩阵每个对应位置相加</span></span><br><span class="line">      <span class="type">XtX</span> = <span class="type">XtX</span>.add(m.outerProduct(m))</span><br><span class="line">      <span class="comment">// Add m * rating to Xty</span></span><br><span class="line">      <span class="comment">// mapMultiply方法会用将原向量中的每个值都乘以入参（此处即用户j对电影i的评分）</span></span><br><span class="line">      <span class="comment">// add方法会把每个向量的对应位置相加</span></span><br><span class="line">      <span class="type">Xty</span> = <span class="type">Xty</span>.add(m.mapMultiply(<span class="type">R</span>.getEntry(i, j)))</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Add regularization coefficients to diagonal terms</span></span><br><span class="line">    <span class="keyword">for</span> (d &lt;- <span class="number">0</span> until <span class="type">F</span>) &#123;</span><br><span class="line">      <span class="comment">// addToEntry方法将2维数组中当前参数1行和参数2列确定的对应元素加上参数3形成新值</span></span><br><span class="line">      <span class="type">XtX</span>.addToEntry(d, d, <span class="type">LAMBDA</span> * <span class="type">M</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Solve it with Cholesky</span></span><br><span class="line">    <span class="comment">// 使用乔里斯基分解求解，mllib中还提供非负最小二乘分解(NNLS)</span></span><br><span class="line">    <span class="keyword">new</span> <span class="type">CholeskyDecomposition</span>(<span class="type">XtX</span>).getSolver.solve(<span class="type">Xty</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>结合公式4,$(M_{I_i}M_{I_i}^T+\lambda n_{u_i}E)u_i=M_{I_i}R^T(i,I_i)$,其中XtX即为公式中$u_i$前的计算结果，Xty为等号后的计算结果。</p>
+<p>NDC为：<br>每个GSM的网络均分配一个国内目的码(NDC)。也可以要求分配两个以上的NDC号。MSISDN的号长是可变的（取决于网络结构与编号计划），不包括字冠，最长可以达到15位，我国GSM的国内身份号码为11位。<br>$$NDC=N1N2N3(接入号)+H1H2H3H4(HLR的识别号)$$<br>接入号用于识别网络，我们目前采用：139、138……。<br>HLR识别号表示用户归属的HLR，也表示移动业务本地网号。</p>
+<blockquote>
+<p>例如：133-3333</p>
+</blockquote>
+<h2 id="IMSI与MSISDN对应关系">IMSI与MSISDN对应关系</h2><p>切记IMSI与MSISDN不一定完全有对应关系，但是有一些可以作为借鉴。<br>当前收集了移动和联通的对应关系，其他暂时无法获取，且无法推导。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s130</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)[0,1]\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s131</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)9\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s132</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)2\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s134</span> =</span> <span class="string">"""^460020(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s13x0</span> =</span> <span class="string">"""^46000(\d&#123;3&#125;)([5,6,7,8,9])\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s13x</span> =</span> <span class="string">"""^46000(\d&#123;3&#125;)([0,1,2,3,4])(\d)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s150</span> =</span> <span class="string">"""^460023(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s151</span> =</span> <span class="string">"""^460021(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s152</span> =</span> <span class="string">"""^460022(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s155</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)4\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s156</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)3\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s157</span> =</span> <span class="string">"""^460077(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s158</span> =</span> <span class="string">"""^460028(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s159</span> =</span> <span class="string">"""^460029(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s147</span> =</span> <span class="string">"""^460079(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s185</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)5\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s186</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)6\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s187</span> =</span> <span class="string">"""^460027(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s188</span> =</span> <span class="string">"""^460078(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s1705</span> =</span> <span class="string">"""^460070(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s170x</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)8\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s178</span> =</span> <span class="string">"""^460075(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s145</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)7\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s182</span> =</span> <span class="string">"""^460026(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s183</span> =</span> <span class="string">"""^460025(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s184</span> =</span> <span class="string">"""^460024(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">calphone</span> =</span> imsi <span class="keyword">match</span> &#123;</span><br><span class="line">  <span class="keyword">case</span> s130(bcd,a) =&gt; <span class="string">"130"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s131(bcd,a) =&gt; <span class="string">"131"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s132(bcd,a) =&gt; <span class="string">"132"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s134(a,bcd) =&gt; <span class="string">"134"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s13x0(bcd,s) =&gt; <span class="string">"13"</span>+s+<span class="string">"0"</span>+bcd</span><br><span class="line">  <span class="keyword">case</span> s13x(bcd,s,a) =&gt; <span class="string">"13"</span>+(s.toInt+<span class="number">5</span>)+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s150(a,bcd) =&gt; <span class="string">"150"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s151(a,bcd) =&gt; <span class="string">"151"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s152(a,bcd) =&gt; <span class="string">"152"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s155(bcd,a) =&gt; <span class="string">"155"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s156(bcd,a) =&gt; <span class="string">"156"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s157(a,bcd) =&gt; <span class="string">"157"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s158(a,bcd) =&gt; <span class="string">"158"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s159(a,bcd) =&gt; <span class="string">"159"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s147(a,bcd) =&gt; <span class="string">"147"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s185(bcd,a) =&gt; <span class="string">"185"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s186(bcd,a) =&gt; <span class="string">"186"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s187(a,bcd) =&gt; <span class="string">"187"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s188(a,bcd) =&gt; <span class="string">"188"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s1705(a,bcd) =&gt; <span class="string">"170"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s170x(bcd,a) =&gt; <span class="string">"170"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s178(a,bcd) =&gt; <span class="string">"178"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s145(bcd,a) =&gt; <span class="string">"145"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s182(a,bcd) =&gt; <span class="string">"182"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s183(a,bcd) =&gt; <span class="string">"183"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s184(a,bcd) =&gt; <span class="string">"184"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> _ =&gt; <span class="string">"0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>再次提醒，当前两者之间关系并非一定如此，仅作参考。</p>
+</blockquote>
 </span>
       
     </div>
@@ -281,9 +284,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/spark/" rel="tag">#spark</a>
-          
-            <a href="/tags/推荐系统/" rel="tag">#推荐系统</a>
+            <a href="/tags/其他/" rel="tag">#其他</a>
           
         </div>
       
@@ -292,13 +293,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/11/19/spark-SGD学习/" rel="prev">spark SGD学习</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/10/22/BLAS方法简介（一）/" rel="next">BLAS方法简介（一）</a>
+              <a href="/2015/12/10/Spark-SQL-读写MySQL/" rel="next">Spark SQL 读写MySQL</a>
             
           </div>
         </div>
@@ -327,8 +326,8 @@
         
           <div class="comments" id="comments">
             
-              <div class="ds-thread" data-thread-key="2015/11/19/spark-ALS学习/"
-                   data-title="spark ALS学习" data-url="http://3iter.com/2015/11/19/spark-ALS学习/">
+              <div class="ds-thread" data-thread-key="2015/12/16/IMSI与MSISDN对应规则/"
+                   data-title="IMSI与MSISDN对应规则" data-url="http://3iter.com/2015/12/16/IMSI与MSISDN对应规则/">
               </div>
             
           </div>
@@ -410,7 +409,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法介绍"><span class="nav-number">1.</span> <span class="nav-text">算法介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">2.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IMSI"><span class="nav-number">2.</span> <span class="nav-text">IMSI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MCC"><span class="nav-number">2.1.</span> <span class="nav-text">MCC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MNC"><span class="nav-number">2.2.</span> <span class="nav-text">MNC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MSIN"><span class="nav-number">2.3.</span> <span class="nav-text">MSIN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MSISDN"><span class="nav-number">3.</span> <span class="nav-text">MSISDN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IMSI与MSISDN对应关系"><span class="nav-number">4.</span> <span class="nav-text">IMSI与MSISDN对应关系</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
