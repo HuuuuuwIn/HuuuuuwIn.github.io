@@ -1,0 +1,696 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+
+
+  <meta name="keywords" content="web," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/images/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="本文紧接着上一篇文章Spring mvc + Hibernate + Jpa + druid 全注解配置实例，推荐先掌握上一篇文章。
+
+介绍零配置是servlet3.0之后支持的方式，所有servlet的版本以及运行容器的servlet版本需要3.0+版本。本文与前文不同的是没有配置文件，包括web.xml也是无内容的。替换方式是采用Java代码实现。pom.xml文件与上文一致，web.xml为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring mvc 零配置实例">
+<meta property="og:url" content="http://3iter.com/2015/12/30/spring-mvc-零配置实例/index.html">
+<meta property="og:site_name" content="Hoocoln个人博客">
+<meta property="og:description" content="本文紧接着上一篇文章Spring mvc + Hibernate + Jpa + druid 全注解配置实例，推荐先掌握上一篇文章。
+
+介绍零配置是servlet3.0之后支持的方式，所有servlet的版本以及运行容器的servlet版本需要3.0+版本。本文与前文不同的是没有配置文件，包括web.xml也是无内容的。替换方式是采用Java代码实现。pom.xml文件与上文一致，web.xml为">
+<meta property="og:updated_time" content="2015-12-30T10:37:16.584Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spring mvc 零配置实例">
+<meta name="twitter:description" content="本文紧接着上一篇文章Spring mvc + Hibernate + Jpa + druid 全注解配置实例，推荐先掌握上一篇文章。
+
+介绍零配置是servlet3.0之后支持的方式，所有servlet的版本以及运行容器的servlet版本需要3.0+版本。本文与前文不同的是没有配置文件，包括web.xml也是无内容的。替换方式是采用Java代码实现。pom.xml文件与上文一致，web.xml为">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> spring mvc 零配置实例 | Hoocoln个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?eb0ae0ce3f923010eaaef69d09d15eb2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">Hoocoln个人博客</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'qHLfpz1f6fG1U_P-rhR5','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              spring mvc 零配置实例
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-30T18:36:33+08:00" content="2015-12-30">
+            2015-12-30
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/web/" itemprop="url" rel="index">
+                  <span itemprop="name">web</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/12/30/spring-mvc-零配置实例/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/30/spring-mvc-零配置实例/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>本文紧接着上一篇文章<a href="http://3iter.com/2015/12/30/Spring-mvc-Hibernate-Jpa-druid-全注解配置实例/">Spring mvc + Hibernate + Jpa + druid 全注解配置实例</a>，推荐先掌握上一篇文章。</p>
+</blockquote>
+<h2 id="介绍">介绍</h2><p>零配置是servlet3.0之后支持的方式，所有servlet的版本以及运行容器的servlet版本需要3.0+版本。<br>本文与前文不同的是没有配置文件，包括web.xml也是无内容的。替换方式是采用Java代码实现。pom.xml文件与上文一致，web.xml为空，spring相关配置全无。<br>包括初始化、数据源、mvc、容器等</p>
+<h2 id="初始化">初始化</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.alibaba.druid.support.http.StatViewServlet;</span><br><span class="line"><span class="keyword">import</span> com.alibaba.druid.support.http.WebStatFilter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.WebApplicationInitializer;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.context.ContextLoaderListener;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.context.support.AnnotationConfigWebApplicationContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.filter.CharacterEncodingFilter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.DispatcherServlet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Created by Administrator on 2015/12/25.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Initializer</span> <span class="keyword">implements</span> <span class="title">WebApplicationInitializer</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStartup</span><span class="params">(ServletContext servletContext)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">        AnnotationConfigWebApplicationContext ctx = <span class="keyword">new</span> AnnotationConfigWebApplicationContext();</span><br><span class="line">        ctx.register(WebAppConfig.class);</span><br><span class="line">        servletContext.addListener(<span class="keyword">new</span> ContextLoaderListener(ctx));</span><br><span class="line"></span><br><span class="line">        ctx.setServletContext(servletContext);</span><br><span class="line"></span><br><span class="line">        ServletRegistration.Dynamic servlet = servletContext.addServlet(<span class="string">"dispatcher"</span>, <span class="keyword">new</span> DispatcherServlet(ctx));</span><br><span class="line">        servlet.addMapping(<span class="string">"/"</span>);</span><br><span class="line">        servlet.setLoadOnStartup(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        CharacterEncodingFilter encodingFilter = <span class="keyword">new</span> CharacterEncodingFilter();</span><br><span class="line">        encodingFilter.setEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line">        encodingFilter.setForceEncoding(<span class="keyword">true</span>);</span><br><span class="line">        FilterRegistration.Dynamic encodingServlet = servletContext.addFilter(<span class="string">"encodingFilter"</span>, encodingFilter);</span><br><span class="line">        encodingServlet.addMappingForUrlPatterns(<span class="keyword">null</span>,<span class="keyword">true</span>,<span class="string">"/*"</span>);</span><br><span class="line"></span><br><span class="line">        WebStatFilter webStatFilter = <span class="keyword">new</span> WebStatFilter();</span><br><span class="line">        FilterRegistration.Dynamic webStatServlet = servletContext.addFilter(<span class="string">"DruidWebStatFilter"</span>, webStatFilter);</span><br><span class="line">        webStatServlet.setInitParameter(<span class="string">"exclusions"</span>,<span class="string">"*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"</span>);</span><br><span class="line">        webStatServlet.addMappingForUrlPatterns(<span class="keyword">null</span>,<span class="keyword">true</span>,<span class="string">"/*"</span>);</span><br><span class="line"></span><br><span class="line">        ServletRegistration.Dynamic druidStatViewServlet = servletContext.addServlet(<span class="string">"DruidStatView"</span>,<span class="keyword">new</span> StatViewServlet());</span><br><span class="line">        druidStatViewServlet.addMapping(<span class="string">"/druid/*"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可以和web.xml对照看。</p>
+</blockquote>
+<h2 id="spring_相关">spring 相关</h2><p>包括两个文件，当然还可以更细分，用@import导入即可。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.alibaba.druid.pool.DruidDataSource;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.*;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.env.Environment;</span><br><span class="line"><span class="keyword">import</span> org.springframework.orm.jpa.JpaTransactionManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.quartz.SchedulerFactoryBean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.transaction.annotation.EnableTransactionManagement;</span><br><span class="line"><span class="keyword">import</span> org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.multipart.commons.CommonsMultipartResolver;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.EnableWebMvc;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.view.JstlView;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.view.UrlBasedViewResolver;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"><span class="keyword">import</span> javax.sql.DataSource;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Created by Administrator on 2015/12/25.</span><br><span class="line"> */</span></span><br><span class="line"><span class="annotation">@Configuration</span></span><br><span class="line"><span class="annotation">@ComponentScan</span>(<span class="string">"com.zzcm.tmp"</span>)</span><br><span class="line"><span class="annotation">@EnableWebMvc</span></span><br><span class="line"><span class="annotation">@EnableTransactionManagement</span>(proxyTargetClass = <span class="keyword">true</span>)</span><br><span class="line"><span class="annotation">@PropertySource</span>(<span class="string">"classpath:db.properties"</span>)</span><br><span class="line"><span class="annotation">@Import</span>(&#123;MvcConfig.class&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebAppConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOG = LoggerFactory.getLogger(WebAppConfig.class);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_DB_DRIVER = <span class="string">"db.driver"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_DB_PASSWORD = <span class="string">"db.password"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_DB_URL = <span class="string">"db.url"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_DB_USERNAME = <span class="string">"db.username"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_DB_MAXACTIVE = <span class="string">"db.maxActive"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_DB_INITSIZE = <span class="string">"db.initialSize"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_DB_MAXWAIT = <span class="string">"db.maxWait"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_DB_MINIDLE = <span class="string">"db.minIdle"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_DB_TBERM = <span class="string">"db.timeBetweenEvictionRunsMillis"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_DB_MEITM = <span class="string">"db.minEvictableIdleTimeMillis"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_DB_VQ = <span class="string">"db.validationQuery"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_DB_TESTWHILEIDEL = <span class="string">"db.testWhileIdle"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_DB_TESTONBORROW = <span class="string">"db.testOnBorrow"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_DB_TESTONRETURN = <span class="string">"db.testOnReturn"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_DB_FILTERS = <span class="string">"db.filters"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_HIBERNATE_DIALECT = <span class="string">"hibernate.dialect"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_HIBERNATE_SHOW_SQL = <span class="string">"hibernate.show_sql"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_ENTITYMANAGER_PACKAGES_TO_SCAN = <span class="string">"entitymanager.packages.to.scan"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_HIBERNATE_MAX_FETCH_DEPTH = <span class="string">"hibernate.max_fetch_depth"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_HIBERNATE_JDBC_FETCH_SIZE = <span class="string">"hibernate.jdbc.fetch_size"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_HIBERNATE_JDBC_BATCH_SIZE = <span class="string">"hibernate.jdbc.batch_size"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_HIBERNATE_FORMAT_SQL = <span class="string">"hibernate.format_sql"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_HIBERNATE_CACHE_P_CLASS = <span class="string">"hibernate.cache.provider_class"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_PERSISTENCE_VALI_MODE = <span class="string">"javax.persistence.validation.mode"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String P_HIBERNATE_EJB_NAMING_STRATEGY = <span class="string">"hibernate.ejb.naming_strategy"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> Environment env;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> UrlBasedViewResolver <span class="title">setupViewResolver</span><span class="params">()</span></span>&#123;</span><br><span class="line">        UrlBasedViewResolver resolver = <span class="keyword">new</span> UrlBasedViewResolver();</span><br><span class="line">        resolver.setPrefix(<span class="string">"/WEB-INF/jsp/"</span>);</span><br><span class="line">        resolver.setSuffix(<span class="string">".jsp"</span>);</span><br><span class="line">        resolver.setViewClass(JstlView.class);</span><br><span class="line">        <span class="keyword">return</span> resolver;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">()</span></span>&#123;</span><br><span class="line">        DruidDataSource dataSource = <span class="keyword">new</span> DruidDataSource();</span><br><span class="line">        dataSource.setDriverClassName(env.getRequiredProperty(P_DB_DRIVER));</span><br><span class="line">        dataSource.setUrl(env.getRequiredProperty(P_DB_URL));</span><br><span class="line">        dataSource.setUsername(env.getRequiredProperty(P_DB_USERNAME));</span><br><span class="line">        dataSource.setPassword(env.getRequiredProperty(P_DB_PASSWORD));</span><br><span class="line"></span><br><span class="line">        dataSource.setMaxActive(env.getRequiredProperty(P_DB_MAXACTIVE, Integer.class));</span><br><span class="line">        dataSource.setInitialSize(env.getRequiredProperty(P_DB_INITSIZE, Integer.class));</span><br><span class="line">        dataSource.setMaxWait(env.getRequiredProperty(P_DB_MAXWAIT, Integer.class));</span><br><span class="line">        dataSource.setMinIdle(env.getRequiredProperty(P_DB_MINIDLE, Integer.class));</span><br><span class="line">        dataSource.setTimeBetweenEvictionRunsMillis(env.getRequiredProperty(P_DB_TBERM, Integer.class));</span><br><span class="line">        dataSource.setMinEvictableIdleTimeMillis(env.getRequiredProperty(P_DB_MEITM, Long.class));</span><br><span class="line">        dataSource.setValidationQuery(env.getRequiredProperty(P_DB_VQ));</span><br><span class="line">        dataSource.setTestWhileIdle(env.getRequiredProperty(P_DB_TESTWHILEIDEL, Boolean.class));</span><br><span class="line">        dataSource.setTestOnBorrow(env.getRequiredProperty(P_DB_TESTONBORROW, Boolean.class));</span><br><span class="line">        dataSource.setTestOnReturn(env.getRequiredProperty(P_DB_TESTONRETURN, Boolean.class));</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            dataSource.setFilters(env.getRequiredProperty(P_DB_FILTERS));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            LOG.error(<span class="string">"Create DataSource filters failed."</span>,e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dataSource;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> LocalContainerEntityManagerFactoryBean <span class="title">entityManagerFactory</span><span class="params">()</span></span>&#123;</span><br><span class="line">        LocalContainerEntityManagerFactoryBean bean = <span class="keyword">new</span> LocalContainerEntityManagerFactoryBean();</span><br><span class="line">        bean.setDataSource(dataSource());</span><br><span class="line">        bean.setPackagesToScan(env.getRequiredProperty(P_ENTITYMANAGER_PACKAGES_TO_SCAN));</span><br><span class="line">        <span class="comment">//b.setPersistenceUnitName("mysqldb");</span></span><br><span class="line">        HibernateJpaVendorAdapter adapter = <span class="keyword">new</span> HibernateJpaVendorAdapter();</span><br><span class="line">        adapter.setShowSql(env.getRequiredProperty(P_HIBERNATE_SHOW_SQL,Boolean.class));</span><br><span class="line">        adapter.setDatabasePlatform(env.getRequiredProperty(P_HIBERNATE_DIALECT));</span><br><span class="line">        bean.setJpaVendorAdapter(adapter);</span><br><span class="line">        bean.setJpaProperties(jpaProperties());</span><br><span class="line">        <span class="keyword">return</span> bean;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> Properties <span class="title">jpaProperties</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Properties prop = <span class="keyword">new</span> Properties();</span><br><span class="line">        prop.put(P_HIBERNATE_MAX_FETCH_DEPTH, env.getRequiredProperty(P_HIBERNATE_MAX_FETCH_DEPTH, Integer.class));</span><br><span class="line">        prop.put(P_HIBERNATE_JDBC_FETCH_SIZE, env.getRequiredProperty(P_HIBERNATE_JDBC_FETCH_SIZE, Integer.class));</span><br><span class="line">        prop.put(P_HIBERNATE_JDBC_BATCH_SIZE, env.getRequiredProperty(P_HIBERNATE_JDBC_BATCH_SIZE, Integer.class));</span><br><span class="line">        prop.put(P_HIBERNATE_SHOW_SQL, env.getRequiredProperty(P_HIBERNATE_SHOW_SQL, Boolean.class));</span><br><span class="line">        prop.put(P_HIBERNATE_FORMAT_SQL, env.getRequiredProperty(P_HIBERNATE_FORMAT_SQL, Boolean.class));</span><br><span class="line">        prop.put(P_HIBERNATE_CACHE_P_CLASS, env.getRequiredProperty(P_HIBERNATE_CACHE_P_CLASS));</span><br><span class="line">        prop.put(P_PERSISTENCE_VALI_MODE, env.getRequiredProperty(P_PERSISTENCE_VALI_MODE));</span><br><span class="line">        prop.put(P_HIBERNATE_EJB_NAMING_STRATEGY, env.getRequiredProperty(P_HIBERNATE_EJB_NAMING_STRATEGY));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> prop;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> JpaTransactionManager <span class="title">transactionManager</span><span class="params">()</span></span>&#123;</span><br><span class="line">        JpaTransactionManager transactionManager = <span class="keyword">new</span> JpaTransactionManager();</span><br><span class="line">        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());</span><br><span class="line">        <span class="keyword">return</span> transactionManager;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SchedulerFactoryBean <span class="title">schedulerFactoryBean</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> SchedulerFactoryBean();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CommonsMultipartResolver <span class="title">multipartResolver</span><span class="params">()</span></span>&#123;</span><br><span class="line">        CommonsMultipartResolver resolver = <span class="keyword">new</span> CommonsMultipartResolver();</span><br><span class="line">        resolver.setMaxUploadSize(<span class="number">104857600</span>);</span><br><span class="line">        <span class="keyword">return</span> resolver;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> LocalValidatorFactoryBean <span class="title">validator</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> LocalValidatorFactoryBean();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.serializer.SerializerFeature;</span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.MediaType;</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.converter.HttpMessageConverter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.converter.StringHttpMessageConverter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.nio.charset.Charset;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Created by Administrator on 2015/12/25.</span><br><span class="line"> */</span></span><br><span class="line"><span class="annotation">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MvcConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configureContentNegotiation</span><span class="params">(ContentNegotiationConfigurer configurer)</span> </span>&#123;</span><br><span class="line">        configurer.mediaType(<span class="string">"json"</span>, MediaType.valueOf(<span class="string">"application/json"</span>));</span><br><span class="line">        configurer.mediaType(<span class="string">"xml"</span>,MediaType.valueOf(<span class="string">"application/xml"</span>));</span><br><span class="line">        configurer.mediaType(<span class="string">"html"</span>,MediaType.valueOf(<span class="string">"text/html"</span>));</span><br><span class="line">        configurer.mediaType(<span class="string">"*"</span>,MediaType.valueOf(<span class="string">"*/*"</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configureMessageConverters</span><span class="params">(List&lt;HttpMessageConverter&lt;?&gt;&gt; converters)</span> </span>&#123;</span><br><span class="line">        StringHttpMessageConverter stringConverter = <span class="keyword">new</span> StringHttpMessageConverter(Charset.forName(<span class="string">"UTF-8"</span>));</span><br><span class="line">        List&lt;MediaType&gt; list = <span class="keyword">new</span> ArrayList&lt;MediaType&gt;();</span><br><span class="line">        list.add(<span class="keyword">new</span> MediaType(<span class="string">"text"</span>,<span class="string">"plain"</span>,Charset.forName(<span class="string">"UTF-8"</span>)));</span><br><span class="line">        list.add(<span class="keyword">new</span> MediaType(<span class="string">"*"</span>,<span class="string">"*"</span>,Charset.forName(<span class="string">"UTF-8"</span>)));</span><br><span class="line">        stringConverter.setSupportedMediaTypes(list);</span><br><span class="line"></span><br><span class="line">        FastJsonHttpMessageConverter jsonConverter = <span class="keyword">new</span> FastJsonHttpMessageConverter();</span><br><span class="line">        List&lt;MediaType&gt; jsonList = <span class="keyword">new</span> ArrayList&lt;MediaType&gt;();</span><br><span class="line">        jsonList.add(MediaType.valueOf(<span class="string">"application/json;charset=UTF-8"</span>));</span><br><span class="line">        jsonList.add(MediaType.valueOf(<span class="string">"text/plain;charset=utf-8"</span>));</span><br><span class="line">        jsonList.add(MediaType.valueOf(<span class="string">"text/html;charset=utf-8"</span>));</span><br><span class="line">        jsonConverter.setSupportedMediaTypes(jsonList);</span><br><span class="line">        jsonConverter.setFeatures(<span class="keyword">new</span> SerializerFeature[]&#123;SerializerFeature.WriteDateUseDateFormat&#125;);</span><br><span class="line"></span><br><span class="line">        converters.add(stringConverter);</span><br><span class="line">        converters.add(jsonConverter);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这两个类就包含了spring-mvc.xml,spring-root.xml等相关配置。其中MvcConfig包含了对json的支持。<br>本处引用了db.properties，内容和上一篇一致。<br>其他的实现与上一篇文章一致。</p>
+</blockquote>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/web/" rel="tag">#web</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/30/Spring-mvc-Hibernate-Jpa-druid-全注解配置实例/" rel="next">Spring mvc + Hibernate + Jpa + druid 全注解配置实例</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+            <!-- 多说热评文章-->
+            <p>热评文章</p>
+            <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2015/12/30/spring-mvc-零配置实例/"
+                   data-title="spring mvc 零配置实例" data-url="http://3iter.com/2015/12/30/spring-mvc-零配置实例/">
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Hoocoln" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Hoocoln</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">2.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring_相关"><span class="nav-number">3.</span> <span class="nav-text">spring 相关</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hoocoln</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"3iter"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>
