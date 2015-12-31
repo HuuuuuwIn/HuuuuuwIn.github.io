@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="其他," />
+  <meta name="keywords" content="blas," />
 
 
 
@@ -37,28 +37,52 @@
   <link rel="shorticon icon" type="image/x-icon" href="/images/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="正好项目中有用到imsi与msisdn对应规则，在此记录一下。
+<meta name="description" content="对矩阵的一些概念做备忘。
 
 简介
-IMSI(International Mobile Subscriber Identity)：IMSI=MCC（移动国家码）+MNC（移动网号）+MSIN（ PLMN中唯一识别MS）
-MSISDN(Mobile Subscriber International ISDN/PSTN number)：MSISDN=CC（国家码）+">
+方阵
+对角矩阵
+对称矩阵
+转置矩阵
+逆矩阵
+正定矩阵
+
+方阵方阵就是行数与列数一样多的矩阵。n×n阶矩阵被称为n阶方阵。如下：$$\begin {Bmatrix}a&amp;amp;0&amp;amp;0&amp;amp;0\\0&amp;amp;b&amp;amp;0&amp;amp;0\\0&amp;amp;0&amp;amp;c&amp;amp;0\\0&amp;amp;0&amp;amp;0&amp;amp;d\end{Bmatrix}$$
+
+4阶方">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IMSI与MSISDN对应规则">
-<meta property="og:url" content="http://3iter.com/2015/12/16/IMSI与MSISDN对应规则/index.html">
+<meta property="og:title" content="矩阵知识备忘">
+<meta property="og:url" content="http://3iter.com/2015/12/31/矩阵知识备忘/index.html">
 <meta property="og:site_name" content="Hoocoln个人博客">
-<meta property="og:description" content="正好项目中有用到imsi与msisdn对应规则，在此记录一下。
+<meta property="og:description" content="对矩阵的一些概念做备忘。
 
 简介
-IMSI(International Mobile Subscriber Identity)：IMSI=MCC（移动国家码）+MNC（移动网号）+MSIN（ PLMN中唯一识别MS）
-MSISDN(Mobile Subscriber International ISDN/PSTN number)：MSISDN=CC（国家码）+">
-<meta property="og:updated_time" content="2015-12-16T10:19:55.474Z">
+方阵
+对角矩阵
+对称矩阵
+转置矩阵
+逆矩阵
+正定矩阵
+
+方阵方阵就是行数与列数一样多的矩阵。n×n阶矩阵被称为n阶方阵。如下：$$\begin {Bmatrix}a&amp;amp;0&amp;amp;0&amp;amp;0\\0&amp;amp;b&amp;amp;0&amp;amp;0\\0&amp;amp;0&amp;amp;c&amp;amp;0\\0&amp;amp;0&amp;amp;0&amp;amp;d\end{Bmatrix}$$
+
+4阶方">
+<meta property="og:updated_time" content="2015-12-31T08:36:53.721Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IMSI与MSISDN对应规则">
-<meta name="twitter:description" content="正好项目中有用到imsi与msisdn对应规则，在此记录一下。
+<meta name="twitter:title" content="矩阵知识备忘">
+<meta name="twitter:description" content="对矩阵的一些概念做备忘。
 
 简介
-IMSI(International Mobile Subscriber Identity)：IMSI=MCC（移动国家码）+MNC（移动网号）+MSIN（ PLMN中唯一识别MS）
-MSISDN(Mobile Subscriber International ISDN/PSTN number)：MSISDN=CC（国家码）+">
+方阵
+对角矩阵
+对称矩阵
+转置矩阵
+逆矩阵
+正定矩阵
+
+方阵方阵就是行数与列数一样多的矩阵。n×n阶矩阵被称为n阶方阵。如下：$$\begin {Bmatrix}a&amp;amp;0&amp;amp;0&amp;amp;0\\0&amp;amp;b&amp;amp;0&amp;amp;0\\0&amp;amp;0&amp;amp;c&amp;amp;0\\0&amp;amp;0&amp;amp;0&amp;amp;d\end{Bmatrix}$$
+
+4阶方">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -68,7 +92,7 @@ MSISDN(Mobile Subscriber International ISDN/PSTN number)：MSISDN=CC（国家码
   };
 </script>
 
-  <title> IMSI与MSISDN对应规则 | Hoocoln个人博客 </title>
+  <title> 矩阵知识备忘 | Hoocoln个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -206,7 +230,7 @@ MSISDN(Mobile Subscriber International ISDN/PSTN number)：MSISDN=CC（国家码
           
           
             
-              IMSI与MSISDN对应规则
+              矩阵知识备忘
             
           
         </h1>
@@ -215,8 +239,8 @@ MSISDN(Mobile Subscriber International ISDN/PSTN number)：MSISDN=CC（国家码
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-12-16T18:15:44+08:00" content="2015-12-16">
-            2015-12-16
+          <time itemprop="dateCreated" datetime="2015-12-31T16:34:21+08:00" content="2015-12-31">
+            2015-12-31
           </time>
         </span>
 
@@ -225,8 +249,8 @@ MSISDN(Mobile Subscriber International ISDN/PSTN number)：MSISDN=CC（国家码
             &nbsp; | &nbsp; 分类于
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/其他/" itemprop="url" rel="index">
-                  <span itemprop="name">其他</span>
+                <a href="/categories/blas/" itemprop="url" rel="index">
+                  <span itemprop="name">blas</span>
                 </a>
               </span>
 
@@ -241,8 +265,8 @@ MSISDN(Mobile Subscriber International ISDN/PSTN number)：MSISDN=CC（国家码
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/12/16/IMSI与MSISDN对应规则/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/16/IMSI与MSISDN对应规则/" itemprop="commentsCount"></span>
+              <a href="/2015/12/31/矩阵知识备忘/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/31/矩阵知识备忘/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -257,25 +281,62 @@ MSISDN(Mobile Subscriber International ISDN/PSTN number)：MSISDN=CC（国家码
 
       
         <span itemprop="articleBody"><blockquote>
-<p>正好项目中有用到imsi与msisdn对应规则，在此记录一下。</p>
+<p>对矩阵的一些概念做备忘。</p>
 </blockquote>
 <h2 id="简介">简介</h2><ul>
-<li>IMSI(International Mobile Subscriber Identity)：<br>IMSI=MCC（移动国家码）+MNC（移动网号）+MSIN（ PLMN中唯一识别MS）</li>
-<li>MSISDN(Mobile Subscriber International ISDN/PSTN number)：<br>MSISDN=CC（国家码）+NDC（国内接入号）+SN（用户号码）<h2 id="IMSI">IMSI</h2>IMSI是区别移动用户的标志，储存在SIM卡中，可用于区别移动用户的有效信息。其总长度不超过15位，同样使用0～9的数字。<h3 id="MCC">MCC</h3>MCC是移动用户所属国家代号，占3位数字，中国的MCC规定为460。<h3 id="MNC">MNC</h3>MNC为移动网络码，共2-3位，中国国内当前如为下表所示：<br>|运营商|MNC号码|<br>|:-:|:-|<br>|移动|00, 02, 07|<br>|联通|01, 06|<br>|电信|03, 05|<br>|电信4G|11|<br>|铁通|20|</li>
+<li>方阵</li>
+<li>对角矩阵</li>
+<li>对称矩阵</li>
+<li>转置矩阵</li>
+<li>逆矩阵</li>
+<li>正定矩阵</li>
 </ul>
-<h3 id="MSIN">MSIN</h3><p>MSIN为移动用户识别号码，10-11位，其结构如下：<br>$$CC+M0M1M2M3+ABCD$$<br>CC由不同运营商分配，其中的M0M1M2M3和MDN号码中的H0H1H2H3可存在对应关系，ABCD四位为自由分配。</p>
-<h2 id="MSISDN">MSISDN</h2><p>其实MSISDN就是我们平时所说的手机号码。<br>$$MSISDN=CC+NDC+SN$$</p>
+<h2 id="方阵">方阵</h2><p>方阵就是行数与列数一样多的矩阵。n×n阶矩阵被称为n阶方阵。<br>如下：<br>$$\begin {Bmatrix}a&amp;0&amp;0&amp;0\\0&amp;b&amp;0&amp;0\\0&amp;0&amp;c&amp;0\\0&amp;0&amp;0&amp;d\end{Bmatrix}$$</p>
 <blockquote>
-<p>其中：<br>CC=国家码 (中国为86)<br>NDC=国内目的码<br>SN=用户号码</p>
+<p>4阶方阵。</p>
 </blockquote>
-<p>NDC为：<br>每个GSM的网络均分配一个国内目的码(NDC)。也可以要求分配两个以上的NDC号。MSISDN的号长是可变的（取决于网络结构与编号计划），不包括字冠，最长可以达到15位，我国GSM的国内身份号码为11位。<br>$$NDC=N1N2N3(接入号)+H1H2H3H4(HLR的识别号)$$<br>接入号用于识别网络，我们目前采用：139、138……。<br>HLR识别号表示用户归属的HLR，也表示移动业务本地网号。</p>
+<h2 id="对角矩阵">对角矩阵</h2><p>对角矩阵式除主对角线之外的元素皆为 0 的方阵，对角线上的元素可以为 0 或其他值。<br>常写为$diag(a_1,a_2,a_3,\cdots,a_n)$<br>如下：<br>$$\begin {Bmatrix}a&amp;0&amp;0&amp;0\\0&amp;b&amp;0&amp;0\\0&amp;0&amp;c&amp;0\\0&amp;0&amp;0&amp;d\end{Bmatrix}$$</p>
 <blockquote>
-<p>例如：133-3333</p>
+<p>a,b,c,d 可以为任意数字</p>
 </blockquote>
-<h2 id="IMSI与MSISDN对应关系">IMSI与MSISDN对应关系</h2><p>切记IMSI与MSISDN不一定完全有对应关系，但是有一些可以作为借鉴。<br>当前收集了移动和联通的对应关系，其他暂时无法获取，且无法推导。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s130</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)[0,1]\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s131</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)9\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s132</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)2\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s134</span> =</span> <span class="string">"""^460020(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s13x0</span> =</span> <span class="string">"""^46000(\d&#123;3&#125;)([5,6,7,8,9])\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s13x</span> =</span> <span class="string">"""^46000(\d&#123;3&#125;)([0,1,2,3,4])(\d)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s150</span> =</span> <span class="string">"""^460023(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s151</span> =</span> <span class="string">"""^460021(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s152</span> =</span> <span class="string">"""^460022(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s155</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)4\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s156</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)3\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s157</span> =</span> <span class="string">"""^460077(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s158</span> =</span> <span class="string">"""^460028(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s159</span> =</span> <span class="string">"""^460029(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s147</span> =</span> <span class="string">"""^460079(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s185</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)5\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s186</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)6\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s187</span> =</span> <span class="string">"""^460027(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s188</span> =</span> <span class="string">"""^460078(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s1705</span> =</span> <span class="string">"""^460070(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s170x</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)8\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s178</span> =</span> <span class="string">"""^460075(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s145</span> =</span> <span class="string">"""^46001(\d&#123;3&#125;)(\d)7\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s182</span> =</span> <span class="string">"""^460026(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s183</span> =</span> <span class="string">"""^460025(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">s184</span> =</span> <span class="string">"""^460024(\d)(\d&#123;3&#125;)\d+"""</span>.r</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">calphone</span> =</span> imsi <span class="keyword">match</span> &#123;</span><br><span class="line">  <span class="keyword">case</span> s130(bcd,a) =&gt; <span class="string">"130"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s131(bcd,a) =&gt; <span class="string">"131"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s132(bcd,a) =&gt; <span class="string">"132"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s134(a,bcd) =&gt; <span class="string">"134"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s13x0(bcd,s) =&gt; <span class="string">"13"</span>+s+<span class="string">"0"</span>+bcd</span><br><span class="line">  <span class="keyword">case</span> s13x(bcd,s,a) =&gt; <span class="string">"13"</span>+(s.toInt+<span class="number">5</span>)+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s150(a,bcd) =&gt; <span class="string">"150"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s151(a,bcd) =&gt; <span class="string">"151"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s152(a,bcd) =&gt; <span class="string">"152"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s155(bcd,a) =&gt; <span class="string">"155"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s156(bcd,a) =&gt; <span class="string">"156"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s157(a,bcd) =&gt; <span class="string">"157"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s158(a,bcd) =&gt; <span class="string">"158"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s159(a,bcd) =&gt; <span class="string">"159"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s147(a,bcd) =&gt; <span class="string">"147"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s185(bcd,a) =&gt; <span class="string">"185"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s186(bcd,a) =&gt; <span class="string">"186"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s187(a,bcd) =&gt; <span class="string">"187"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s188(a,bcd) =&gt; <span class="string">"188"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s1705(a,bcd) =&gt; <span class="string">"170"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s170x(bcd,a) =&gt; <span class="string">"170"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s178(a,bcd) =&gt; <span class="string">"178"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s145(bcd,a) =&gt; <span class="string">"145"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s182(a,bcd) =&gt; <span class="string">"182"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s183(a,bcd) =&gt; <span class="string">"183"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> s184(a,bcd) =&gt; <span class="string">"184"</span>+a+bcd</span><br><span class="line">  <span class="keyword">case</span> _ =&gt; <span class="string">"0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>主对角线全为0的对角矩阵常称为<strong><em>零矩阵</em></strong>；</li>
+<li>a=b=c=d的对角矩阵常称为<strong><em>标量矩阵</em></strong>；</li>
+<li>a=b=c=d=1的对角矩阵常称为<strong><em>单位矩阵</em></strong>；</li>
+</ul>
+<h2 id="对称矩阵">对称矩阵</h2><p>元素以主对角线为对称轴对应相等的矩阵。<br>如下：<br>$$\begin {Bmatrix}1&amp;0&amp;8&amp;1\\0&amp;2&amp;5&amp;7\\8&amp;5&amp;3&amp;9\\1&amp;7&amp;9&amp;4\end{Bmatrix}$$</p>
 <blockquote>
-<p>再次提醒，当前两者之间关系并非一定如此，仅作参考。</p>
+<p>$m<em>{ij}=m</em>{ji}$</p>
 </blockquote>
+<h2 id="转置矩阵">转置矩阵</h2><p>把矩阵A的行换成相应的列，得到的新矩阵称为A的转置矩阵，记作$A^T$或$A’$。<br>$$A=\begin {Bmatrix}1&amp;0&amp;8\\0&amp;2&amp;5\end{Bmatrix}$$<br>$$B=\begin {Bmatrix}1&amp;0\\2&amp;0\\8&amp;5\end{Bmatrix}$$</p>
+<blockquote>
+<p>B 是 A 的转置矩阵。 </p>
+</blockquote>
+<ul>
+<li>(A±B)’=A’±B’</li>
+<li>(A×B)’= B’×A’</li>
+<li>(A’)’=A</li>
+<li>(λA’)’=λA</li>
+<li>det(A’)=det(A)，即转置矩阵的行列式不变</li>
+</ul>
+<h2 id="逆矩阵">逆矩阵</h2><p>给定一个 n 阶方阵A，若存在一n 阶方阵B， 使得$AB=BA=I_n$（或AB=In、BA=In 任满足一个），其中$I_n$ 为n 阶单位矩阵，则称A 是可逆的，且B 是A 的逆阵，记作 $A^{-1}$。<br>若方阵A 的逆阵存在，则称A 为 <strong><em>非奇异方阵</em></strong> 或 <strong><em>可逆方阵</em></strong> 或<strong><em>满秩矩阵</em></strong>。</p>
+<blockquote>
+<p>给定一个 n 阶方阵 A，则下面的叙述都是等价的：<br>A 是可逆的。<br>A 的行列式不为零。<br>A 的秩等于 n（A 满秩）。<br>A 的转置矩阵 A也是可逆的。<br>AA 也是可逆的。<br>存在一 n 阶方阵 B 使得 AB = In。<br>存在一 n 阶方阵 B 使得 BA = In。</p>
+</blockquote>
+<p>如果矩阵$A$可逆，则$A^{-1}=\frac {A^<em>} {|A|}$ , 其中$A^</em>$是的<strong><em>伴随矩阵</em></strong>。</p>
+<blockquote>
+<p>伴随矩阵$A^*$元素的排列特点是的第k列元素是A的第k行元素的代数余子式。<br>代数余子式定义：在一个n阶行列式A中,把(i,j)元$a<em>{ij}$所在的第i行和第j 列划去后，留下来的n-1阶行列式叫做(i,j)元$a</em>{ij}$的余子式，记作$M<em>{ij}$;即<br>$A</em>{ij}=(-1)^{i+j}M<em>{ij}$，$A</em>{ij}$叫做(i,j)元$a_{ij}$的代数余子式。</p>
+</blockquote>
+<p>A是可逆矩阵的充分必要条件是︱A︱≠0（方阵A的行列式不等于0）。（当︱A︱= 0时，A称为 <strong><em>奇异矩阵</em></strong> ）<br>可逆矩阵一定是方阵。<br>如果矩阵A是可逆的，A的逆矩阵是唯一的。<br>两个可逆矩阵的乘积依然可逆。<br>可逆矩阵的转置矩阵也可逆。<br>矩阵可逆当且仅当它是满秩矩阵。</p>
+<h2 id="正定矩阵">正定矩阵</h2><p>正交矩阵,即满足A乘以A的转置等于单位阵E；</p>
+<ol>
+<li>方阵A正交的充要条件是A的行（列) 向量组是单位正交向量组（它们的内积等于零）；</li>
+<li>方阵A正交的充要条件是A的n个行（列)向量是n维向量空间的一组标准正交基；</li>
+<li>A是正交矩阵的充要条件是：A的行向量组两两正交且都是单位向量；</li>
+<li>A的列向量组也是正交单位向量组。</li>
+<li>正交方阵是欧氏空间中标准正交基到标准正交基的过渡矩阵。</li>
+</ol>
+<p>对称阵A正定的等价条件<br>1、对应的二次型正定<br>2、所有主子式大于0<br>3、所有顺序主子式大于<br>4、所有特征根大于0<br>正定的一个必要条件 ：所有对角线上的元素全大于0（用于判定不正定时常用）</p>
 </span>
       
     </div>
@@ -284,7 +345,7 @@ MSISDN(Mobile Subscriber International ISDN/PSTN number)：MSISDN=CC（国家码
       
         <div class="post-tags">
           
-            <a href="/tags/其他/" rel="tag">#其他</a>
+            <a href="/tags/blas/" rel="tag">#blas</a>
           
         </div>
       
@@ -293,13 +354,11 @@ MSISDN(Mobile Subscriber International ISDN/PSTN number)：MSISDN=CC（国家码
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/30/Spring-mvc-Hibernate-Jpa-druid-全注解配置实例/" rel="prev">Spring mvc + Hibernate + Jpa + druid 全注解配置实例</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/10/Spark-SQL-读写MySQL/" rel="next">Spark SQL 读写MySQL</a>
+              <a href="/2015/12/30/spring-mvc-零配置实例/" rel="next">spring mvc 零配置实例</a>
             
           </div>
         </div>
@@ -328,8 +387,8 @@ MSISDN(Mobile Subscriber International ISDN/PSTN number)：MSISDN=CC（国家码
         
           <div class="comments" id="comments">
             
-              <div class="ds-thread" data-thread-key="2015/12/16/IMSI与MSISDN对应规则/"
-                   data-title="IMSI与MSISDN对应规则" data-url="http://3iter.com/2015/12/16/IMSI与MSISDN对应规则/">
+              <div class="ds-thread" data-thread-key="2015/12/31/矩阵知识备忘/"
+                   data-title="矩阵知识备忘" data-url="http://3iter.com/2015/12/31/矩阵知识备忘/">
               </div>
             
           </div>
@@ -411,7 +470,7 @@ MSISDN(Mobile Subscriber International ISDN/PSTN number)：MSISDN=CC（国家码
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IMSI"><span class="nav-number">2.</span> <span class="nav-text">IMSI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MCC"><span class="nav-number">2.1.</span> <span class="nav-text">MCC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MNC"><span class="nav-number">2.2.</span> <span class="nav-text">MNC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MSIN"><span class="nav-number">2.3.</span> <span class="nav-text">MSIN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MSISDN"><span class="nav-number">3.</span> <span class="nav-text">MSISDN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IMSI与MSISDN对应关系"><span class="nav-number">4.</span> <span class="nav-text">IMSI与MSISDN对应关系</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方阵"><span class="nav-number">2.</span> <span class="nav-text">方阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对角矩阵"><span class="nav-number">3.</span> <span class="nav-text">对角矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对称矩阵"><span class="nav-number">4.</span> <span class="nav-text">对称矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转置矩阵"><span class="nav-number">5.</span> <span class="nav-text">转置矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逆矩阵"><span class="nav-number">6.</span> <span class="nav-text">逆矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正定矩阵"><span class="nav-number">7.</span> <span class="nav-text">正定矩阵</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

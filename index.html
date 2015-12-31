@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="Hexo,next" />
+  <meta name="keywords" content="Hoocoln,spark" />
 
 
 
@@ -183,6 +183,146 @@
       <div class="main-inner">
         <div id="content" class="content"> 
   <section id="posts" class="posts-expand">
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/12/31/矩阵知识备忘/" itemprop="url">
+                矩阵知识备忘
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-31T16:34:21+08:00" content="2015-12-31">
+            2015-12-31
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blas/" itemprop="url" rel="index">
+                  <span itemprop="name">blas</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/12/31/矩阵知识备忘/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/31/矩阵知识备忘/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><blockquote>
+<p>对矩阵的一些概念做备忘。</p>
+</blockquote>
+<h2 id="简介">简介</h2><ul>
+<li>方阵</li>
+<li>对角矩阵</li>
+<li>对称矩阵</li>
+<li>转置矩阵</li>
+<li>逆矩阵</li>
+<li>正定矩阵</li>
+</ul>
+<h2 id="方阵">方阵</h2><p>方阵就是行数与列数一样多的矩阵。n×n阶矩阵被称为n阶方阵。<br>如下：<br>$$\begin {Bmatrix}a&amp;0&amp;0&amp;0\\0&amp;b&amp;0&amp;0\\0&amp;0&amp;c&amp;0\\0&amp;0&amp;0&amp;d\end{Bmatrix}$$</p>
+<blockquote>
+<p>4阶方阵。</p>
+</blockquote>
+<h2 id="对角矩阵">对角矩阵</h2><p>对角矩阵式除主对角线之外的元素皆为 0 的方阵，对角线上的元素可以为 0 或其他值。<br>常写为$diag(a_1,a_2,a_3,\cdots,a_n)$<br>如下：<br>$$\begin {Bmatrix}a&amp;0&amp;0&amp;0\\0&amp;b&amp;0&amp;0\\0&amp;0&amp;c&amp;0\\0&amp;0&amp;0&amp;d\end{Bmatrix}$$</p>
+<blockquote>
+<p>a,b,c,d 可以为任意数字</p>
+</blockquote>
+<ul>
+<li>主对角线全为0的对角矩阵常称为<strong><em>零矩阵</em></strong>；</li>
+<li>a=b=c=d的对角矩阵常称为<strong><em>标量矩阵</em></strong>；</li>
+<li>a=b=c=d=1的对角矩阵常称为<strong><em>单位矩阵</em></strong>；</li>
+</ul>
+<h2 id="对称矩阵">对称矩阵</h2><p>元素以主对角线为对称轴对应相等的矩阵。<br>如下：<br>$$\begin {Bmatrix}1&amp;0&amp;8&amp;1\\0&amp;2&amp;5&amp;7\\8&amp;5&amp;3&amp;9\\1&amp;7&amp;9&amp;4\end{Bmatrix}$$</p>
+<blockquote>
+<p>$m<em>{ij}=m</em>{ji}$</p>
+</blockquote>
+<h2 id="转置矩阵">转置矩阵</h2><p>把矩阵A的行换成相应的列，得到的新矩阵称为A的转置矩阵，记作$A^T$或$A’$。<br>$$A=\begin {Bmatrix}1&amp;0&amp;8\\0&amp;2&amp;5\end{Bmatrix}$$<br>$$B=\begin {Bmatrix}1&amp;0\\2&amp;0\\8&amp;5\end{Bmatrix}$$</p>
+<blockquote>
+<p>B 是 A 的转置矩阵。 </p>
+</blockquote>
+<ul>
+<li>(A±B)’=A’±B’</li>
+<li>(A×B)’= B’×A’</li>
+<li>(A’)’=A</li>
+<li>(λA’)’=λA</li>
+<li>det(A’)=det(A)，即转置矩阵的行列式不变</li>
+</ul>
+<h2 id="逆矩阵">逆矩阵</h2><p>给定一个 n 阶方阵A，若存在一n 阶方阵B， 使得$AB=BA=I_n$（或AB=In、BA=In 任满足一个），其中$I_n$ 为n 阶单位矩阵，则称A 是可逆的，且B 是A 的逆阵，记作 $A^{-1}$。<br>若方阵A 的逆阵存在，则称A 为 <strong><em>非奇异方阵</em></strong> 或 <strong><em>可逆方阵</em></strong> 或<strong><em>满秩矩阵</em></strong>。</p>
+<blockquote>
+<p>给定一个 n 阶方阵 A，则下面的叙述都是等价的：<br>A 是可逆的。<br>A 的行列式不为零。<br>A 的秩等于 n（A 满秩）。<br>A 的转置矩阵 A也是可逆的。<br>AA 也是可逆的。<br>存在一 n 阶方阵 B 使得 AB = In。<br>存在一 n 阶方阵 B 使得 BA = In。</p>
+</blockquote>
+<p>如果矩阵$A$可逆，则$A^{-1}=\frac {A^<em>} {|A|}$ , 其中$A^</em>$是的<strong><em>伴随矩阵</em></strong>。</p>
+<blockquote>
+<p>伴随矩阵$A^*$元素的排列特点是的第k列元素是A的第k行元素的代数余子式。<br>代数余子式定义：在一个n阶行列式A中,把(i,j)元$a<em>{ij}$所在的第i行和第j 列划去后，留下来的n-1阶行列式叫做(i,j)元$a</em>{ij}$的余子式，记作$M<em>{ij}$;即<br>$A</em>{ij}=(-1)^{i+j}M<em>{ij}$，$A</em>{ij}$叫做(i,j)元$a_{ij}$的代数余子式。</p>
+</blockquote>
+<p>A是可逆矩阵的充分必要条件是︱A︱≠0（方阵A的行列式不等于0）。（当︱A︱= 0时，A称为 <strong><em>奇异矩阵</em></strong> ）<br>可逆矩阵一定是方阵。<br>如果矩阵A是可逆的，A的逆矩阵是唯一的。<br>两个可逆矩阵的乘积依然可逆。<br>可逆矩阵的转置矩阵也可逆。<br>矩阵可逆当且仅当它是满秩矩阵。</p>
+<h2 id="正定矩阵">正定矩阵</h2><p>正交矩阵,即满足A乘以A的转置等于单位阵E；</p>
+<ol>
+<li>方阵A正交的充要条件是A的行（列) 向量组是单位正交向量组（它们的内积等于零）；</li>
+<li>方阵A正交的充要条件是A的n个行（列)向量是n维向量空间的一组标准正交基；</li>
+<li>A是正交矩阵的充要条件是：A的行向量组两两正交且都是单位向量；</li>
+<li>A的列向量组也是正交单位向量组。</li>
+<li>正交方阵是欧氏空间中标准正交基到标准正交基的过渡矩阵。</li>
+</ol>
+<p>对称阵A正定的等价条件<br>1、对应的二次型正定<br>2、所有主子式大于0<br>3、所有顺序主子式大于<br>4、所有特征根大于0<br>正定的一个必要条件 ：所有对角线上的元素全大于0（用于判定不正定时常用）</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -1678,116 +1818,6 @@
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/10/14/用spark实现基于物品共现矩阵的相似度算法/" itemprop="url">
-                用spark实现基于物品共现矩阵的相似度算法
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-10-14T09:15:26+08:00" content="2015-10-14">
-            2015-10-14
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/spark/" itemprop="url" rel="index">
-                  <span itemprop="name">spark</span>
-                </a>
-              </span>
-
-              
-              
-                ， 
-              
-
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/spark/推荐算法/" itemprop="url" rel="index">
-                  <span itemprop="name">推荐算法</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/10/14/用spark实现基于物品共现矩阵的相似度算法/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/14/用spark实现基于物品共现矩阵的相似度算法/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><blockquote>
-<p>本文分享一下基于共现矩阵的推荐算法实现</p>
-</blockquote>
-<hr>
-<h2 id="算法讲解">算法讲解</h2><p>本文采用的是Jaccard相似系数：<br>$$w_{ij}=\frac {|N_i\cap N_j|}{|N_i|}$$<br>分母 $|N_i|$ 表示喜欢物品i的用户数，<br>分子 $|N_i\cap N_j|$ 表示同时喜欢物品i和物品j的用户数。<br>但是由于物品j可能是热门物品，很多人都喜欢，可能会导致最后结果接近于1，为了避免热门物品的影响，采用以下公式：<br>$$w_{ij}=\frac {|N_i\cap N_j|}{\sqrt{|N_i||N_j|}}$$</p>
-<h2 id="数据准备">数据准备</h2><p>本次仅需要用户偏好集<br>数据准备详细见[<a href="http://3iter.com/2015/10/12/%E7%94%A8spark%E5%AE%9E%E7%8E%B0%E5%9F%BA%E4%BA%8E%E7%89%A9%E5%93%81%E5%B1%9E%E6%80%A7%E7%9B%B8%E4%BC%BC%E5%BA%A6%E7%9A%84%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95/">用spark实现基于物品属性相似度的推荐算法</a>]</p>
-<h2 id="生成物品相似度矩阵">生成物品相似度矩阵</h2><h3 id="初始化spark运行环境">初始化spark运行环境</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">conf</span> =</span> <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="string">"MatrixCal"</span>)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">sc</span> =</span> <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>不推荐在conf是设置master值，硬编码…</p>
-</blockquote>
-<h3 id="读取用户偏好集文件">读取用户偏好集文件</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">src</span> =</span> sc.textFile(<span class="string">"hdfs://master:9000/user/hive/warehouse/pdata.db/user_weight"</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="处理物品属性文件">处理物品属性文件</h3><p>将物品属性集处理成（索引，（物品ID，属性数组））<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//itemid1:userid1:rating1_1</span></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd</span> =</span> src.map&#123;</span><br><span class="line">  line =&gt; <span class="function"><span class="keyword">val</span> <span class="title">lines</span> =</span> line.split(<span class="string">":"</span>)</span><br><span class="line">    (lines(<span class="number">1</span>),lines(<span class="number">0</span>).toInt,lines(<span class="number">2</span>).toDouble)</span><br><span class="line">&#125;.sortByKey().cache()</span><br></pre></td></tr></table></figure></p>
-<h3 id="获取物品与物品的属性集">获取物品与物品的属性集</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//(用户ID,物品ID)</span></span><br><span class="line">val user_rdd2 = rdd.<span class="function"><span class="title">map</span><span class="params">(f=&gt;(f._1,f._2)</span></span>)</span><br></pre></td></tr></table></figure>
-<h3 id="计算物品间的共现次数">计算物品间的共现次数</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//（（物品AID，物品BID），1）</span></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd2</span> =</span> user_rdd2.join(user_rdd2).map(f =&gt; (data._2,<span class="number">1</span>))</span><br><span class="line"><span class="comment">//统计相同的物品对出现的次数((（物品AID，物品BID）,同时出现的总数))</span></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd3</span>  =</span> rdd2.reduceByKey(_+_)</span><br></pre></td></tr></table></figure>
-<h3 id="计算物品间的相似度">计算物品间的相似度</h3><p>采用Jaccard相似系数<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对角线上((4,4),4) ((10,10),6)</span></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd4</span> =</span> rdd3.filter(f =&gt; f._1._1 == f._1._2)</span><br><span class="line"><span class="comment">//非对角线上的矩阵</span></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd5</span> =</span> rdd3.filter(f =&gt; f._1._1 != f._1._2)</span><br><span class="line"><span class="comment">//(4,((4,10,2),4))</span></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd6</span> =</span> rdd5.map(f =&gt; (f._1._1,(f._1._1,f._1._2,f._2))).join(rdd4.map(f =&gt; (f._1._1,f._2) ))</span><br><span class="line"><span class="comment">//(10,(4,10,2,5))</span></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd7</span> =</span> rdd6.map(f =&gt; (f._2._1._2,(f._2._1._1,f._2._1._2,f._2._1._3,f._2._2)))</span><br><span class="line"><span class="comment">//(10,((4,10,3,4),6))</span></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd8</span> =</span> rdd7.join(rdd4.map(f =&gt; (f._1._1,f._2)))</span><br><span class="line"><span class="comment">//(4,10,3,4,6)  f._3为同时喜欢f._1,f._2的用户数，f._4,f._5为喜欢f._1,f._2的用户数</span></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd9</span> =</span> rdd8.map(f =&gt; (f._2._1._1,f._2._1._2,f._2._1._3,f._2._1._4,f._2._2))</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd10</span> =</span> rdd9.map(f=&gt; (f._1, f._2, (f._3 / sqrt(f._4 * f._5)) ))</span><br><span class="line">rdd10.foreach(println)</span><br></pre></td></tr></table></figure></p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1833,7 +1863,7 @@
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
