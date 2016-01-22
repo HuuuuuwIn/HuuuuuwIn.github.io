@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="blas," />
+  <meta name="keywords" content="zookeeper," />
 
 
 
@@ -37,52 +37,22 @@
   <link rel="shorticon icon" type="image/x-icon" href="/images/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="对矩阵的一些概念做备忘。
-
-简介
-方阵
-对角矩阵
-对称矩阵
-转置矩阵
-逆矩阵
-正定矩阵
-
-方阵方阵就是行数与列数一样多的矩阵。n×n阶矩阵被称为n阶方阵。如下：$$\begin {Bmatrix}a&amp;amp;0&amp;amp;0&amp;amp;0\\0&amp;amp;b&amp;amp;0&amp;amp;0\\0&amp;amp;0&amp;amp;c&amp;amp;0\\0&amp;amp;0&amp;amp;0&amp;amp;d\end{Bmatrix}$$
-
-4阶方">
+<meta name="description" content="准备去官网下载zookeeper[下载地址]。
+配置将下载的压缩包解压1tar -zxvf zookeeper-3.4.6.tar.gz
+配置环境变量12345678910# 移动到自己习惯的地方，本例为/usr/local下面mv zookeeper-3.4.6 /usr/local/# 添加zookeeper的环境变量vi /etc/profile# 添加以下内容export ZOOKEEPE">
 <meta property="og:type" content="article">
-<meta property="og:title" content="矩阵知识备忘">
-<meta property="og:url" content="http://3iter.com/2015/12/31/矩阵知识备忘/index.html">
+<meta property="og:title" content="Zookeeper安装">
+<meta property="og:url" content="http://3iter.com/2016/01/22/Zookeeper安装/index.html">
 <meta property="og:site_name" content="Hoocoln个人博客">
-<meta property="og:description" content="对矩阵的一些概念做备忘。
-
-简介
-方阵
-对角矩阵
-对称矩阵
-转置矩阵
-逆矩阵
-正定矩阵
-
-方阵方阵就是行数与列数一样多的矩阵。n×n阶矩阵被称为n阶方阵。如下：$$\begin {Bmatrix}a&amp;amp;0&amp;amp;0&amp;amp;0\\0&amp;amp;b&amp;amp;0&amp;amp;0\\0&amp;amp;0&amp;amp;c&amp;amp;0\\0&amp;amp;0&amp;amp;0&amp;amp;d\end{Bmatrix}$$
-
-4阶方">
-<meta property="og:updated_time" content="2016-01-06T00:52:24.898Z">
+<meta property="og:description" content="准备去官网下载zookeeper[下载地址]。
+配置将下载的压缩包解压1tar -zxvf zookeeper-3.4.6.tar.gz
+配置环境变量12345678910# 移动到自己习惯的地方，本例为/usr/local下面mv zookeeper-3.4.6 /usr/local/# 添加zookeeper的环境变量vi /etc/profile# 添加以下内容export ZOOKEEPE">
+<meta property="og:updated_time" content="2016-01-22T01:27:32.601Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="矩阵知识备忘">
-<meta name="twitter:description" content="对矩阵的一些概念做备忘。
-
-简介
-方阵
-对角矩阵
-对称矩阵
-转置矩阵
-逆矩阵
-正定矩阵
-
-方阵方阵就是行数与列数一样多的矩阵。n×n阶矩阵被称为n阶方阵。如下：$$\begin {Bmatrix}a&amp;amp;0&amp;amp;0&amp;amp;0\\0&amp;amp;b&amp;amp;0&amp;amp;0\\0&amp;amp;0&amp;amp;c&amp;amp;0\\0&amp;amp;0&amp;amp;0&amp;amp;d\end{Bmatrix}$$
-
-4阶方">
+<meta name="twitter:title" content="Zookeeper安装">
+<meta name="twitter:description" content="准备去官网下载zookeeper[下载地址]。
+配置将下载的压缩包解压1tar -zxvf zookeeper-3.4.6.tar.gz
+配置环境变量12345678910# 移动到自己习惯的地方，本例为/usr/local下面mv zookeeper-3.4.6 /usr/local/# 添加zookeeper的环境变量vi /etc/profile# 添加以下内容export ZOOKEEPE">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -92,7 +62,7 @@
   };
 </script>
 
-  <title> 矩阵知识备忘 | Hoocoln个人博客 </title>
+  <title> Zookeeper安装 | Hoocoln个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -230,7 +200,7 @@
           
           
             
-              矩阵知识备忘
+              Zookeeper安装
             
           
         </h1>
@@ -239,8 +209,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-12-31T16:34:21+08:00" content="2015-12-31">
-            2015-12-31
+          <time itemprop="dateCreated" datetime="2016-01-22T09:26:38+08:00" content="2016-01-22">
+            2016-01-22
           </time>
         </span>
 
@@ -249,8 +219,8 @@
             &nbsp; | &nbsp; 分类于
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/blas/" itemprop="url" rel="index">
-                  <span itemprop="name">blas</span>
+                <a href="/categories/zookeeper/" itemprop="url" rel="index">
+                  <span itemprop="name">zookeeper</span>
                 </a>
               </span>
 
@@ -265,8 +235,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/12/31/矩阵知识备忘/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/31/矩阵知识备忘/" itemprop="commentsCount"></span>
+              <a href="/2016/01/22/Zookeeper安装/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/22/Zookeeper安装/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -280,63 +250,15 @@
       
 
       
-        <span itemprop="articleBody"><blockquote>
-<p>对矩阵的一些概念做备忘。</p>
-</blockquote>
-<h2 id="简介">简介</h2><ul>
-<li>方阵</li>
-<li>对角矩阵</li>
-<li>对称矩阵</li>
-<li>转置矩阵</li>
-<li>逆矩阵</li>
-<li>正定矩阵</li>
-</ul>
-<h2 id="方阵">方阵</h2><p>方阵就是行数与列数一样多的矩阵。n×n阶矩阵被称为n阶方阵。<br>如下：<br>$$\begin {Bmatrix}a&amp;0&amp;0&amp;0\\0&amp;b&amp;0&amp;0\\0&amp;0&amp;c&amp;0\\0&amp;0&amp;0&amp;d\end{Bmatrix}$$</p>
-<blockquote>
-<p>4阶方阵。</p>
-</blockquote>
-<h2 id="对角矩阵">对角矩阵</h2><p>对角矩阵式除主对角线之外的元素皆为 0 的方阵，对角线上的元素可以为 0 或其他值。<br>常写为$diag(a_1,a_2,a_3,\cdots,a_n)$<br>如下：<br>$$\begin {Bmatrix}a&amp;0&amp;0&amp;0\\0&amp;b&amp;0&amp;0\\0&amp;0&amp;c&amp;0\\0&amp;0&amp;0&amp;d\end{Bmatrix}$$</p>
-<blockquote>
-<p>a,b,c,d 可以为任意数字</p>
-</blockquote>
-<ul>
-<li>主对角线全为0的对角矩阵常称为<strong><em>零矩阵</em></strong>；</li>
-<li>a=b=c=d的对角矩阵常称为<strong><em>标量矩阵</em></strong>；</li>
-<li>a=b=c=d=1的对角矩阵常称为<strong><em>单位矩阵</em></strong>；</li>
-</ul>
-<h2 id="对称矩阵">对称矩阵</h2><p>元素以主对角线为对称轴对应相等的矩阵。<br>如下：<br>$$\begin {Bmatrix}1&amp;0&amp;8&amp;1\\0&amp;2&amp;5&amp;7\\8&amp;5&amp;3&amp;9\\1&amp;7&amp;9&amp;4\end{Bmatrix}$$</p>
-<blockquote>
-<p>$m<em>{ij}=m</em>{ji}$</p>
-</blockquote>
-<h2 id="转置矩阵">转置矩阵</h2><p>把矩阵A的行换成相应的列，得到的新矩阵称为A的转置矩阵，记作$A^T$或$A’$。<br>$$A=\begin {Bmatrix}1&amp;0&amp;8\\0&amp;2&amp;5\end{Bmatrix}$$<br>$$B=\begin {Bmatrix}1&amp;0\\2&amp;0\\8&amp;5\end{Bmatrix}$$</p>
-<blockquote>
-<p>B 是 A 的转置矩阵。 </p>
-</blockquote>
-<ul>
-<li>(A±B)’=A’±B’</li>
-<li>(A×B)’= B’×A’</li>
-<li>(A’)’=A</li>
-<li>(λA’)’=λA</li>
-<li>det(A’)=det(A)，即转置矩阵的行列式不变</li>
-</ul>
-<h2 id="逆矩阵">逆矩阵</h2><p>给定一个 n 阶方阵A，若存在一n 阶方阵B， 使得$AB=BA=I_n$（或AB=In、BA=In 任满足一个），其中$I_n$ 为n 阶单位矩阵，则称A 是可逆的，且B 是A 的逆阵，记作 $A^{-1}$。<br>若方阵A 的逆阵存在，则称A 为 <strong><em>非奇异方阵</em></strong> 或 <strong><em>可逆方阵</em></strong> 或<strong><em>满秩矩阵</em></strong>。</p>
-<blockquote>
-<p>给定一个 n 阶方阵 A，则下面的叙述都是等价的：<br>A 是可逆的。<br>A 的行列式不为零。<br>A 的秩等于 n（A 满秩）。<br>A 的转置矩阵 A也是可逆的。<br>AA 也是可逆的。<br>存在一 n 阶方阵 B 使得 AB = In。<br>存在一 n 阶方阵 B 使得 BA = In。</p>
-</blockquote>
-<p>如果矩阵$A$可逆，则$A^{-1}=\frac {A^*} {|A|}$ , 其中$A^*$是的<strong><em>伴随矩阵</em></strong>。</p>
-<blockquote>
-<p>伴随矩阵$A^*$元素的排列特点是的第k列元素是A的第k行元素的代数余子式。<br>代数余子式定义：在一个n阶行列式A中,把(i,j)元 $a_{ij}$ 所在的第i行和第j 列划去后，留下来的n-1阶行列式叫做(i,j)元$a_{ij}$的余子式，记作$M_{ij}$;即<br>$A_{ij}=(-1)^{i+j}M_{ij}$，$A_{ij}$叫做(i,j)元$a_{ij}$的代数余子式。</p>
-</blockquote>
-<p>A是可逆矩阵的充分必要条件是︱A︱≠0（方阵A的行列式不等于0）。（当︱A︱= 0时，A称为 <strong><em>奇异矩阵</em></strong> ）<br>可逆矩阵一定是方阵。<br>如果矩阵A是可逆的，A的逆矩阵是唯一的。<br>两个可逆矩阵的乘积依然可逆。<br>可逆矩阵的转置矩阵也可逆。<br>矩阵可逆当且仅当它是满秩矩阵。</p>
-<h2 id="正定矩阵">正定矩阵</h2><p>正交矩阵,即满足A乘以A的转置等于单位阵E；</p>
-<ol>
-<li>方阵A正交的充要条件是A的行（列) 向量组是单位正交向量组（它们的内积等于零）；</li>
-<li>方阵A正交的充要条件是A的n个行（列)向量是n维向量空间的一组标准正交基；</li>
-<li>A是正交矩阵的充要条件是：A的行向量组两两正交且都是单位向量；</li>
-<li>A的列向量组也是正交单位向量组。</li>
-<li>正交方阵是欧氏空间中标准正交基到标准正交基的过渡矩阵。</li>
-</ol>
-<p>对称阵A正定的等价条件<br>1、对应的二次型正定<br>2、所有主子式大于0<br>3、所有顺序主子式大于<br>4、所有特征根大于0<br>正定的一个必要条件 ：所有对角线上的元素全大于0（用于判定不正定时常用）</p>
+        <span itemprop="articleBody"><h2 id="准备">准备</h2><p>去<a href="http://zookeeper.apache.org/releases.html" target="_blank" rel="external">官网</a>下载zookeeper[<a href="http://mirrors.cnnic.cn/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz" target="_blank" rel="external">下载地址</a>]。</p>
+<h2 id="配置">配置</h2><h3 id="将下载的压缩包解压">将下载的压缩包解压</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">tar</span> <span class="tag">-zxvf</span> <span class="tag">zookeeper-3</span><span class="class">.4</span><span class="class">.6</span><span class="class">.tar</span><span class="class">.gz</span></span><br></pre></td></tr></table></figure>
+<h3 id="配置环境变量">配置环境变量</h3><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 移动到自己习惯的地方，本例为/usr/local下面</span></span><br><span class="line">mv zookeeper-<span class="number">3.4</span>.<span class="number">6</span> /usr/local/</span><br><span class="line"><span class="comment"># 添加zookeeper的环境变量</span></span><br><span class="line">vi /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加以下内容</span></span><br><span class="line">export <span class="constant">ZOOKEEPER_HOME</span>=<span class="regexp">/usr/local</span><span class="regexp">/zookeeper-3.4.6</span><br><span class="line">export PATH=$PATH:$ZOOKEEPER_HOME/bin</span></span><br><span class="line"><span class="comment"># classpath里面加上zk的lib</span></span><br><span class="line">export <span class="constant">CLASSPATH</span>=.<span class="symbol">:</span><span class="variable">$JAVA_HOME</span>/<span class="class"><span class="keyword">lib</span>/<span class="title">dt</span>.<span class="title">jar</span>:$<span class="title">JAVA_HOME</span>/<span class="title">lib</span>/<span class="title">tools</span>.<span class="title">jar</span>:$<span class="title">ZOOKEEPER_HOME</span>/<span class="title">lib</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="修改zk配置">修改zk配置</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># 进入zk配置目录</span></span><br><span class="line">cd /usr/local/zookeeper-<span class="number">3.4</span><span class="number">.6</span>/conf/</span><br><span class="line"><span class="preprocessor"># 复制配置文件</span></span><br><span class="line">cp zoo_sample.cfg zoo.cfg</span><br><span class="line"><span class="preprocessor"># 配置配置文件</span></span><br><span class="line">vi zoo.cfg</span><br></pre></td></tr></table></figure>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># The number of milliseconds of each tick</span></span><br><span class="line"><span class="preprocessor"># 这个时间是作为 Zookeeper 服务器之间或客户端与服务器之间维持心跳的时间间隔，也就是每个 tickTime 时间就会发送一个心跳。</span></span><br><span class="line">tickTime=<span class="number">2000</span></span><br><span class="line"><span class="preprocessor"># The number of ticks that the initial</span></span><br><span class="line"><span class="preprocessor"># synchronization phase can take</span></span><br><span class="line">initLimit=<span class="number">10</span></span><br><span class="line"><span class="preprocessor"># The number of ticks that can pass between</span></span><br><span class="line"><span class="preprocessor"># sending a request and getting an acknowledgement</span></span><br><span class="line">syncLimit=<span class="number">5</span></span><br><span class="line"><span class="preprocessor"># the directory where the snapshot is stored.</span></span><br><span class="line"><span class="preprocessor"># do not use /tmp for storage, /tmp here is just</span></span><br><span class="line"><span class="preprocessor"># example sakes.</span></span><br><span class="line"><span class="preprocessor"># Zookeeper 保存数据的目录，默认情况下，Zookeeper 将写数据的日志文件也保存在这个目录里。</span></span><br><span class="line">dataDir=/home/zookeeper/data</span><br><span class="line"><span class="preprocessor"># the port at which the clients will connect</span></span><br><span class="line"><span class="preprocessor"># 这个端口就是客户端连接 Zookeeper 服务器的端口，Zookeeper 会监听这个端口，接受客户端的访问请求。</span></span><br><span class="line">clientPort=<span class="number">2181</span></span><br><span class="line"><span class="preprocessor"># the maximum number of client connections.</span></span><br><span class="line"><span class="preprocessor"># increase this if you need to handle more clients</span></span><br><span class="line"><span class="preprocessor">#maxClientCnxns=60</span></span><br><span class="line"><span class="preprocessor">#</span></span><br><span class="line"><span class="preprocessor"># Be sure to read the maintenance section of the</span></span><br><span class="line"><span class="preprocessor"># administrator guide before turning on autopurge.</span></span><br><span class="line"><span class="preprocessor">#</span></span><br><span class="line"><span class="preprocessor"># http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance</span></span><br><span class="line"><span class="preprocessor">#</span></span><br><span class="line"><span class="preprocessor"># The number of snapshots to retain in dataDir</span></span><br><span class="line"><span class="preprocessor">#autopurge.snapRetainCount=3</span></span><br><span class="line"><span class="preprocessor"># Purge task interval in hours</span></span><br><span class="line"><span class="preprocessor"># Set to "0" to disable auto purge feature</span></span><br><span class="line"><span class="preprocessor">#autopurge.purgeInterval=1</span></span><br></pre></td></tr></table></figure>
+<h3 id="启动zk">启动zk</h3><p>先查看端口是否被占用<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># 看<span class="number">2181</span>是否已使用</span></span><br><span class="line">netstat -nat</span><br></pre></td></tr></table></figure></p>
+<p>查看zk是否已启动<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># 默认是只有一个jps返回，如果启动了hadoop,可能有多个，查看是否有QuorumPeerMain，没有则说明，尚未启动。</span></span><br><span class="line">jps</span><br></pre></td></tr></table></figure></p>
+<p>进入bin下面，启动<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./zkServer<span class="class">.sh</span> start</span><br></pre></td></tr></table></figure></p>
+<p>如需查看是否启动，参见前两步。<br>停止的话执行以下命令<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># bin目录下</span></span><br><span class="line">./zkServer.sh <span class="built_in">stop</span></span><br></pre></td></tr></table></figure></p>
 </span>
       
     </div>
@@ -345,7 +267,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/blas/" rel="tag">#blas</a>
+            <a href="/tags/zookeeper/" rel="tag">#zookeeper</a>
           
         </div>
       
@@ -354,13 +276,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/01/22/Zookeeper安装/" rel="prev">Zookeeper安装</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/30/spring-mvc-零配置实例/" rel="next">spring mvc 零配置实例</a>
+              <a href="/2015/12/31/矩阵知识备忘/" rel="next">矩阵知识备忘</a>
             
           </div>
         </div>
@@ -389,8 +309,8 @@
         
           <div class="comments" id="comments">
             
-              <div class="ds-thread" data-thread-key="2015/12/31/矩阵知识备忘/"
-                   data-title="矩阵知识备忘" data-url="http://3iter.com/2015/12/31/矩阵知识备忘/">
+              <div class="ds-thread" data-thread-key="2016/01/22/Zookeeper安装/"
+                   data-title="Zookeeper安装" data-url="http://3iter.com/2016/01/22/Zookeeper安装/">
               </div>
             
           </div>
@@ -472,7 +392,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方阵"><span class="nav-number">2.</span> <span class="nav-text">方阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对角矩阵"><span class="nav-number">3.</span> <span class="nav-text">对角矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对称矩阵"><span class="nav-number">4.</span> <span class="nav-text">对称矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转置矩阵"><span class="nav-number">5.</span> <span class="nav-text">转置矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逆矩阵"><span class="nav-number">6.</span> <span class="nav-text">逆矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正定矩阵"><span class="nav-number">7.</span> <span class="nav-text">正定矩阵</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备"><span class="nav-number">1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将下载的压缩包解压"><span class="nav-number">2.1.</span> <span class="nav-text">将下载的压缩包解压</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置环境变量"><span class="nav-number">2.2.</span> <span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改zk配置"><span class="nav-number">2.3.</span> <span class="nav-text">修改zk配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动zk"><span class="nav-number">2.4.</span> <span class="nav-text">启动zk</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
