@@ -195,6 +195,239 @@
           
           
             
+              <a class="post-title-link" href="/2016/08/20/spark读写Hbase/" itemprop="url">
+                spark读写Hbase
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-08-20T15:46:23+08:00" content="2016-08-20">
+            2016-08-20
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/spark/" itemprop="url" rel="index">
+                  <span itemprop="name">spark</span>
+                </a>
+              </span>
+
+              
+              
+                ， 
+              
+
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/spark/hbase/" itemprop="url" rel="index">
+                  <span itemprop="name">hbase</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2016/08/20/spark读写Hbase/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/20/spark读写Hbase/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h2 id="写HBase">写HBase</h2><h3 id="方式一">方式一</h3><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">val conf = <span class="built_in">new</span> SparkConf().setAppName(this.getClass.getSimpleName)</span><br><span class="line">val sc = <span class="built_in">new</span> SparkContext(conf)</span><br><span class="line"></span><br><span class="line">val data = ...<span class="comment"> //要写HBase的RDD</span></span><br><span class="line">val hConf = HBaseConfiguration.<span class="built_in">create</span>()</span><br><span class="line">hConf.<span class="built_in">set</span>(<span class="string">"hbase.zookeeper.quorum"</span>,<span class="string">"10.10.40.112"</span>)</span><br><span class="line">hConf.<span class="built_in">set</span>(<span class="string">"hbase.zookeeper.property.clientPort"</span>,<span class="string">"2181"</span>)<span class="comment"></span><br><span class="line">//hConf.set("hbase.rootdir","hdfs://10.10.40.111:9000/hbase113")</span><span class="comment"></span><br><span class="line">//hConf.setBoolean("hbase.cluster.distributed", true)</span><span class="comment"></span><br><span class="line">//hConf.setInt("hbase.client.scanner.caching", 2000)</span><span class="comment"></span><br><span class="line">//hConf.set("zookeeper.znode.parent","/hbase")</span></span><br><span class="line">hConf.<span class="built_in">set</span>(<span class="string">"hbase.defaults.for.version.skip"</span>,<span class="string">"true"</span>)</span><br><span class="line">hConf.<span class="built_in">set</span>(TableOutputFormat.OUTPUT_TABLE,<span class="string">"user_m_info"</span><span class="comment">)//要写入的表名</span></span><br><span class="line">val job = <span class="built_in">new</span> Job(hConf)</span><br><span class="line">job.setOutputKeyClass(classOf[ImmutableBytesWritable])</span><br><span class="line">job.setOutputValueClass(classOf[Result])</span><br><span class="line">job.setOutputFormatClass(classOf[TableOutputFormat[ImmutableBytesWritable]])</span><br><span class="line"></span><br><span class="line">dData..map&#123;</span><br><span class="line">  <span class="keyword">case</span> (<span class="keyword">mid</span>,tag,<span class="built_in">value</span>) =&gt;</span><br><span class="line">    val <span class="built_in">put</span> = <span class="built_in">new</span> Put(Bytes.toBytes(<span class="keyword">mid</span>))</span><br><span class="line">    <span class="built_in">put</span>.<span class="built_in">add</span>(<span class="string">"m"</span>.getBytes,tag.getBytes,Bytes.toBytes(<span class="built_in">value</span>)<span class="comment">)//列族为m</span></span><br><span class="line">    (<span class="built_in">new</span> ImmutableBytesWritable(),<span class="built_in">put</span>)</span><br><span class="line">&#125;.saveAsNewAPIHadoopDataset(job.getConfiguration)</span><br></pre></td></tr></table></figure>
+<h3 id="方式二">方式二</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">conf</span> =</span> <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="keyword">this</span>.getClass.getSimpleName)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">sc</span> =</span> <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">data</span> =</span> ... <span class="comment">//要写HBase的RDD</span></span><br><span class="line">data.foreachPartition&#123;x=&gt;</span><br><span class="line">    <span class="function"><span class="keyword">val</span> <span class="title">hConf</span> =</span> <span class="type">HBaseConfiguration</span>.create()</span><br><span class="line">    hConf.set(<span class="string">"hbase.zookeeper.quorum"</span>,<span class="string">"192.168.0.180"</span>)</span><br><span class="line">    hConf.set(<span class="string">"hbase.zookeeper.property.clientPort"</span>,<span class="string">"2181"</span>)</span><br><span class="line">    hConf.set(<span class="string">"hbase.defaults.for.version.skip"</span>,<span class="string">"true"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">val</span> <span class="title">table</span> =</span> <span class="keyword">new</span> <span class="type">HTable</span>(hConf,<span class="type">TableName</span>.valueOf(<span class="string">"user_m_info"</span>))<span class="comment">//表名</span></span><br><span class="line">    table.setAutoFlush(<span class="literal">false</span>,<span class="literal">false</span>)</span><br><span class="line">    table.setWriteBufferSize(<span class="number">3</span>*<span class="number">1024</span>*<span class="number">1024</span>)</span><br><span class="line">    x.foreach&#123;y=&gt;</span><br><span class="line">        <span class="function"><span class="keyword">val</span> <span class="title">put</span> =</span> <span class="keyword">new</span> <span class="type">Put</span>(<span class="type">Bytes</span>.toBytes(y._1._1))</span><br><span class="line">        put.addColumn(<span class="string">"m"</span>.getBytes,(y._1._2.toString).getBytes,<span class="type">Bytes</span>.toBytes(y._2.toString))</span><br><span class="line">        table.put(put)</span><br><span class="line">    &#125;</span><br><span class="line">    table.flushCommits()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="读HBase">读HBase</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">val conf = new <span class="function"><span class="title">SparkConf</span><span class="params">()</span></span>.<span class="function"><span class="title">setAppName</span><span class="params">(this.getClass.getSimpleName)</span></span></span><br><span class="line">val sc = new <span class="function"><span class="title">SparkContext</span><span class="params">(conf)</span></span></span><br><span class="line"></span><br><span class="line">val hConf = HBaseConfiguration.<span class="function"><span class="title">create</span><span class="params">()</span></span></span><br><span class="line">hConf.<span class="function"><span class="title">set</span><span class="params">(<span class="string">"hbase.zookeeper.quorum"</span>,<span class="string">"10.10.40.112"</span>)</span></span></span><br><span class="line">hConf.<span class="function"><span class="title">set</span><span class="params">(<span class="string">"hbase.zookeeper.property.clientPort"</span>,<span class="string">"2181"</span>)</span></span></span><br><span class="line"><span class="comment">//hConf.set("hbase.rootdir","hdfs://10.10.40.111:9000/hbase113")</span></span><br><span class="line"><span class="comment">//hConf.setBoolean("hbase.cluster.distributed", true)</span></span><br><span class="line"><span class="comment">//hConf.setInt("hbase.client.scanner.caching", 2000)</span></span><br><span class="line"><span class="comment">//hConf.set("zookeeper.znode.parent","/hbase")</span></span><br><span class="line">hConf.<span class="function"><span class="title">set</span><span class="params">(<span class="string">"hbase.defaults.for.version.skip"</span>,<span class="string">"true"</span>)</span></span></span><br><span class="line">hConf.<span class="function"><span class="title">set</span><span class="params">(TableInputFormat.INPUT_TABLE,<span class="string">"user_m_info"</span>)</span></span></span><br><span class="line"></span><br><span class="line">val data = sc.<span class="function"><span class="title">newAPIHadoopRDD</span><span class="params">(hConf,classOf[TableInputFormat],classOf[ImmutableBytesWritable],classOf[Result])</span></span></span><br><span class="line"></span><br><span class="line">data.<span class="function"><span class="title">foreach</span><span class="params">(println)</span></span></span><br></pre></td></tr></table></figure>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2016/08/20/Redis-安装与Spark集成/" itemprop="url">
+                Redis 安装与Spark集成
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-08-20T15:33:14+08:00" content="2016-08-20">
+            2016-08-20
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/spark/" itemprop="url" rel="index">
+                  <span itemprop="name">spark</span>
+                </a>
+              </span>
+
+              
+              
+                ， 
+              
+
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/spark/redis/" itemprop="url" rel="index">
+                  <span itemprop="name">redis</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2016/08/20/Redis-安装与Spark集成/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/20/Redis-安装与Spark集成/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h2 id="安装篇">安装篇</h2><h3 id="下载">下载</h3><p>去<a href="http://redis.io/download" target="_blank" rel="external">官网</a>查看你要的版本下载(本文使用3.2.3)<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget <span class="string">http:</span><span class="comment">//download.redis.io/releases/redis-3.2.3.tar.gz</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="解压安装">解压安装</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">tar</span> <span class="tag">xvzf</span> <span class="tag">redis-3</span><span class="class">.2</span><span class="class">.3</span><span class="class">.tar</span><span class="class">.gz</span></span><br><span class="line"><span class="tag">cd</span> <span class="tag">redis-3</span><span class="class">.2</span><span class="class">.3</span></span><br><span class="line"><span class="tag">make</span></span><br></pre></td></tr></table></figure>
+<p>make执行完后会出现src目录，进入src可以看见有redis-server、redis-cli等命令。</p>
+<h3 id="启动与测试">启动与测试</h3><p>执行redis-server即可看到redis启动页面。<br>另开一个命令行界面执行redis-cli即可进去测试。</p>
+<h3 id="设置服务">设置服务</h3><p>如果想以服务的方式去启动redis，可以按照以下步骤来。</p>
+<ul>
+<li><p>首先复制redis子目录utils中的redis_init_script到/etc/init.d下，同时易名为redis。</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp redis-<span class="number">3.2</span>.<span class="number">3</span><span class="regexp">/utils/</span>redis_init_script  <span class="regexp">/etc/</span>rc.d<span class="regexp">/init.d/</span>redis</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改脚本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/sh</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># chkconfig: 2345 80 90</span></span><br><span class="line"><span class="comment"># Simple Redis init.d script conceived to work on Linux systems</span></span><br><span class="line"><span class="comment"># as it does use of the /proc filesystem.</span></span><br><span class="line"></span><br><span class="line">REDISPORT=<span class="number">6379</span></span><br><span class="line">EXEC=/usr/<span class="built_in">local</span>/bin/redis-server</span><br><span class="line">CLIEXEC=/usr/<span class="built_in">local</span>/bin/redis-cli</span><br><span class="line"></span><br><span class="line">PIDFILE=/var/run/redis_<span class="variable">$&#123;REDISPORT&#125;</span>.pid</span><br><span class="line">CONF=<span class="string">"/etc/redis/<span class="variable">$&#123;REDISPORT&#125;</span>.conf"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">    start)</span><br><span class="line">        <span class="keyword">if</span> [ <span class="operator">-f</span> <span class="variable">$PIDFILE</span> ]</span><br><span class="line">        <span class="keyword">then</span></span><br><span class="line">                <span class="built_in">echo</span> <span class="string">"<span class="variable">$PIDFILE</span> exists, process is already running or crashed"</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">echo</span> <span class="string">"Starting Redis server..."</span></span><br><span class="line">                <span class="variable">$EXEC</span> <span class="variable">$CONF</span> &amp;</span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">        ;;</span><br><span class="line">    stop)</span><br><span class="line">        <span class="keyword">if</span> [ ! <span class="operator">-f</span> <span class="variable">$PIDFILE</span> ]</span><br><span class="line">        <span class="keyword">then</span></span><br><span class="line">                <span class="built_in">echo</span> <span class="string">"<span class="variable">$PIDFILE</span> does not exist, process is not running"</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                PID=$(cat <span class="variable">$PIDFILE</span>)</span><br><span class="line">                <span class="built_in">echo</span> <span class="string">"Stopping ..."</span></span><br><span class="line">                <span class="variable">$CLIEXEC</span> -p <span class="variable">$REDISPORT</span> shutdown</span><br><span class="line">                <span class="keyword">while</span> [ -x /proc/<span class="variable">$&#123;PID&#125;</span> ]</span><br><span class="line">                <span class="keyword">do</span></span><br><span class="line">                    <span class="built_in">echo</span> <span class="string">"Waiting for Redis to shutdown ..."</span></span><br><span class="line">                    sleep <span class="number">1</span></span><br><span class="line">                <span class="keyword">done</span></span><br><span class="line">                <span class="built_in">echo</span> <span class="string">"Redis stopped"</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"Please use start or stop as first argument"</span></span><br><span class="line">        ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>修改有两处：1、第三行为新增；2、第21行结尾处添加&amp;，后台启动。</p>
+</blockquote>
+<ul>
+<li><p>将redis子目录src下的redis-server和redis-cli复制到/usr/local/bin/文件（脚本中第8/9行指示）</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp redis-<span class="number">3.2</span>.<span class="number">3</span><span class="regexp">/src/</span>redis-server  <span class="regexp">/usr/</span>local<span class="regexp">/bin/</span></span><br><span class="line">cp redis-<span class="number">3.2</span>.<span class="number">3</span><span class="regexp">/src/</span>redis-cli  <span class="regexp">/usr/</span>local<span class="regexp">/bin/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>/etc目录下创建redis目录并复制配置到此目录（脚本文中第12行）</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /etc/redis</span><br><span class="line"><span class="keyword">cp</span> redis-<span class="number">3.2</span>.<span class="number">3</span>/redis.<span class="keyword">conf</span> /etc/redis/<span class="number">6379</span>.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注册服务</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig <span class="comment">--add redis</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动服务</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service redis <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>以服务的方式启动已成功，即可使用，若需要停止，请看下一个步骤。</p>
+<ul>
+<li>停止服务<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service redis <span class="keyword">stop</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><strong><em>如需对外开放服务，请修改配置文件中的bind，配置对外服务机器的IP。</em></strong></p>
+</blockquote>
+<h2 id="集成篇">集成篇</h2><p>当前只介绍Spark写数据到redis<br>导入jar<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>redis.clients<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>jedis<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">version</span>&gt;</span>2.9.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>代码如下：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.spark.&#123;<span class="type">SparkContext</span>, <span class="type">SparkConf</span>&#125;</span><br><span class="line"><span class="keyword">import</span> redis.clients.jedis.<span class="type">Jedis</span></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">conf</span> =</span> <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="keyword">this</span>.getClass.getSimpleName)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">sc</span> =</span> <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">rdd</span> =</span> ... <span class="comment">//要写入redis的数据，RDD[Map[String,String]]</span></span><br><span class="line">rdd.foreachPartition&#123;iter =&gt;</span><br><span class="line">  <span class="function"><span class="keyword">val</span> <span class="title">redis</span> =</span> <span class="keyword">new</span> <span class="type">Jedis</span>(<span class="string">"10.10.40.111"</span>,<span class="number">6379</span>,<span class="number">400000</span>)</span><br><span class="line">  <span class="function"><span class="keyword">val</span> <span class="title">ppl</span> =</span> redis.pipelined()<span class="comment">//使用pipeline 更高效的批处理</span></span><br><span class="line">  iter.foreach&#123;f=&gt;</span><br><span class="line">    ppl.hmset(f(<span class="string">"mid"</span>),f)<span class="comment">//当前采用的是Map类型，以mid为Key</span></span><br><span class="line">  &#125;</span><br><span class="line">  ppl.sync()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2016/08/20/ElasticSearch-安装与Spark集成/" itemprop="url">
                 ElasticSearch 安装与Spark集成
               </a>
@@ -278,151 +511,151 @@
 <table>
 <thead>
 <tr>
-<th style="text-align:center">参数</th>
-<th style="text-align:center">解释</th>
-<th style="text-align:center">值</th>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">解释</th>
+<th style="text-align:left">值</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><strong>*cluster.name</strong></td>
-<td style="text-align:center">集群的名字，一样即为同一集群</td>
-<td style="text-align:center">es_test(默认值是elasticsearch)</td>
+<td style="text-align:left"><strong>*cluster.name</strong></td>
+<td style="text-align:left">集群的名字，一样即为同一集群</td>
+<td style="text-align:left">es_test(默认值是elasticsearch)</td>
 </tr>
 <tr>
-<td style="text-align:center"><strong>*node.name</strong></td>
-<td style="text-align:center">集群节点的名字</td>
-<td style="text-align:center">spark1(每个机器这个配置不一样)</td>
+<td style="text-align:left"><strong>*node.name</strong></td>
+<td style="text-align:left">集群节点的名字</td>
+<td style="text-align:left">spark1(每个机器这个配置不一样)</td>
 </tr>
 <tr>
-<td style="text-align:center"><strong>*network.host</strong></td>
-<td style="text-align:center">集群的对外服务IP</td>
-<td style="text-align:center">192.068.0.180（对外服务的主机IP）</td>
+<td style="text-align:left"><strong>*network.host</strong></td>
+<td style="text-align:left">集群的对外服务IP</td>
+<td style="text-align:left">192.068.0.180（对外服务的主机IP）</td>
 </tr>
 <tr>
-<td style="text-align:center"><strong>*http.port</strong></td>
-<td style="text-align:center">集群的对外服务端口</td>
-<td style="text-align:center">9200（默认就是9200）</td>
+<td style="text-align:left"><strong>*http.port</strong></td>
+<td style="text-align:left">集群的对外服务端口</td>
+<td style="text-align:left">9200（默认就是9200）</td>
 </tr>
 <tr>
-<td style="text-align:center">node.master</td>
-<td style="text-align:center">是否有资格被选为主节点</td>
-<td style="text-align:center">true</td>
+<td style="text-align:left">node.master</td>
+<td style="text-align:left">是否有资格被选为主节点</td>
+<td style="text-align:left">true</td>
 </tr>
 <tr>
-<td style="text-align:center">node.data</td>
-<td style="text-align:center">是否存储索引数据</td>
-<td style="text-align:center">true</td>
+<td style="text-align:left">node.data</td>
+<td style="text-align:left">是否存储索引数据</td>
+<td style="text-align:left">true</td>
 </tr>
 <tr>
-<td style="text-align:center">index.number_of_shards</td>
-<td style="text-align:center">索引分片个数</td>
-<td style="text-align:center">5（默认值）</td>
+<td style="text-align:left">index.number_of_shards</td>
+<td style="text-align:left">索引分片个数</td>
+<td style="text-align:left">5（默认值）</td>
 </tr>
 <tr>
-<td style="text-align:center">index.number_of_replicas</td>
-<td style="text-align:center">索引副本个数</td>
-<td style="text-align:center">1（默认值）</td>
+<td style="text-align:left">index.number_of_replicas</td>
+<td style="text-align:left">索引副本个数</td>
+<td style="text-align:left">1（默认值）</td>
 </tr>
 <tr>
-<td style="text-align:center">path.conf</td>
-<td style="text-align:center">配置文件的存储路径</td>
-<td style="text-align:center">默认是config文件夹</td>
+<td style="text-align:left">path.conf</td>
+<td style="text-align:left">配置文件的存储路径</td>
+<td style="text-align:left">默认是config文件夹</td>
 </tr>
 <tr>
-<td style="text-align:center">path.data</td>
-<td style="text-align:center">索引数据的存储路径</td>
-<td style="text-align:center">默认是es下data文件夹，可设置多路径，用逗号隔开</td>
+<td style="text-align:left">path.data</td>
+<td style="text-align:left">索引数据的存储路径</td>
+<td style="text-align:left">默认是es下data文件夹，可设置多路径，用逗号隔开</td>
 </tr>
 <tr>
-<td style="text-align:center">path.work</td>
-<td style="text-align:center">临时文件的存储路径</td>
-<td style="text-align:center">默认是es下的work文件夹</td>
+<td style="text-align:left">path.work</td>
+<td style="text-align:left">临时文件的存储路径</td>
+<td style="text-align:left">默认是es下的work文件夹</td>
 </tr>
 <tr>
-<td style="text-align:center">path.logs</td>
-<td style="text-align:center">日志文件的存储路径</td>
-<td style="text-align:center">默认是es下的logs文件夹</td>
+<td style="text-align:left">path.logs</td>
+<td style="text-align:left">日志文件的存储路径</td>
+<td style="text-align:left">默认是es下的logs文件夹</td>
 </tr>
 <tr>
-<td style="text-align:center">path.plugins</td>
-<td style="text-align:center">插件的存放路径</td>
-<td style="text-align:center">默认是es下的plugins文件夹</td>
+<td style="text-align:left">path.plugins</td>
+<td style="text-align:left">插件的存放路径</td>
+<td style="text-align:left">默认是es下的plugins文件夹</td>
 </tr>
 <tr>
-<td style="text-align:center">bootstrap.mlockall</td>
-<td style="text-align:center">设置为true来锁住内存</td>
-<td style="text-align:center">true</td>
+<td style="text-align:left">bootstrap.mlockall</td>
+<td style="text-align:left">设置为true来锁住内存</td>
+<td style="text-align:left">true</td>
 </tr>
 <tr>
-<td style="text-align:center">http.max_content_length</td>
-<td style="text-align:center">内容的最大容量</td>
-<td style="text-align:center">默认100MB</td>
+<td style="text-align:left">http.max_content_length</td>
+<td style="text-align:left">内容的最大容量</td>
+<td style="text-align:left">默认100MB</td>
 </tr>
 <tr>
-<td style="text-align:center">http.enabled</td>
-<td style="text-align:center">是否对外提供服务</td>
-<td style="text-align:center">true</td>
+<td style="text-align:left">http.enabled</td>
+<td style="text-align:left">是否对外提供服务</td>
+<td style="text-align:left">true</td>
 </tr>
 <tr>
-<td style="text-align:center">gateway.type</td>
-<td style="text-align:center">gateway的类型</td>
-<td style="text-align:center">默认为local即为本地文件系统，可以设置为本地文件系统，分布式文件系统，HDFS和amazon s3</td>
+<td style="text-align:left">gateway.type</td>
+<td style="text-align:left">gateway的类型</td>
+<td style="text-align:left">默认为local即为本地文件系统，可以设置为本地文件系统，分布式文件系统，HDFS和amazon s3</td>
 </tr>
 <tr>
-<td style="text-align:center">gateway.recover_after_nodes</td>
-<td style="text-align:center">设置集群中N个节点启动时进行数据恢复</td>
-<td style="text-align:center">默认为1</td>
+<td style="text-align:left">gateway.recover_after_nodes</td>
+<td style="text-align:left">设置集群中N个节点启动时进行数据恢复</td>
+<td style="text-align:left">默认为1</td>
 </tr>
 <tr>
-<td style="text-align:center">gateway.recover_after_time</td>
-<td style="text-align:center">设置初始化数据恢复进程的超时时间</td>
-<td style="text-align:center">5m（默认是5分钟）</td>
+<td style="text-align:left">gateway.recover_after_time</td>
+<td style="text-align:left">设置初始化数据恢复进程的超时时间</td>
+<td style="text-align:left">5m（默认是5分钟）</td>
 </tr>
 <tr>
-<td style="text-align:center">gateway.expected_nodes</td>
-<td style="text-align:center">设置这个集群中节点的数量</td>
-<td style="text-align:center">默认是2</td>
+<td style="text-align:left">gateway.expected_nodes</td>
+<td style="text-align:left">设置这个集群中节点的数量</td>
+<td style="text-align:left">默认是2</td>
 </tr>
 <tr>
-<td style="text-align:center">cluster.routing.allocation.node_initial_primaries_recoveries</td>
-<td style="text-align:center">初始化数据恢复时，并发恢复线程的个数</td>
-<td style="text-align:center">默认4</td>
+<td style="text-align:left">cluster.routing.allocation.node_initial_primaries_recoveries</td>
+<td style="text-align:left">初始化数据恢复时，并发恢复线程的个数</td>
+<td style="text-align:left">默认4</td>
 </tr>
 <tr>
-<td style="text-align:center">cluster.routing.allocation.node_concurrent_recoveries</td>
-<td style="text-align:center">添加删除节点或负载均衡时并发恢复线程的个数</td>
-<td style="text-align:center">默认4</td>
+<td style="text-align:left">cluster.routing.allocation.node_concurrent_recoveries</td>
+<td style="text-align:left">添加删除节点或负载均衡时并发恢复线程的个数</td>
+<td style="text-align:left">默认4</td>
 </tr>
 <tr>
-<td style="text-align:center">indices.recovery.max_size_per_sec</td>
-<td style="text-align:center">设置数据恢复时限制的带宽，如入100mb</td>
-<td style="text-align:center">默认0，无限制</td>
+<td style="text-align:left">indices.recovery.max_size_per_sec</td>
+<td style="text-align:left">设置数据恢复时限制的带宽，如入100mb</td>
+<td style="text-align:left">默认0，无限制</td>
 </tr>
 <tr>
-<td style="text-align:center">indices.recovery.concurrent_streams</td>
-<td style="text-align:center">设置这个参数来限制从其它分片恢复数据时最大同时打开并发流的个数</td>
-<td style="text-align:center">默认5</td>
+<td style="text-align:left">indices.recovery.concurrent_streams</td>
+<td style="text-align:left">设置这个参数来限制从其它分片恢复数据时最大同时打开并发流的个数</td>
+<td style="text-align:left">默认5</td>
 </tr>
 <tr>
-<td style="text-align:center">discovery.zen.minimum_master_nodes</td>
-<td style="text-align:center">设置这个参数来保证集群中的节点可以知道其它N个有master资格的节点</td>
-<td style="text-align:center">默认1</td>
+<td style="text-align:left">discovery.zen.minimum_master_nodes</td>
+<td style="text-align:left">设置这个参数来保证集群中的节点可以知道其它N个有master资格的节点</td>
+<td style="text-align:left">默认1</td>
 </tr>
 <tr>
-<td style="text-align:center">discovery.zen.ping.timeout</td>
-<td style="text-align:center">设置集群中自动发现其它节点时ping连接超时时间</td>
-<td style="text-align:center">3s(默认3秒)</td>
+<td style="text-align:left">discovery.zen.ping.timeout</td>
+<td style="text-align:left">设置集群中自动发现其它节点时ping连接超时时间</td>
+<td style="text-align:left">3s(默认3秒)</td>
 </tr>
 <tr>
-<td style="text-align:center">discovery.zen.ping.multicast.enabled</td>
-<td style="text-align:center">设置是否打开多播发现节点</td>
-<td style="text-align:center">默认true</td>
+<td style="text-align:left">discovery.zen.ping.multicast.enabled</td>
+<td style="text-align:left">设置是否打开多播发现节点</td>
+<td style="text-align:left">默认true</td>
 </tr>
 <tr>
-<td style="text-align:center">discovery.zen.ping.unicast.hosts</td>
-<td style="text-align:center">设置集群中master节点的初始列表，可以通过这些节点来自动发现新加入集群的节点</td>
-<td style="text-align:center">[“host1”, “host2:port”, “host3[portX-portY]”]</td>
+<td style="text-align:left">discovery.zen.ping.unicast.hosts</td>
+<td style="text-align:left">设置集群中master节点的初始列表，可以通过这些节点来自动发现新加入集群的节点</td>
+<td style="text-align:left">[“host1”, “host2:port”, “host3[portX-portY]”]</td>
 </tr>
 </tbody>
 </table>
@@ -438,7 +671,7 @@
 <h3 id="写入ES">写入ES</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import org<span class="class">.elasticsearch</span><span class="class">.spark</span>._</span><br><span class="line"></span><br><span class="line">val sc = new <span class="function"><span class="title">SparkContext</span><span class="params">(conf)</span></span>         </span><br><span class="line"></span><br><span class="line">val numbers = <span class="function"><span class="title">Map</span><span class="params">(<span class="string">"one"</span> -&gt; <span class="number">1</span>, <span class="string">"two"</span> -&gt; <span class="number">2</span>, <span class="string">"three"</span> -&gt; <span class="number">3</span>)</span></span></span><br><span class="line">val airports = <span class="function"><span class="title">Map</span><span class="params">(<span class="string">"arrival"</span> -&gt; <span class="string">"Otopeni"</span>, <span class="string">"SFO"</span> -&gt; <span class="string">"San Fran"</span>)</span></span></span><br><span class="line">val rdd = sc.<span class="function"><span class="title">makeRDD</span><span class="params">(Seq(numbers, airports)</span></span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//方法一</span></span><br><span class="line"><span class="comment">//saveToEs方法的参数即为：index/type</span></span><br><span class="line">rdd.<span class="function"><span class="title">saveToEs</span><span class="params">(<span class="string">"spark/docs"</span>)</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//方法二</span></span><br><span class="line">import org<span class="class">.elasticsearch</span><span class="class">.spark</span><span class="class">.rdd</span><span class="class">.EsSpark</span></span><br><span class="line">EsSpark.<span class="function"><span class="title">saveToEs</span><span class="params">(rdd, <span class="string">"spark/docs"</span>)</span></span></span><br></pre></td></tr></table></figure>
 <h3 id="读取ES">读取ES</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import org<span class="class">.apache</span><span class="class">.spark</span><span class="class">.SparkContext</span></span><br><span class="line">import org<span class="class">.apache</span><span class="class">.spark</span><span class="class">.SparkContext</span>._</span><br><span class="line"></span><br><span class="line">import org<span class="class">.elasticsearch</span><span class="class">.spark</span>._ </span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">val conf = ...</span><br><span class="line">val sc = new <span class="function"><span class="title">SparkContext</span><span class="params">(conf)</span></span></span><br><span class="line"></span><br><span class="line">val RDD = sc.<span class="function"><span class="title">esRDD</span><span class="params">(<span class="string">"radio/artists"</span>)</span></span></span><br><span class="line"><span class="comment">//带参数的</span></span><br><span class="line">val rdd2 = sc.<span class="function"><span class="title">esRDD</span><span class="params">(<span class="string">"radio/artists"</span>, <span class="string">"?q=me*"</span>)</span></span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>其他的使用方式请参照官网介绍。</p>
+<p>其他的使用方式请参照官网介绍。<br>更多文档可以参考<a href="http://es.xiaoleilu.com/" target="_blank" rel="external">这里</a></p>
 </blockquote>
 </span>
         
@@ -1286,262 +1519,6 @@
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/11/19/spark-ALS学习/" itemprop="url">
-                spark ALS学习
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-11-19T17:20:15+08:00" content="2015-11-19">
-            2015-11-19
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/spark/" itemprop="url" rel="index">
-                  <span itemprop="name">spark</span>
-                </a>
-              </span>
-
-              
-              
-                ， 
-              
-
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/spark/推荐系统/" itemprop="url" rel="index">
-                  <span itemprop="name">推荐系统</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/11/19/spark-ALS学习/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/19/spark-ALS学习/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><blockquote>
-<p>最近使用spark ALS做推荐，故写一篇文章记录所得。</p>
-</blockquote>
-<h2 id="算法介绍">算法介绍</h2><p>spark实现的推荐算法是基于矩阵分解的ALS-WR(alternating-least-squares with weighted-λ-regularization)的协同过滤算法。<br>矩阵r表示用户对物品的评分矩阵，矩阵u,m表示用户和物品的特征矩阵。<br>$$r\approx u \cdot m$$<br>损失函数为<br>$$f(U,M)=\sum(r_{ij}-u_i^T m_j)^2+\lambda(\sum n_{u_i} ||u_i||^2+\sum n_{m_j}||m_j||^2)$$<br>$n_{u_i}$和$n_{m_i}$分别表示user评分数和电影数，$I_i$表示user i评分过的物品，$I_j$表示评论过物品j的所有用户。<br>损失函数前一部分为真实值与分解矩阵计算值得误差平方和，后一部分为正则范数，防止过拟合，目的即变成求f函数的最小值。<br>每次迭代，<br>固定M，逐个更新每个user的特征u(对u求偏导，令偏导为0求解)。<br>固定U，逐个更新每个item的特征m(对m求偏导，令偏导为0求解)。<br>给定的U的一列，称为$u_i$，由解正则化线性最小平方问题得到，这个问题由user i评分记录，以及i评分过的电影的特征向量组成</p>
-<blockquote>
-<p>$\frac 1 2\frac{\partial f}{\partial u_{ki}}=0,\forall{i,k}\tag 1$<br>$\Rightarrow \sum_{j\in I_i}(u_i^Tm_j-r_{ij})m_{kj}+\lambda n_{ui}u_{ki}=0,\forall{i,k}\tag 2$<br>$\Rightarrow \sum_{j\in I_i}m_{kj}m_j^Tu_i+\lambda n_{ui}u_{ki}=\sum_{j\in I_i}m_{kj}r_{ij},\forall{i,k}\tag 3$<br>$\Rightarrow (M_{I_i}M_{I_i}^T+\lambda n_{u_i}E)u_i=M_{I_i}R^T(i,I_i),\forall i \tag 4$<br>$\Rightarrow u_i=A_i^{-1}V_i,\forall i\tag 5$</p>
-</blockquote>
-<p>其中$A_i=M_{I_i}M_{I_i}^T+\lambda n_{u_i}E=M_{I_i}R^T(i,I_i)$E是单位矩阵,$M_{I_i}$表示M的子矩阵，它的列是user i评分过的物品，$R(i,I_i)$是以评分物品为列的矩阵R的第i行向量。<br>同理$m_j=A_j^{-1}V_j$</p>
-<h2 id="代码实现">代码实现</h2><p>本文从spark中的LocalALS分析（SparkALS与其原理一样，只不过用RDD实现并行计算处理）<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ITERATIONS 为迭代次数</span></span><br><span class="line"><span class="keyword">for</span> (iter &lt;- <span class="number">1</span> to <span class="type">ITERATIONS</span>) &#123;</span><br><span class="line">  println(s<span class="string">"Iteration $iter:"</span>)</span><br><span class="line">  <span class="comment">//固定用户,逐个更新所有物品的特征</span></span><br><span class="line">  ms = (<span class="number">0</span> until <span class="type">M</span>).map(i =&gt; updateMovie(i, ms(i), us, <span class="type">R</span>)).toArray</span><br><span class="line">  <span class="comment">//固定物品,逐个更新所有用户的特征</span></span><br><span class="line">  us = (<span class="number">0</span> until <span class="type">U</span>).map(j =&gt; updateUser(j, us(j), ms, <span class="type">R</span>)).toArray</span><br><span class="line">  <span class="comment">//计算均方根误差</span></span><br><span class="line">  println(<span class="string">"RMSE = "</span> + rmse(<span class="type">R</span>, ms, us))</span><br><span class="line">  println()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>迭代更新的方法为updateMovie和updateUser，实现原理一致，取其一介绍<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">updateUser</span>(</span>j: <span class="type">Int</span>, u: <span class="type">RealVector</span>, ms: <span class="type">Array</span>[<span class="type">RealVector</span>], <span class="type">R</span>:<span class="type">RealMatrix</span>) : <span class="type">RealVector</span> = &#123;</span><br><span class="line">    <span class="comment">//F为隐性因子的个数，M为电影的总数，U为用户的总数</span></span><br><span class="line">    <span class="keyword">var</span> <span class="type">XtX</span>: <span class="type">RealMatrix</span> = <span class="keyword">new</span> <span class="type">Array2DRowRealMatrix</span>(<span class="type">F</span>, <span class="type">F</span>)</span><br><span class="line">    <span class="keyword">var</span> <span class="type">Xty</span>: <span class="type">RealVector</span> = <span class="keyword">new</span> <span class="type">ArrayRealVector</span>(<span class="type">F</span>)</span><br><span class="line">    <span class="comment">// For each movie that the user rated</span></span><br><span class="line">    <span class="comment">// 迭代所有电影，应取该用户评论过的电影集</span></span><br><span class="line">    <span class="keyword">for</span> (i &lt;- <span class="number">0</span> until <span class="type">M</span>) &#123;</span><br><span class="line">      <span class="function"><span class="keyword">val</span> <span class="title">m</span> =</span> ms(i)<span class="comment">//取出电影的特征向量</span></span><br><span class="line">      <span class="comment">// Add m * m^t to XtX</span></span><br><span class="line">      <span class="comment">// outProduct即为矩阵叉乘另一个矩阵的转置矩阵</span></span><br><span class="line">      <span class="comment">// add方法会把两个矩阵每个对应位置相加</span></span><br><span class="line">      <span class="type">XtX</span> = <span class="type">XtX</span>.add(m.outerProduct(m))</span><br><span class="line">      <span class="comment">// Add m * rating to Xty</span></span><br><span class="line">      <span class="comment">// mapMultiply方法会用将原向量中的每个值都乘以入参（此处即用户j对电影i的评分）</span></span><br><span class="line">      <span class="comment">// add方法会把每个向量的对应位置相加</span></span><br><span class="line">      <span class="type">Xty</span> = <span class="type">Xty</span>.add(m.mapMultiply(<span class="type">R</span>.getEntry(i, j)))</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Add regularization coefficients to diagonal terms</span></span><br><span class="line">    <span class="keyword">for</span> (d &lt;- <span class="number">0</span> until <span class="type">F</span>) &#123;</span><br><span class="line">      <span class="comment">// addToEntry方法将2维数组中当前参数1行和参数2列确定的对应元素加上参数3形成新值</span></span><br><span class="line">      <span class="type">XtX</span>.addToEntry(d, d, <span class="type">LAMBDA</span> * <span class="type">M</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Solve it with Cholesky</span></span><br><span class="line">    <span class="comment">// 使用乔里斯基分解求解，mllib中还提供非负最小二乘分解(NNLS)</span></span><br><span class="line">    <span class="keyword">new</span> <span class="type">CholeskyDecomposition</span>(<span class="type">XtX</span>).getSolver.solve(<span class="type">Xty</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>结合公式4,$(M_{I_i}M_{I_i}^T+\lambda n_{u_i}E)u_i=M_{I_i}R^T(i,I_i)$,其中XtX即为公式中$u_i$前的计算结果，Xty为等号后的计算结果。</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/10/22/BLAS方法简介（一）/" itemprop="url">
-                BLAS方法简介（一）
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-10-22T17:32:17+08:00" content="2015-10-22">
-            2015-10-22
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/spark/" itemprop="url" rel="index">
-                  <span itemprop="name">spark</span>
-                </a>
-              </span>
-
-              
-              
-                ， 
-              
-
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/spark/blas/" itemprop="url" rel="index">
-                  <span itemprop="name">blas</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/10/22/BLAS方法简介（一）/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/22/BLAS方法简介（一）/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><blockquote>
-<p>BLAS（Basic Linear Algebra Subprograms 基础线性代数程序集）相关算法中文的介绍比较少，所以写一篇简单记录下，难免有误，欢迎拍砖。</p>
-</blockquote>
-<p>BLAS按照功能被分为三个级别：<br>Level 1：矢量-矢量运算<br>$y \leftarrow \alpha x + y$<br>Level 2：矩阵-矢量运算<br>$y \leftarrow \alpha Ax + \beta y$<br>Level 3：矩阵-矩阵运算<br>$C \leftarrow \alpha AB + \beta C$<br>官方参考实现：<a href="http://www.netlib.org/blas/" target="_blank" rel="external">http://www.netlib.org/blas/</a><br>代码示例选用com.github.fommil.netlib.BLAS（spark官方亦是这个）</p>
-<p>本文介绍下Level1</p>
-<h2 id="srot">srot</h2><p>实现数组a,b间数据的处理，处理公式为：<br>$a_i = c \ast a_i + s \ast b_i$<br>$b_i = c \ast b_i - s \ast a_i$<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">srot</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">float</span>[] sx, <span class="keyword">int</span> _sx_offset, <span class="keyword">int</span> incx, <span class="keyword">float</span>[] sy, <span class="keyword">int</span> _sy_offset, <span class="keyword">int</span> incy, <span class="keyword">float</span> c, <span class="keyword">float</span> s)</span></span>;</span><br><span class="line">参数解析：</span><br><span class="line">n ：需要处理的数据总数</span><br><span class="line">sx|sy ：互相处理数据的数组</span><br><span class="line">_sx_offset|_sy_offset ：sx|sy数组数据处理起始的位置</span><br><span class="line">incx|incy :步长，取数据的间隔</span><br><span class="line">c|s ：数据处理的系数</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> <span class="type">Array</span>(<span class="number">2.0</span>f,<span class="number">3.0</span>f,<span class="number">5.0</span>f,<span class="number">4.0</span>f,<span class="number">1.0</span>f)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">b</span> =</span> <span class="type">Array</span>(<span class="number">2.0</span>f,<span class="number">3.0</span>f,<span class="number">5.0</span>f,<span class="number">4.0</span>f,<span class="number">1.0</span>f)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">e</span> =</span> blas.srot(<span class="number">2</span>,a,<span class="number">1</span>,<span class="number">1</span>,b,<span class="number">0</span>,<span class="number">2</span>,<span class="number">3.0</span>f,<span class="number">2.0</span>f)</span><br><span class="line"></span><br><span class="line">println(a.mkString(<span class="string">","</span>))</span><br><span class="line">println(b.mkString(<span class="string">","</span>))</span><br><span class="line"><span class="comment">//2.0,13.0,25.0,4.0,1.0</span></span><br><span class="line"><span class="comment">//0.0,3.0,5.0,4.0,1.0</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>本例中需要处理的数据数量为2，a数组从索引1开始，以步长为1取数据进行处理，也就是取到（3.0,5.0），b数组从索引0开始，以步长为2取数据进行处理，也就是取到（2.0,5.0），那么也就是对这四个数据进行处理，怎么处理呢？<br>按照公式$a_i = c \ast a_i + s \ast b_i$，$b_i = c \ast b_i - s \ast a_i$<br>$a_1$ = 3.0 $\ast$ 3+2.0 $\ast$ 2 = 13.0<br>$a_2$ = 5.0 $\ast$ 3+5.0 $\ast$ 2 = 25.0<br>$b_0$ = 2.0$\ast$3-3.0$\ast$2 = 0.0<br>$b_2$ = 5.0$\ast$3-5.0$\ast$2 = 5.0</p>
-</blockquote>
-<h2 id="sscal">sscal</h2><p>实现数组内数据的乘法<br>$sx_i = sx_i \ast sa$<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">sscal</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">float</span> sa, <span class="keyword">float</span>[] sx, <span class="keyword">int</span> _sx_offset, <span class="keyword">int</span> incx)</span></span>;</span><br><span class="line">参数解析：</span><br><span class="line">n ：需要处理的数据总数</span><br><span class="line">sx ：需要处理数据的数组</span><br><span class="line">_sx_offset ：sx数组数据处理起始的位置</span><br><span class="line">incx :步长，取数据的间隔</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> <span class="type">Array</span>(<span class="number">1.0</span>f,<span class="number">2.0</span>f,<span class="number">3.0</span>f,<span class="number">4.0</span>f,<span class="number">5.0</span>f)</span><br><span class="line">blas.sscal(<span class="number">2</span>,<span class="number">2.0</span>f,a,<span class="number">0</span>,<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">println(a.mkString(<span class="string">","</span>))</span><br><span class="line"><span class="comment">//2.0,4.0,3.0,4.0,5.0</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>以步长1从索引0开始取两个数据，也即（1,2），进行乘法，乘法的系数是2.0，所以结果就是（2,4）</p>
-</blockquote>
-<h2 id="saxpy">saxpy</h2><p>数组处理，处理公式为：$y=a \ast x+y$<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">saxpy</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">float</span> sa, <span class="keyword">float</span>[] sx, <span class="keyword">int</span> _sx_offset, <span class="keyword">int</span> incx, <span class="keyword">float</span>[] sy, <span class="keyword">int</span> _sy_offset, <span class="keyword">int</span> incy)</span></span>;</span><br><span class="line">参数解析：</span><br><span class="line">n ：需要处理的数据总数</span><br><span class="line">sa ：数据处理的系数</span><br><span class="line">sx|sy ：互相处理数据的数组</span><br><span class="line">_sx_offset|_sy_offset ：sx|sy数组数据处理起始的位置</span><br><span class="line">incx|incy :步长，取数据的间隔</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> <span class="type">Array</span>(<span class="number">1.0</span>f,<span class="number">2.0</span>f,<span class="number">3.0</span>f,<span class="number">4.0</span>f,<span class="number">5.0</span>f)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">b</span> =</span> <span class="type">Array</span>(<span class="number">1.0</span>f,<span class="number">2.0</span>f,<span class="number">3.0</span>f,<span class="number">4.0</span>f,<span class="number">5.0</span>f)</span><br><span class="line"></span><br><span class="line">blas.saxpy(<span class="number">2</span>,<span class="number">2.0</span>f,a,<span class="number">0</span>,<span class="number">1</span>,b,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">println(a.mkString(<span class="string">","</span>))</span><br><span class="line">println(b.mkString(<span class="string">","</span>))</span><br><span class="line"><span class="comment">//1.0,2.0,3.0,4.0,5.0</span></span><br><span class="line"><span class="comment">//1.0,4.0,7.0,4.0,5.0</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>从索引0，以步长1从a取2个数字，也即（1.0,2.0），从索引1，以步长1从b取2个数字，也即（2.0,3.0），执行计算（1.0$\ast$2.0+2.0=4.0,2.0$\ast$2.0+3.0=7.0），放置到刚才b取出数据的位置即为结果</p>
-</blockquote>
-<h2 id="sswap">sswap</h2><p>实现数组内数据的交换<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">sswap</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">float</span>[] sx, <span class="keyword">int</span> _sx_offset, <span class="keyword">int</span> incx, <span class="keyword">float</span>[] sy, <span class="keyword">int</span> _sy_offset, <span class="keyword">int</span> incy)</span></span>;</span><br><span class="line">参数解析：</span><br><span class="line">n ：需要交换的数据总数</span><br><span class="line">sx|sy ：互相交换数据的数组</span><br><span class="line">_sx_offset|_sy_offset ：sx|sy数组数据交换起始的位置</span><br><span class="line">incx|incy :步长，取数据的间隔</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span>  <span class="type">Array</span>(<span class="number">1.0</span>f,<span class="number">3.0</span>f,<span class="number">5.0</span>f,<span class="number">2.0</span>f,<span class="number">4.0</span>f)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">b</span> =</span> <span class="type">Array</span>(<span class="number">1.0</span>f,<span class="number">3.0</span>f,<span class="number">5.0</span>f,<span class="number">2.0</span>f,<span class="number">4.0</span>f)</span><br><span class="line">blas.sswap(<span class="number">2</span>,a,<span class="number">1</span>,<span class="number">1</span>,b,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">println(a.mkString(<span class="string">","</span>))</span><br><span class="line">println(b.mkString(<span class="string">","</span>))</span><br><span class="line"><span class="comment">//1.0,5.0,4.0,2.0,4.0</span></span><br><span class="line"><span class="comment">//1.0,3.0,3.0,2.0,5.0</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>a数组从索引1开始取，步长为1，取俩，也就是（3.0,5.0）<br>b数组从索引2开始取，步长为2，取俩，也就是（5.0,4.0）<br>ab取出来的数据互相交换位置即为结果</p>
-</blockquote>
-<h2 id="dasum">dasum</h2><p>实现数组内数据的累加<br><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">double</span> dasum(<span class="keyword">int</span> n, <span class="keyword">double</span>[] dx, <span class="keyword">int</span> _dx_offset, <span class="keyword">int</span> incx)</span><br><span class="line">参数解析：</span><br><span class="line">n ：表示总共取多少数据累加，取<span class="number">0</span>的话结果为<span class="number">0</span></span><br><span class="line">dx ：执行累加的数据集</span><br><span class="line">_dx_offset ：累加第一个数据在数组dx中的<span class="keyword">index</span></span><br><span class="line">incx :步长，每次累加的数据的间隔</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">d</span> =</span> blas.dasum(<span class="number">2</span>,<span class="type">Array</span>(<span class="number">1.0</span>,<span class="number">2.0</span>,<span class="number">3.0</span>,<span class="number">4.0</span>,<span class="number">5.0</span>),<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">println(d)</span><br><span class="line"><span class="comment">//8.0</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>以步长2从索引2开始取2个数据，也即（3.0,5.0），执行加法，结果即8.0。</p>
-</blockquote>
-<h2 id="scopy">scopy</h2><p>实现前一个数组复制到后一个数组中<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">scopy</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">float</span>[] sx, <span class="keyword">int</span> _sx_offset, <span class="keyword">int</span> incx, <span class="keyword">float</span>[] sy, <span class="keyword">int</span> _sy_offset, <span class="keyword">int</span> incy)</span></span>;</span><br><span class="line">参数解析：</span><br><span class="line">n ：需要复制的数据总数</span><br><span class="line">sx|sy ：sx为源数据，复制到sy</span><br><span class="line">_sx_offset|_sy_offset ：sx|sy数组数据复制|插入的起始的位置</span><br><span class="line">incx|incy :步长，取数据的间隔</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> <span class="type">Array</span>(<span class="number">1.0</span>f,<span class="number">2.0</span>f,<span class="number">3.0</span>f,<span class="number">4.0</span>f,<span class="number">5.0</span>f)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">b</span> =</span> <span class="type">Array</span>(<span class="number">1.0</span>f,<span class="number">2.0</span>f,<span class="number">3.0</span>f,<span class="number">4.0</span>f,<span class="number">5.0</span>f)</span><br><span class="line"></span><br><span class="line">blas.scopy(<span class="number">2</span>,a,<span class="number">0</span>,<span class="number">1</span>,b,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">println(a.mkString(<span class="string">","</span>))</span><br><span class="line">println(b.mkString(<span class="string">","</span>))</span><br><span class="line"><span class="comment">//1.0,2.0,3.0,4.0,5.0</span></span><br><span class="line"><span class="comment">//1.0,2.0,1.0,4.0,2.0</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>从索引0，以步长1从a取2个数字，也即（1.0,2.0），放到b的从索引2开始，步长2的位置，原数据是（3.0,5.0），替换原数据，即得结果。</p>
-</blockquote>
-<h2 id="sdot">sdot</h2><p>矢量的点积<br>$x = (a_1,a_2,…,a_n)$,$y = (b_1,b_2,…,b_n)$<br>$sdot(x,y) = a_1 \ast b_1+a_2 \ast b_2+\cdots+a_n \ast b_n$<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">float</span> <span class="title">sdot</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">float</span>[] sx, <span class="keyword">int</span> _sx_offset, <span class="keyword">int</span> incx, <span class="keyword">float</span>[] sy, <span class="keyword">int</span> _sy_offset, <span class="keyword">int</span> incy)</span></span>;</span><br><span class="line">参数解析：</span><br><span class="line">n ：需要计算的数据总数</span><br><span class="line">sx|sy ：sx|sy为数据源</span><br><span class="line">_sx_offset|_sy_offset ：sx|sy数组开始计算的位置</span><br><span class="line">incx|incy :步长，取数据的间隔</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> <span class="type">Array</span>(<span class="number">1.0</span>f,<span class="number">2.0</span>f,<span class="number">3.0</span>f,<span class="number">4.0</span>f,<span class="number">5.0</span>f)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">b</span> =</span> <span class="type">Array</span>(<span class="number">1.0</span>f,<span class="number">2.0</span>f,<span class="number">3.0</span>f,<span class="number">4.0</span>f,<span class="number">5.0</span>f)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">c</span> =</span> blas.sdot(<span class="number">2</span>,a,<span class="number">2</span>,<span class="number">1</span>,b,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">println(c)</span><br><span class="line"><span class="comment">//18.0</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>从索引2，以步长1从a取2个数字，也即（3.0,4.0），从索引1，以步长1从b取2个数字，也即（2.0,3.0），结果=3.0$\ast$2.0+4.0$\ast$3.0=18.0</p>
-</blockquote>
-<h2 id="sdsdot">sdsdot</h2><p>同sdot，不过多加一个额外的系数<br>$x = (a_1,a_2,…,a_n)$,$y = (b_1,b_2,…,b_n)$<br>$sdot(x,y) = a_1 \ast b_1+a_2 \ast b_2+\cdots+a_n \ast b_n+c$<br>其中c为系数<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="typename">float</span> sdsdot(<span class="typename">int</span> n, <span class="typename">float</span> sb, <span class="typename">float</span>[] sx, <span class="typename">int</span> _sx_offset, <span class="typename">int</span> incx, <span class="typename">float</span>[] sy, <span class="typename">int</span> _sy_offset, <span class="typename">int</span> incy);</span><br><span class="line">参数解析：</span><br><span class="line">n ：需要计算的数据总数</span><br><span class="line"><span class="string">sb :</span>额外需要加的系数</span><br><span class="line">sx|sy ：sx|sy为数据源</span><br><span class="line">_sx_offset|_sy_offset ：sx|sy数组开始计算的位置</span><br><span class="line">incx|<span class="string">incy :</span>步长，取数据的间隔</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> <span class="type">Array</span>(<span class="number">1.0</span>f,<span class="number">2.0</span>f,<span class="number">3.0</span>f,<span class="number">4.0</span>f,<span class="number">5.0</span>f)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">b</span> =</span> <span class="type">Array</span>(<span class="number">1.0</span>f,<span class="number">2.0</span>f,<span class="number">3.0</span>f,<span class="number">4.0</span>f,<span class="number">5.0</span>f)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">c</span> =</span> blas.sdsdot(<span class="number">2</span>,<span class="number">11.0</span>f,a,<span class="number">1</span>,<span class="number">2</span>,b,<span class="number">3</span>,<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">println(c)</span><br><span class="line"><span class="comment">//39.0</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>从索引1，以步长2从a取2个数字，也即（2.0,4.0），从索引3，以步长1从b取2个数字，也即（4.0,5.0），结果=2.0$\ast$4.0+4.0$\ast$5.0+11.0=39.0</p>
-</blockquote>
-<h2 id="snrm2">snrm2</h2><p>欧几里得范数<br>$x = (a_1,a_2,…,a_n)$<br>$snrm2(x) = \sqrt{a_1^2+a_2^2+\cdots+a_n^2}$<br>其中c为系数<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">float</span> <span class="title">snrm2</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">float</span>[] x, <span class="keyword">int</span> _x_offset, <span class="keyword">int</span> incx)</span></span>;</span><br><span class="line">参数解析：</span><br><span class="line">n ：需要计算的数据总数</span><br><span class="line">x ：x为数据源</span><br><span class="line">_x_offset ：x数组开始计算的位置</span><br><span class="line">incx :步长，取数据的间隔</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> <span class="type">Array</span>(<span class="number">1.0</span>f,<span class="number">2.0</span>f,<span class="number">3.0</span>f,<span class="number">4.0</span>f,<span class="number">5.0</span>f)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">c</span> =</span> blas.snrm2(<span class="number">2</span>,a,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">println(c)</span><br><span class="line"><span class="comment">//5.0</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>从索引2，以步长1从a取2个数字，也即（3.0,4.0），勾三股四弦五结果=5.0</p>
-</blockquote>
-<h2 id="isamax">isamax</h2><p>求最大值的位置<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">isamax</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">float</span>[] sx, <span class="keyword">int</span> _sx_offset, <span class="keyword">int</span> incx)</span></span>;</span><br><span class="line">参数解析：</span><br><span class="line">n ：需要计算的数据总数</span><br><span class="line">sx ：sx为数据源</span><br><span class="line">_x_offset ：sx数组开始计算的位置</span><br><span class="line">incx :步长，取数据的间隔</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">a</span> =</span> <span class="type">Array</span>(<span class="number">1.0</span>f,<span class="number">2.0</span>f,<span class="number">3.0</span>f,<span class="number">4.0</span>f,<span class="number">5.0</span>f)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">c</span> =</span> blas.isamax(<span class="number">4</span>,a,<span class="number">0</span>,<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">println(c)</span><br><span class="line"><span class="comment">//4</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>从索引0开始以步长1取出4个数，也即（1.0f,2.0f,3.0f,4.0f），计算最大值的位置（从1开始）</p>
-</blockquote>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1580,21 +1557,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

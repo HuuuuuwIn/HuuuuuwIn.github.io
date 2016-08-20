@@ -51,7 +51,7 @@
 安装
 解压文件
 1tar -zxvf ela">
-<meta property="og:updated_time" content="2016-08-20T06:39:39.795Z">
+<meta property="og:updated_time" content="2016-08-20T06:47:20.369Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ElasticSearch 安装与Spark集成">
 <meta name="twitter:description" content="安装篇下载1wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.3.5/elasticsearch-2.3.5.tar.gz
@@ -286,151 +286,151 @@
 <table>
 <thead>
 <tr>
-<th style="text-align:center">参数</th>
-<th style="text-align:center">解释</th>
-<th style="text-align:center">值</th>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">解释</th>
+<th style="text-align:left">值</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><strong>*cluster.name</strong></td>
-<td style="text-align:center">集群的名字，一样即为同一集群</td>
-<td style="text-align:center">es_test(默认值是elasticsearch)</td>
+<td style="text-align:left"><strong>*cluster.name</strong></td>
+<td style="text-align:left">集群的名字，一样即为同一集群</td>
+<td style="text-align:left">es_test(默认值是elasticsearch)</td>
 </tr>
 <tr>
-<td style="text-align:center"><strong>*node.name</strong></td>
-<td style="text-align:center">集群节点的名字</td>
-<td style="text-align:center">spark1(每个机器这个配置不一样)</td>
+<td style="text-align:left"><strong>*node.name</strong></td>
+<td style="text-align:left">集群节点的名字</td>
+<td style="text-align:left">spark1(每个机器这个配置不一样)</td>
 </tr>
 <tr>
-<td style="text-align:center"><strong>*network.host</strong></td>
-<td style="text-align:center">集群的对外服务IP</td>
-<td style="text-align:center">192.068.0.180（对外服务的主机IP）</td>
+<td style="text-align:left"><strong>*network.host</strong></td>
+<td style="text-align:left">集群的对外服务IP</td>
+<td style="text-align:left">192.068.0.180（对外服务的主机IP）</td>
 </tr>
 <tr>
-<td style="text-align:center"><strong>*http.port</strong></td>
-<td style="text-align:center">集群的对外服务端口</td>
-<td style="text-align:center">9200（默认就是9200）</td>
+<td style="text-align:left"><strong>*http.port</strong></td>
+<td style="text-align:left">集群的对外服务端口</td>
+<td style="text-align:left">9200（默认就是9200）</td>
 </tr>
 <tr>
-<td style="text-align:center">node.master</td>
-<td style="text-align:center">是否有资格被选为主节点</td>
-<td style="text-align:center">true</td>
+<td style="text-align:left">node.master</td>
+<td style="text-align:left">是否有资格被选为主节点</td>
+<td style="text-align:left">true</td>
 </tr>
 <tr>
-<td style="text-align:center">node.data</td>
-<td style="text-align:center">是否存储索引数据</td>
-<td style="text-align:center">true</td>
+<td style="text-align:left">node.data</td>
+<td style="text-align:left">是否存储索引数据</td>
+<td style="text-align:left">true</td>
 </tr>
 <tr>
-<td style="text-align:center">index.number_of_shards</td>
-<td style="text-align:center">索引分片个数</td>
-<td style="text-align:center">5（默认值）</td>
+<td style="text-align:left">index.number_of_shards</td>
+<td style="text-align:left">索引分片个数</td>
+<td style="text-align:left">5（默认值）</td>
 </tr>
 <tr>
-<td style="text-align:center">index.number_of_replicas</td>
-<td style="text-align:center">索引副本个数</td>
-<td style="text-align:center">1（默认值）</td>
+<td style="text-align:left">index.number_of_replicas</td>
+<td style="text-align:left">索引副本个数</td>
+<td style="text-align:left">1（默认值）</td>
 </tr>
 <tr>
-<td style="text-align:center">path.conf</td>
-<td style="text-align:center">配置文件的存储路径</td>
-<td style="text-align:center">默认是config文件夹</td>
+<td style="text-align:left">path.conf</td>
+<td style="text-align:left">配置文件的存储路径</td>
+<td style="text-align:left">默认是config文件夹</td>
 </tr>
 <tr>
-<td style="text-align:center">path.data</td>
-<td style="text-align:center">索引数据的存储路径</td>
-<td style="text-align:center">默认是es下data文件夹，可设置多路径，用逗号隔开</td>
+<td style="text-align:left">path.data</td>
+<td style="text-align:left">索引数据的存储路径</td>
+<td style="text-align:left">默认是es下data文件夹，可设置多路径，用逗号隔开</td>
 </tr>
 <tr>
-<td style="text-align:center">path.work</td>
-<td style="text-align:center">临时文件的存储路径</td>
-<td style="text-align:center">默认是es下的work文件夹</td>
+<td style="text-align:left">path.work</td>
+<td style="text-align:left">临时文件的存储路径</td>
+<td style="text-align:left">默认是es下的work文件夹</td>
 </tr>
 <tr>
-<td style="text-align:center">path.logs</td>
-<td style="text-align:center">日志文件的存储路径</td>
-<td style="text-align:center">默认是es下的logs文件夹</td>
+<td style="text-align:left">path.logs</td>
+<td style="text-align:left">日志文件的存储路径</td>
+<td style="text-align:left">默认是es下的logs文件夹</td>
 </tr>
 <tr>
-<td style="text-align:center">path.plugins</td>
-<td style="text-align:center">插件的存放路径</td>
-<td style="text-align:center">默认是es下的plugins文件夹</td>
+<td style="text-align:left">path.plugins</td>
+<td style="text-align:left">插件的存放路径</td>
+<td style="text-align:left">默认是es下的plugins文件夹</td>
 </tr>
 <tr>
-<td style="text-align:center">bootstrap.mlockall</td>
-<td style="text-align:center">设置为true来锁住内存</td>
-<td style="text-align:center">true</td>
+<td style="text-align:left">bootstrap.mlockall</td>
+<td style="text-align:left">设置为true来锁住内存</td>
+<td style="text-align:left">true</td>
 </tr>
 <tr>
-<td style="text-align:center">http.max_content_length</td>
-<td style="text-align:center">内容的最大容量</td>
-<td style="text-align:center">默认100MB</td>
+<td style="text-align:left">http.max_content_length</td>
+<td style="text-align:left">内容的最大容量</td>
+<td style="text-align:left">默认100MB</td>
 </tr>
 <tr>
-<td style="text-align:center">http.enabled</td>
-<td style="text-align:center">是否对外提供服务</td>
-<td style="text-align:center">true</td>
+<td style="text-align:left">http.enabled</td>
+<td style="text-align:left">是否对外提供服务</td>
+<td style="text-align:left">true</td>
 </tr>
 <tr>
-<td style="text-align:center">gateway.type</td>
-<td style="text-align:center">gateway的类型</td>
-<td style="text-align:center">默认为local即为本地文件系统，可以设置为本地文件系统，分布式文件系统，HDFS和amazon s3</td>
+<td style="text-align:left">gateway.type</td>
+<td style="text-align:left">gateway的类型</td>
+<td style="text-align:left">默认为local即为本地文件系统，可以设置为本地文件系统，分布式文件系统，HDFS和amazon s3</td>
 </tr>
 <tr>
-<td style="text-align:center">gateway.recover_after_nodes</td>
-<td style="text-align:center">设置集群中N个节点启动时进行数据恢复</td>
-<td style="text-align:center">默认为1</td>
+<td style="text-align:left">gateway.recover_after_nodes</td>
+<td style="text-align:left">设置集群中N个节点启动时进行数据恢复</td>
+<td style="text-align:left">默认为1</td>
 </tr>
 <tr>
-<td style="text-align:center">gateway.recover_after_time</td>
-<td style="text-align:center">设置初始化数据恢复进程的超时时间</td>
-<td style="text-align:center">5m（默认是5分钟）</td>
+<td style="text-align:left">gateway.recover_after_time</td>
+<td style="text-align:left">设置初始化数据恢复进程的超时时间</td>
+<td style="text-align:left">5m（默认是5分钟）</td>
 </tr>
 <tr>
-<td style="text-align:center">gateway.expected_nodes</td>
-<td style="text-align:center">设置这个集群中节点的数量</td>
-<td style="text-align:center">默认是2</td>
+<td style="text-align:left">gateway.expected_nodes</td>
+<td style="text-align:left">设置这个集群中节点的数量</td>
+<td style="text-align:left">默认是2</td>
 </tr>
 <tr>
-<td style="text-align:center">cluster.routing.allocation.node_initial_primaries_recoveries</td>
-<td style="text-align:center">初始化数据恢复时，并发恢复线程的个数</td>
-<td style="text-align:center">默认4</td>
+<td style="text-align:left">cluster.routing.allocation.node_initial_primaries_recoveries</td>
+<td style="text-align:left">初始化数据恢复时，并发恢复线程的个数</td>
+<td style="text-align:left">默认4</td>
 </tr>
 <tr>
-<td style="text-align:center">cluster.routing.allocation.node_concurrent_recoveries</td>
-<td style="text-align:center">添加删除节点或负载均衡时并发恢复线程的个数</td>
-<td style="text-align:center">默认4</td>
+<td style="text-align:left">cluster.routing.allocation.node_concurrent_recoveries</td>
+<td style="text-align:left">添加删除节点或负载均衡时并发恢复线程的个数</td>
+<td style="text-align:left">默认4</td>
 </tr>
 <tr>
-<td style="text-align:center">indices.recovery.max_size_per_sec</td>
-<td style="text-align:center">设置数据恢复时限制的带宽，如入100mb</td>
-<td style="text-align:center">默认0，无限制</td>
+<td style="text-align:left">indices.recovery.max_size_per_sec</td>
+<td style="text-align:left">设置数据恢复时限制的带宽，如入100mb</td>
+<td style="text-align:left">默认0，无限制</td>
 </tr>
 <tr>
-<td style="text-align:center">indices.recovery.concurrent_streams</td>
-<td style="text-align:center">设置这个参数来限制从其它分片恢复数据时最大同时打开并发流的个数</td>
-<td style="text-align:center">默认5</td>
+<td style="text-align:left">indices.recovery.concurrent_streams</td>
+<td style="text-align:left">设置这个参数来限制从其它分片恢复数据时最大同时打开并发流的个数</td>
+<td style="text-align:left">默认5</td>
 </tr>
 <tr>
-<td style="text-align:center">discovery.zen.minimum_master_nodes</td>
-<td style="text-align:center">设置这个参数来保证集群中的节点可以知道其它N个有master资格的节点</td>
-<td style="text-align:center">默认1</td>
+<td style="text-align:left">discovery.zen.minimum_master_nodes</td>
+<td style="text-align:left">设置这个参数来保证集群中的节点可以知道其它N个有master资格的节点</td>
+<td style="text-align:left">默认1</td>
 </tr>
 <tr>
-<td style="text-align:center">discovery.zen.ping.timeout</td>
-<td style="text-align:center">设置集群中自动发现其它节点时ping连接超时时间</td>
-<td style="text-align:center">3s(默认3秒)</td>
+<td style="text-align:left">discovery.zen.ping.timeout</td>
+<td style="text-align:left">设置集群中自动发现其它节点时ping连接超时时间</td>
+<td style="text-align:left">3s(默认3秒)</td>
 </tr>
 <tr>
-<td style="text-align:center">discovery.zen.ping.multicast.enabled</td>
-<td style="text-align:center">设置是否打开多播发现节点</td>
-<td style="text-align:center">默认true</td>
+<td style="text-align:left">discovery.zen.ping.multicast.enabled</td>
+<td style="text-align:left">设置是否打开多播发现节点</td>
+<td style="text-align:left">默认true</td>
 </tr>
 <tr>
-<td style="text-align:center">discovery.zen.ping.unicast.hosts</td>
-<td style="text-align:center">设置集群中master节点的初始列表，可以通过这些节点来自动发现新加入集群的节点</td>
-<td style="text-align:center">[“host1”, “host2:port”, “host3[portX-portY]”]</td>
+<td style="text-align:left">discovery.zen.ping.unicast.hosts</td>
+<td style="text-align:left">设置集群中master节点的初始列表，可以通过这些节点来自动发现新加入集群的节点</td>
+<td style="text-align:left">[“host1”, “host2:port”, “host3[portX-portY]”]</td>
 </tr>
 </tbody>
 </table>
@@ -446,7 +446,7 @@
 <h3 id="写入ES">写入ES</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import org<span class="class">.elasticsearch</span><span class="class">.spark</span>._</span><br><span class="line"></span><br><span class="line">val sc = new <span class="function"><span class="title">SparkContext</span><span class="params">(conf)</span></span>         </span><br><span class="line"></span><br><span class="line">val numbers = <span class="function"><span class="title">Map</span><span class="params">(<span class="string">"one"</span> -&gt; <span class="number">1</span>, <span class="string">"two"</span> -&gt; <span class="number">2</span>, <span class="string">"three"</span> -&gt; <span class="number">3</span>)</span></span></span><br><span class="line">val airports = <span class="function"><span class="title">Map</span><span class="params">(<span class="string">"arrival"</span> -&gt; <span class="string">"Otopeni"</span>, <span class="string">"SFO"</span> -&gt; <span class="string">"San Fran"</span>)</span></span></span><br><span class="line">val rdd = sc.<span class="function"><span class="title">makeRDD</span><span class="params">(Seq(numbers, airports)</span></span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//方法一</span></span><br><span class="line"><span class="comment">//saveToEs方法的参数即为：index/type</span></span><br><span class="line">rdd.<span class="function"><span class="title">saveToEs</span><span class="params">(<span class="string">"spark/docs"</span>)</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//方法二</span></span><br><span class="line">import org<span class="class">.elasticsearch</span><span class="class">.spark</span><span class="class">.rdd</span><span class="class">.EsSpark</span></span><br><span class="line">EsSpark.<span class="function"><span class="title">saveToEs</span><span class="params">(rdd, <span class="string">"spark/docs"</span>)</span></span></span><br></pre></td></tr></table></figure>
 <h3 id="读取ES">读取ES</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import org<span class="class">.apache</span><span class="class">.spark</span><span class="class">.SparkContext</span></span><br><span class="line">import org<span class="class">.apache</span><span class="class">.spark</span><span class="class">.SparkContext</span>._</span><br><span class="line"></span><br><span class="line">import org<span class="class">.elasticsearch</span><span class="class">.spark</span>._ </span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">val conf = ...</span><br><span class="line">val sc = new <span class="function"><span class="title">SparkContext</span><span class="params">(conf)</span></span></span><br><span class="line"></span><br><span class="line">val RDD = sc.<span class="function"><span class="title">esRDD</span><span class="params">(<span class="string">"radio/artists"</span>)</span></span></span><br><span class="line"><span class="comment">//带参数的</span></span><br><span class="line">val rdd2 = sc.<span class="function"><span class="title">esRDD</span><span class="params">(<span class="string">"radio/artists"</span>, <span class="string">"?q=me*"</span>)</span></span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>其他的使用方式请参照官网介绍。</p>
+<p>其他的使用方式请参照官网介绍。<br>更多文档可以参考<a href="http://es.xiaoleilu.com/" target="_blank" rel="external">这里</a></p>
 </blockquote>
 </span>
       
@@ -466,6 +466,8 @@
       
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/20/Redis-安装与Spark集成/" rel="prev">Redis 安装与Spark集成</a>
             
           </div>
 
@@ -541,21 +543,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

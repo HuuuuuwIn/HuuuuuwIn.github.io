@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="spark,推荐系统," />
+  <meta name="keywords" content="hbase,spark," />
 
 
 
@@ -37,22 +37,16 @@
   <link rel="shorticon icon" type="image/x-icon" href="/images/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="最近使用spark ALS做推荐，故写一篇文章记录所得。
-
-算法介绍spark实现的推荐算法是基于矩阵分解的ALS-WR(alternating-least-squares with weighted-λ-regularization)的协同过滤算法。矩阵r表示用户对物品的评分矩阵，矩阵u,m表示用户和物品的特征矩阵。$$r\approx u \cdot m$$损失函数为$$f(U,M)=\sum">
+<meta name="description" content="写HBase方式一123456789101112131415161718192021222324val conf = new SparkConf().setAppName(this.getClass.getSimpleName)val sc = new SparkContext(conf)val data = ... //要写HBase的RDDval hConf = HBaseConfigurat">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spark ALS学习">
-<meta property="og:url" content="http://3iter.com/2015/11/19/spark-ALS学习/index.html">
+<meta property="og:title" content="spark读写Hbase">
+<meta property="og:url" content="http://3iter.com/2016/08/20/spark读写Hbase/index.html">
 <meta property="og:site_name" content="Hoocoln个人博客">
-<meta property="og:description" content="最近使用spark ALS做推荐，故写一篇文章记录所得。
-
-算法介绍spark实现的推荐算法是基于矩阵分解的ALS-WR(alternating-least-squares with weighted-λ-regularization)的协同过滤算法。矩阵r表示用户对物品的评分矩阵，矩阵u,m表示用户和物品的特征矩阵。$$r\approx u \cdot m$$损失函数为$$f(U,M)=\sum">
-<meta property="og:updated_time" content="2015-11-19T09:27:53.478Z">
+<meta property="og:description" content="写HBase方式一123456789101112131415161718192021222324val conf = new SparkConf().setAppName(this.getClass.getSimpleName)val sc = new SparkContext(conf)val data = ... //要写HBase的RDDval hConf = HBaseConfigurat">
+<meta property="og:updated_time" content="2016-08-20T07:46:55.095Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spark ALS学习">
-<meta name="twitter:description" content="最近使用spark ALS做推荐，故写一篇文章记录所得。
-
-算法介绍spark实现的推荐算法是基于矩阵分解的ALS-WR(alternating-least-squares with weighted-λ-regularization)的协同过滤算法。矩阵r表示用户对物品的评分矩阵，矩阵u,m表示用户和物品的特征矩阵。$$r\approx u \cdot m$$损失函数为$$f(U,M)=\sum">
+<meta name="twitter:title" content="spark读写Hbase">
+<meta name="twitter:description" content="写HBase方式一123456789101112131415161718192021222324val conf = new SparkConf().setAppName(this.getClass.getSimpleName)val sc = new SparkContext(conf)val data = ... //要写HBase的RDDval hConf = HBaseConfigurat">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -62,7 +56,7 @@
   };
 </script>
 
-  <title> spark ALS学习 | Hoocoln个人博客 </title>
+  <title> spark读写Hbase | Hoocoln个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -200,7 +194,7 @@
           
           
             
-              spark ALS学习
+              spark读写Hbase
             
           
         </h1>
@@ -209,8 +203,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-11-19T17:20:15+08:00" content="2015-11-19">
-            2015-11-19
+          <time itemprop="dateCreated" datetime="2016-08-20T15:46:23+08:00" content="2016-08-20">
+            2016-08-20
           </time>
         </span>
 
@@ -231,8 +225,8 @@
 
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/spark/推荐系统/" itemprop="url" rel="index">
-                  <span itemprop="name">推荐系统</span>
+                <a href="/categories/spark/hbase/" itemprop="url" rel="index">
+                  <span itemprop="name">hbase</span>
                 </a>
               </span>
 
@@ -247,8 +241,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/11/19/spark-ALS学习/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/19/spark-ALS学习/" itemprop="commentsCount"></span>
+              <a href="/2016/08/20/spark读写Hbase/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/20/spark读写Hbase/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -262,17 +256,9 @@
       
 
       
-        <span itemprop="articleBody"><blockquote>
-<p>最近使用spark ALS做推荐，故写一篇文章记录所得。</p>
-</blockquote>
-<h2 id="算法介绍">算法介绍</h2><p>spark实现的推荐算法是基于矩阵分解的ALS-WR(alternating-least-squares with weighted-λ-regularization)的协同过滤算法。<br>矩阵r表示用户对物品的评分矩阵，矩阵u,m表示用户和物品的特征矩阵。<br>$$r\approx u \cdot m$$<br>损失函数为<br>$$f(U,M)=\sum(r_{ij}-u_i^T m_j)^2+\lambda(\sum n_{u_i} ||u_i||^2+\sum n_{m_j}||m_j||^2)$$<br>$n_{u_i}$和$n_{m_i}$分别表示user评分数和电影数，$I_i$表示user i评分过的物品，$I_j$表示评论过物品j的所有用户。<br>损失函数前一部分为真实值与分解矩阵计算值得误差平方和，后一部分为正则范数，防止过拟合，目的即变成求f函数的最小值。<br>每次迭代，<br>固定M，逐个更新每个user的特征u(对u求偏导，令偏导为0求解)。<br>固定U，逐个更新每个item的特征m(对m求偏导，令偏导为0求解)。<br>给定的U的一列，称为$u_i$，由解正则化线性最小平方问题得到，这个问题由user i评分记录，以及i评分过的电影的特征向量组成</p>
-<blockquote>
-<p>$\frac 1 2\frac{\partial f}{\partial u_{ki}}=0,\forall{i,k}\tag 1$<br>$\Rightarrow \sum_{j\in I_i}(u_i^Tm_j-r_{ij})m_{kj}+\lambda n_{ui}u_{ki}=0,\forall{i,k}\tag 2$<br>$\Rightarrow \sum_{j\in I_i}m_{kj}m_j^Tu_i+\lambda n_{ui}u_{ki}=\sum_{j\in I_i}m_{kj}r_{ij},\forall{i,k}\tag 3$<br>$\Rightarrow (M_{I_i}M_{I_i}^T+\lambda n_{u_i}E)u_i=M_{I_i}R^T(i,I_i),\forall i \tag 4$<br>$\Rightarrow u_i=A_i^{-1}V_i,\forall i\tag 5$</p>
-</blockquote>
-<p>其中$A_i=M_{I_i}M_{I_i}^T+\lambda n_{u_i}E=M_{I_i}R^T(i,I_i)$E是单位矩阵,$M_{I_i}$表示M的子矩阵，它的列是user i评分过的物品，$R(i,I_i)$是以评分物品为列的矩阵R的第i行向量。<br>同理$m_j=A_j^{-1}V_j$</p>
-<h2 id="代码实现">代码实现</h2><p>本文从spark中的LocalALS分析（SparkALS与其原理一样，只不过用RDD实现并行计算处理）<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ITERATIONS 为迭代次数</span></span><br><span class="line"><span class="keyword">for</span> (iter &lt;- <span class="number">1</span> to <span class="type">ITERATIONS</span>) &#123;</span><br><span class="line">  println(s<span class="string">"Iteration $iter:"</span>)</span><br><span class="line">  <span class="comment">//固定用户,逐个更新所有物品的特征</span></span><br><span class="line">  ms = (<span class="number">0</span> until <span class="type">M</span>).map(i =&gt; updateMovie(i, ms(i), us, <span class="type">R</span>)).toArray</span><br><span class="line">  <span class="comment">//固定物品,逐个更新所有用户的特征</span></span><br><span class="line">  us = (<span class="number">0</span> until <span class="type">U</span>).map(j =&gt; updateUser(j, us(j), ms, <span class="type">R</span>)).toArray</span><br><span class="line">  <span class="comment">//计算均方根误差</span></span><br><span class="line">  println(<span class="string">"RMSE = "</span> + rmse(<span class="type">R</span>, ms, us))</span><br><span class="line">  println()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>迭代更新的方法为updateMovie和updateUser，实现原理一致，取其一介绍<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">updateUser</span>(</span>j: <span class="type">Int</span>, u: <span class="type">RealVector</span>, ms: <span class="type">Array</span>[<span class="type">RealVector</span>], <span class="type">R</span>:<span class="type">RealMatrix</span>) : <span class="type">RealVector</span> = &#123;</span><br><span class="line">    <span class="comment">//F为隐性因子的个数，M为电影的总数，U为用户的总数</span></span><br><span class="line">    <span class="keyword">var</span> <span class="type">XtX</span>: <span class="type">RealMatrix</span> = <span class="keyword">new</span> <span class="type">Array2DRowRealMatrix</span>(<span class="type">F</span>, <span class="type">F</span>)</span><br><span class="line">    <span class="keyword">var</span> <span class="type">Xty</span>: <span class="type">RealVector</span> = <span class="keyword">new</span> <span class="type">ArrayRealVector</span>(<span class="type">F</span>)</span><br><span class="line">    <span class="comment">// For each movie that the user rated</span></span><br><span class="line">    <span class="comment">// 迭代所有电影，应取该用户评论过的电影集</span></span><br><span class="line">    <span class="keyword">for</span> (i &lt;- <span class="number">0</span> until <span class="type">M</span>) &#123;</span><br><span class="line">      <span class="function"><span class="keyword">val</span> <span class="title">m</span> =</span> ms(i)<span class="comment">//取出电影的特征向量</span></span><br><span class="line">      <span class="comment">// Add m * m^t to XtX</span></span><br><span class="line">      <span class="comment">// outProduct即为矩阵叉乘另一个矩阵的转置矩阵</span></span><br><span class="line">      <span class="comment">// add方法会把两个矩阵每个对应位置相加</span></span><br><span class="line">      <span class="type">XtX</span> = <span class="type">XtX</span>.add(m.outerProduct(m))</span><br><span class="line">      <span class="comment">// Add m * rating to Xty</span></span><br><span class="line">      <span class="comment">// mapMultiply方法会用将原向量中的每个值都乘以入参（此处即用户j对电影i的评分）</span></span><br><span class="line">      <span class="comment">// add方法会把每个向量的对应位置相加</span></span><br><span class="line">      <span class="type">Xty</span> = <span class="type">Xty</span>.add(m.mapMultiply(<span class="type">R</span>.getEntry(i, j)))</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Add regularization coefficients to diagonal terms</span></span><br><span class="line">    <span class="keyword">for</span> (d &lt;- <span class="number">0</span> until <span class="type">F</span>) &#123;</span><br><span class="line">      <span class="comment">// addToEntry方法将2维数组中当前参数1行和参数2列确定的对应元素加上参数3形成新值</span></span><br><span class="line">      <span class="type">XtX</span>.addToEntry(d, d, <span class="type">LAMBDA</span> * <span class="type">M</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Solve it with Cholesky</span></span><br><span class="line">    <span class="comment">// 使用乔里斯基分解求解，mllib中还提供非负最小二乘分解(NNLS)</span></span><br><span class="line">    <span class="keyword">new</span> <span class="type">CholeskyDecomposition</span>(<span class="type">XtX</span>).getSolver.solve(<span class="type">Xty</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>结合公式4,$(M_{I_i}M_{I_i}^T+\lambda n_{u_i}E)u_i=M_{I_i}R^T(i,I_i)$,其中XtX即为公式中$u_i$前的计算结果，Xty为等号后的计算结果。</p>
+        <span itemprop="articleBody"><h2 id="写HBase">写HBase</h2><h3 id="方式一">方式一</h3><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">val conf = <span class="built_in">new</span> SparkConf().setAppName(this.getClass.getSimpleName)</span><br><span class="line">val sc = <span class="built_in">new</span> SparkContext(conf)</span><br><span class="line"></span><br><span class="line">val data = ...<span class="comment"> //要写HBase的RDD</span></span><br><span class="line">val hConf = HBaseConfiguration.<span class="built_in">create</span>()</span><br><span class="line">hConf.<span class="built_in">set</span>(<span class="string">"hbase.zookeeper.quorum"</span>,<span class="string">"10.10.40.112"</span>)</span><br><span class="line">hConf.<span class="built_in">set</span>(<span class="string">"hbase.zookeeper.property.clientPort"</span>,<span class="string">"2181"</span>)<span class="comment"></span><br><span class="line">//hConf.set("hbase.rootdir","hdfs://10.10.40.111:9000/hbase113")</span><span class="comment"></span><br><span class="line">//hConf.setBoolean("hbase.cluster.distributed", true)</span><span class="comment"></span><br><span class="line">//hConf.setInt("hbase.client.scanner.caching", 2000)</span><span class="comment"></span><br><span class="line">//hConf.set("zookeeper.znode.parent","/hbase")</span></span><br><span class="line">hConf.<span class="built_in">set</span>(<span class="string">"hbase.defaults.for.version.skip"</span>,<span class="string">"true"</span>)</span><br><span class="line">hConf.<span class="built_in">set</span>(TableOutputFormat.OUTPUT_TABLE,<span class="string">"user_m_info"</span><span class="comment">)//要写入的表名</span></span><br><span class="line">val job = <span class="built_in">new</span> Job(hConf)</span><br><span class="line">job.setOutputKeyClass(classOf[ImmutableBytesWritable])</span><br><span class="line">job.setOutputValueClass(classOf[Result])</span><br><span class="line">job.setOutputFormatClass(classOf[TableOutputFormat[ImmutableBytesWritable]])</span><br><span class="line"></span><br><span class="line">dData..map&#123;</span><br><span class="line">  <span class="keyword">case</span> (<span class="keyword">mid</span>,tag,<span class="built_in">value</span>) =&gt;</span><br><span class="line">    val <span class="built_in">put</span> = <span class="built_in">new</span> Put(Bytes.toBytes(<span class="keyword">mid</span>))</span><br><span class="line">    <span class="built_in">put</span>.<span class="built_in">add</span>(<span class="string">"m"</span>.getBytes,tag.getBytes,Bytes.toBytes(<span class="built_in">value</span>)<span class="comment">)//列族为m</span></span><br><span class="line">    (<span class="built_in">new</span> ImmutableBytesWritable(),<span class="built_in">put</span>)</span><br><span class="line">&#125;.saveAsNewAPIHadoopDataset(job.getConfiguration)</span><br></pre></td></tr></table></figure>
+<h3 id="方式二">方式二</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">conf</span> =</span> <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="keyword">this</span>.getClass.getSimpleName)</span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">sc</span> =</span> <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">val</span> <span class="title">data</span> =</span> ... <span class="comment">//要写HBase的RDD</span></span><br><span class="line">data.foreachPartition&#123;x=&gt;</span><br><span class="line">    <span class="function"><span class="keyword">val</span> <span class="title">hConf</span> =</span> <span class="type">HBaseConfiguration</span>.create()</span><br><span class="line">    hConf.set(<span class="string">"hbase.zookeeper.quorum"</span>,<span class="string">"192.168.0.180"</span>)</span><br><span class="line">    hConf.set(<span class="string">"hbase.zookeeper.property.clientPort"</span>,<span class="string">"2181"</span>)</span><br><span class="line">    hConf.set(<span class="string">"hbase.defaults.for.version.skip"</span>,<span class="string">"true"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">val</span> <span class="title">table</span> =</span> <span class="keyword">new</span> <span class="type">HTable</span>(hConf,<span class="type">TableName</span>.valueOf(<span class="string">"user_m_info"</span>))<span class="comment">//表名</span></span><br><span class="line">    table.setAutoFlush(<span class="literal">false</span>,<span class="literal">false</span>)</span><br><span class="line">    table.setWriteBufferSize(<span class="number">3</span>*<span class="number">1024</span>*<span class="number">1024</span>)</span><br><span class="line">    x.foreach&#123;y=&gt;</span><br><span class="line">        <span class="function"><span class="keyword">val</span> <span class="title">put</span> =</span> <span class="keyword">new</span> <span class="type">Put</span>(<span class="type">Bytes</span>.toBytes(y._1._1))</span><br><span class="line">        put.addColumn(<span class="string">"m"</span>.getBytes,(y._1._2.toString).getBytes,<span class="type">Bytes</span>.toBytes(y._2.toString))</span><br><span class="line">        table.put(put)</span><br><span class="line">    &#125;</span><br><span class="line">    table.flushCommits()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="读HBase">读HBase</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">val conf = new <span class="function"><span class="title">SparkConf</span><span class="params">()</span></span>.<span class="function"><span class="title">setAppName</span><span class="params">(this.getClass.getSimpleName)</span></span></span><br><span class="line">val sc = new <span class="function"><span class="title">SparkContext</span><span class="params">(conf)</span></span></span><br><span class="line"></span><br><span class="line">val hConf = HBaseConfiguration.<span class="function"><span class="title">create</span><span class="params">()</span></span></span><br><span class="line">hConf.<span class="function"><span class="title">set</span><span class="params">(<span class="string">"hbase.zookeeper.quorum"</span>,<span class="string">"10.10.40.112"</span>)</span></span></span><br><span class="line">hConf.<span class="function"><span class="title">set</span><span class="params">(<span class="string">"hbase.zookeeper.property.clientPort"</span>,<span class="string">"2181"</span>)</span></span></span><br><span class="line"><span class="comment">//hConf.set("hbase.rootdir","hdfs://10.10.40.111:9000/hbase113")</span></span><br><span class="line"><span class="comment">//hConf.setBoolean("hbase.cluster.distributed", true)</span></span><br><span class="line"><span class="comment">//hConf.setInt("hbase.client.scanner.caching", 2000)</span></span><br><span class="line"><span class="comment">//hConf.set("zookeeper.znode.parent","/hbase")</span></span><br><span class="line">hConf.<span class="function"><span class="title">set</span><span class="params">(<span class="string">"hbase.defaults.for.version.skip"</span>,<span class="string">"true"</span>)</span></span></span><br><span class="line">hConf.<span class="function"><span class="title">set</span><span class="params">(TableInputFormat.INPUT_TABLE,<span class="string">"user_m_info"</span>)</span></span></span><br><span class="line"></span><br><span class="line">val data = sc.<span class="function"><span class="title">newAPIHadoopRDD</span><span class="params">(hConf,classOf[TableInputFormat],classOf[ImmutableBytesWritable],classOf[Result])</span></span></span><br><span class="line"></span><br><span class="line">data.<span class="function"><span class="title">foreach</span><span class="params">(println)</span></span></span><br></pre></td></tr></table></figure>
 </span>
       
     </div>
@@ -281,9 +267,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/spark/" rel="tag">#spark</a>
+            <a href="/tags/hbase/" rel="tag">#hbase</a>
           
-            <a href="/tags/推荐系统/" rel="tag">#推荐系统</a>
+            <a href="/tags/spark/" rel="tag">#spark</a>
           
         </div>
       
@@ -292,13 +278,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/11/19/spark-SGD学习/" rel="prev">spark SGD学习</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/10/22/BLAS方法简介（一）/" rel="next">BLAS方法简介（一）</a>
+              <a href="/2016/08/20/Redis-安装与Spark集成/" rel="next">Redis 安装与Spark集成</a>
             
           </div>
         </div>
@@ -327,8 +311,8 @@
         
           <div class="comments" id="comments">
             
-              <div class="ds-thread" data-thread-key="2015/11/19/spark-ALS学习/"
-                   data-title="spark ALS学习" data-url="http://3iter.com/2015/11/19/spark-ALS学习/">
+              <div class="ds-thread" data-thread-key="2016/08/20/spark读写Hbase/"
+                   data-title="spark读写Hbase" data-url="http://3iter.com/2016/08/20/spark读写Hbase/">
               </div>
             
           </div>
@@ -410,7 +394,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法介绍"><span class="nav-number">1.</span> <span class="nav-text">算法介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">2.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写HBase"><span class="nav-number">1.</span> <span class="nav-text">写HBase</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方式一"><span class="nav-number">1.1.</span> <span class="nav-text">方式一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方式二"><span class="nav-number">1.2.</span> <span class="nav-text">方式二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读HBase"><span class="nav-number">2.</span> <span class="nav-text">读HBase</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
