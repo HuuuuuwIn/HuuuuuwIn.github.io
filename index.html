@@ -361,7 +361,7 @@
           <span itemprop="articleBody"><h2 id="安装篇">安装篇</h2><h3 id="下载">下载</h3><p>去<a href="http://redis.io/download" target="_blank" rel="external">官网</a>查看你要的版本下载(本文使用3.2.3)<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget <span class="string">http:</span><span class="comment">//download.redis.io/releases/redis-3.2.3.tar.gz</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="解压安装">解压安装</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">tar</span> <span class="tag">xvzf</span> <span class="tag">redis-3</span><span class="class">.2</span><span class="class">.3</span><span class="class">.tar</span><span class="class">.gz</span></span><br><span class="line"><span class="tag">cd</span> <span class="tag">redis-3</span><span class="class">.2</span><span class="class">.3</span></span><br><span class="line"><span class="tag">make</span></span><br></pre></td></tr></table></figure>
 <p>make执行完后会出现src目录，进入src可以看见有redis-server、redis-cli等命令。</p>
-<h3 id="启动与测试">启动与测试</h3><p>执行redis-server即可看到redis启动页面。<br>另开一个命令行界面执行redis-cli即可进去测试。</p>
+<h3 id="启动与测试">启动与测试</h3><p>执行redis-server即可看到redis启动页面。<br>另开一个命令行界面执行redis-cli即可进去测试。-h 参数指定IP -p 参数可指定端口。</p>
 <h3 id="设置服务">设置服务</h3><p>如果想以服务的方式去启动redis，可以按照以下步骤来。</p>
 <ul>
 <li><p>首先复制redis子目录utils中的redis_init_script到/etc/init.d下，同时易名为redis。</p>
