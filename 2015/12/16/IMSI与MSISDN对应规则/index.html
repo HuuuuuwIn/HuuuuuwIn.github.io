@@ -51,7 +51,7 @@ MSISDN(Mobile Subscriber International ISDN/PSTN number)：MSISDN=CC（国家码
 简介
 IMSI(International Mobile Subscriber Identity)：IMSI=MCC（移动国家码）+MNC（移动网号）+MSIN（ PLMN中唯一识别MS）
 MSISDN(Mobile Subscriber International ISDN/PSTN number)：MSISDN=CC（国家码）+">
-<meta property="og:updated_time" content="2015-12-16T10:19:55.474Z">
+<meta property="og:updated_time" content="2016-08-20T06:38:22.580Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IMSI与MSISDN对应规则">
 <meta name="twitter:description" content="正好项目中有用到imsi与msisdn对应规则，在此记录一下。
@@ -261,8 +261,38 @@ MSISDN(Mobile Subscriber International ISDN/PSTN number)：MSISDN=CC（国家码
 </blockquote>
 <h2 id="简介">简介</h2><ul>
 <li>IMSI(International Mobile Subscriber Identity)：<br>IMSI=MCC（移动国家码）+MNC（移动网号）+MSIN（ PLMN中唯一识别MS）</li>
-<li>MSISDN(Mobile Subscriber International ISDN/PSTN number)：<br>MSISDN=CC（国家码）+NDC（国内接入号）+SN（用户号码）<h2 id="IMSI">IMSI</h2>IMSI是区别移动用户的标志，储存在SIM卡中，可用于区别移动用户的有效信息。其总长度不超过15位，同样使用0～9的数字。<h3 id="MCC">MCC</h3>MCC是移动用户所属国家代号，占3位数字，中国的MCC规定为460。<h3 id="MNC">MNC</h3>MNC为移动网络码，共2-3位，中国国内当前如为下表所示：<br>|运营商|MNC号码|<br>|:-:|:-|<br>|移动|00, 02, 07|<br>|联通|01, 06|<br>|电信|03, 05|<br>|电信4G|11|<br>|铁通|20|</li>
+<li>MSISDN(Mobile Subscriber International ISDN/PSTN number)：<br>MSISDN=CC（国家码）+NDC（国内接入号）+SN（用户号码）<h2 id="IMSI">IMSI</h2>IMSI是区别移动用户的标志，储存在SIM卡中，可用于区别移动用户的有效信息。其总长度不超过15位，同样使用0～9的数字。<h3 id="MCC">MCC</h3>MCC是移动用户所属国家代号，占3位数字，中国的MCC规定为460。<h3 id="MNC">MNC</h3>MNC为移动网络码，共2-3位，中国国内当前如为下表所示：</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运营商</th>
+<th style="text-align:left">MNC号码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">移动</td>
+<td style="text-align:left">00, 02, 07</td>
+</tr>
+<tr>
+<td style="text-align:center">联通</td>
+<td style="text-align:left">01, 06</td>
+</tr>
+<tr>
+<td style="text-align:center">电信</td>
+<td style="text-align:left">03, 05</td>
+</tr>
+<tr>
+<td style="text-align:center">电信4G</td>
+<td style="text-align:left">11</td>
+</tr>
+<tr>
+<td style="text-align:center">铁通</td>
+<td style="text-align:left">20</td>
+</tr>
+</tbody>
+</table>
 <h3 id="MSIN">MSIN</h3><p>MSIN为移动用户识别号码，10-11位，其结构如下：<br>$$CC+M0M1M2M3+ABCD$$<br>CC由不同运营商分配，其中的M0M1M2M3和MDN号码中的H0H1H2H3可存在对应关系，ABCD四位为自由分配。</p>
 <h2 id="MSISDN">MSISDN</h2><p>其实MSISDN就是我们平时所说的手机号码。<br>$$MSISDN=CC+NDC+SN$$</p>
 <blockquote>
@@ -369,21 +399,21 @@ MSISDN(Mobile Subscriber International ISDN/PSTN number)：MSISDN=CC（国家码
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

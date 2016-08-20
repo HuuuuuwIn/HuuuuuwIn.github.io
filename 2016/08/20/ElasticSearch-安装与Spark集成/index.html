@@ -1,0 +1,883 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+
+
+  <meta name="keywords" content="elasticsearch,spark," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/images/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="安装篇下载1wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.3.5/elasticsearch-2.3.5.tar.gz
+本文使用当前最新版本（2.3.5）,具体其他版本信息可以去官网查看。
+安装
+解压文件
+1tar -zxvf ela">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ElasticSearch 安装与Spark集成">
+<meta property="og:url" content="http://3iter.com/2016/08/20/ElasticSearch-安装与Spark集成/index.html">
+<meta property="og:site_name" content="Hoocoln个人博客">
+<meta property="og:description" content="安装篇下载1wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.3.5/elasticsearch-2.3.5.tar.gz
+本文使用当前最新版本（2.3.5）,具体其他版本信息可以去官网查看。
+安装
+解压文件
+1tar -zxvf ela">
+<meta property="og:updated_time" content="2016-08-20T06:39:39.795Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ElasticSearch 安装与Spark集成">
+<meta name="twitter:description" content="安装篇下载1wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.3.5/elasticsearch-2.3.5.tar.gz
+本文使用当前最新版本（2.3.5）,具体其他版本信息可以去官网查看。
+安装
+解压文件
+1tar -zxvf ela">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> ElasticSearch 安装与Spark集成 | Hoocoln个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?eb0ae0ce3f923010eaaef69d09d15eb2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">Hoocoln个人博客</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'qHLfpz1f6fG1U_P-rhR5','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              ElasticSearch 安装与Spark集成
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-08-20T14:31:22+08:00" content="2016-08-20">
+            2016-08-20
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/spark/" itemprop="url" rel="index">
+                  <span itemprop="name">spark</span>
+                </a>
+              </span>
+
+              
+              
+                ， 
+              
+
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/spark/elasticsearch/" itemprop="url" rel="index">
+                  <span itemprop="name">elasticsearch</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2016/08/20/ElasticSearch-安装与Spark集成/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/20/ElasticSearch-安装与Spark集成/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="安装篇">安装篇</h2><h3 id="下载">下载</h3><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget <span class="symbol">https:</span>/<span class="regexp">/download.elastic.co/elasticsearch</span><span class="regexp">/release/org</span><span class="regexp">/elasticsearch/distribution</span><span class="regexp">/tar/elasticsearch</span><span class="regexp">/2.3.5/elasticsearch</span>-<span class="number">2.3</span>.<span class="number">5</span>.tar.gz</span><br></pre></td></tr></table></figure>
+<p>本文使用当前最新版本（2.3.5）,具体其他版本信息可以去<a href="https://www.elastic.co/downloads/elasticsearch" target="_blank" rel="external">官网</a>查看。</p>
+<h3 id="安装">安装</h3><ul>
+<li><p>解压文件</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">tar</span> <span class="tag">-zxvf</span> <span class="tag">elasticsearch-2</span><span class="class">.3</span><span class="class">.5</span><span class="class">.tar</span><span class="class">.gz</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行启动</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># 以非root用户执行</span></span><br><span class="line">./bin/elasticsearch</span><br><span class="line"><span class="preprocessor">#如果后台启动就加上 -d</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET <span class="string">http:</span><span class="comment">//localhost:9200/</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="配置">配置</h3><p>修改配置文件（地址为config/elasticsearch.yml）<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">vi</span> config/elasticsearch.yml</span><br></pre></td></tr></table></figure></p>
+<p>主要修改以下参数：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">解释</th>
+<th style="text-align:center">值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>*cluster.name</strong></td>
+<td style="text-align:center">集群的名字，一样即为同一集群</td>
+<td style="text-align:center">es_test(默认值是elasticsearch)</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>*node.name</strong></td>
+<td style="text-align:center">集群节点的名字</td>
+<td style="text-align:center">spark1(每个机器这个配置不一样)</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>*network.host</strong></td>
+<td style="text-align:center">集群的对外服务IP</td>
+<td style="text-align:center">192.068.0.180（对外服务的主机IP）</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>*http.port</strong></td>
+<td style="text-align:center">集群的对外服务端口</td>
+<td style="text-align:center">9200（默认就是9200）</td>
+</tr>
+<tr>
+<td style="text-align:center">node.master</td>
+<td style="text-align:center">是否有资格被选为主节点</td>
+<td style="text-align:center">true</td>
+</tr>
+<tr>
+<td style="text-align:center">node.data</td>
+<td style="text-align:center">是否存储索引数据</td>
+<td style="text-align:center">true</td>
+</tr>
+<tr>
+<td style="text-align:center">index.number_of_shards</td>
+<td style="text-align:center">索引分片个数</td>
+<td style="text-align:center">5（默认值）</td>
+</tr>
+<tr>
+<td style="text-align:center">index.number_of_replicas</td>
+<td style="text-align:center">索引副本个数</td>
+<td style="text-align:center">1（默认值）</td>
+</tr>
+<tr>
+<td style="text-align:center">path.conf</td>
+<td style="text-align:center">配置文件的存储路径</td>
+<td style="text-align:center">默认是config文件夹</td>
+</tr>
+<tr>
+<td style="text-align:center">path.data</td>
+<td style="text-align:center">索引数据的存储路径</td>
+<td style="text-align:center">默认是es下data文件夹，可设置多路径，用逗号隔开</td>
+</tr>
+<tr>
+<td style="text-align:center">path.work</td>
+<td style="text-align:center">临时文件的存储路径</td>
+<td style="text-align:center">默认是es下的work文件夹</td>
+</tr>
+<tr>
+<td style="text-align:center">path.logs</td>
+<td style="text-align:center">日志文件的存储路径</td>
+<td style="text-align:center">默认是es下的logs文件夹</td>
+</tr>
+<tr>
+<td style="text-align:center">path.plugins</td>
+<td style="text-align:center">插件的存放路径</td>
+<td style="text-align:center">默认是es下的plugins文件夹</td>
+</tr>
+<tr>
+<td style="text-align:center">bootstrap.mlockall</td>
+<td style="text-align:center">设置为true来锁住内存</td>
+<td style="text-align:center">true</td>
+</tr>
+<tr>
+<td style="text-align:center">http.max_content_length</td>
+<td style="text-align:center">内容的最大容量</td>
+<td style="text-align:center">默认100MB</td>
+</tr>
+<tr>
+<td style="text-align:center">http.enabled</td>
+<td style="text-align:center">是否对外提供服务</td>
+<td style="text-align:center">true</td>
+</tr>
+<tr>
+<td style="text-align:center">gateway.type</td>
+<td style="text-align:center">gateway的类型</td>
+<td style="text-align:center">默认为local即为本地文件系统，可以设置为本地文件系统，分布式文件系统，HDFS和amazon s3</td>
+</tr>
+<tr>
+<td style="text-align:center">gateway.recover_after_nodes</td>
+<td style="text-align:center">设置集群中N个节点启动时进行数据恢复</td>
+<td style="text-align:center">默认为1</td>
+</tr>
+<tr>
+<td style="text-align:center">gateway.recover_after_time</td>
+<td style="text-align:center">设置初始化数据恢复进程的超时时间</td>
+<td style="text-align:center">5m（默认是5分钟）</td>
+</tr>
+<tr>
+<td style="text-align:center">gateway.expected_nodes</td>
+<td style="text-align:center">设置这个集群中节点的数量</td>
+<td style="text-align:center">默认是2</td>
+</tr>
+<tr>
+<td style="text-align:center">cluster.routing.allocation.node_initial_primaries_recoveries</td>
+<td style="text-align:center">初始化数据恢复时，并发恢复线程的个数</td>
+<td style="text-align:center">默认4</td>
+</tr>
+<tr>
+<td style="text-align:center">cluster.routing.allocation.node_concurrent_recoveries</td>
+<td style="text-align:center">添加删除节点或负载均衡时并发恢复线程的个数</td>
+<td style="text-align:center">默认4</td>
+</tr>
+<tr>
+<td style="text-align:center">indices.recovery.max_size_per_sec</td>
+<td style="text-align:center">设置数据恢复时限制的带宽，如入100mb</td>
+<td style="text-align:center">默认0，无限制</td>
+</tr>
+<tr>
+<td style="text-align:center">indices.recovery.concurrent_streams</td>
+<td style="text-align:center">设置这个参数来限制从其它分片恢复数据时最大同时打开并发流的个数</td>
+<td style="text-align:center">默认5</td>
+</tr>
+<tr>
+<td style="text-align:center">discovery.zen.minimum_master_nodes</td>
+<td style="text-align:center">设置这个参数来保证集群中的节点可以知道其它N个有master资格的节点</td>
+<td style="text-align:center">默认1</td>
+</tr>
+<tr>
+<td style="text-align:center">discovery.zen.ping.timeout</td>
+<td style="text-align:center">设置集群中自动发现其它节点时ping连接超时时间</td>
+<td style="text-align:center">3s(默认3秒)</td>
+</tr>
+<tr>
+<td style="text-align:center">discovery.zen.ping.multicast.enabled</td>
+<td style="text-align:center">设置是否打开多播发现节点</td>
+<td style="text-align:center">默认true</td>
+</tr>
+<tr>
+<td style="text-align:center">discovery.zen.ping.unicast.hosts</td>
+<td style="text-align:center">设置集群中master节点的初始列表，可以通过这些节点来自动发现新加入集群的节点</td>
+<td style="text-align:center">[“host1”, “host2:port”, “host3[portX-portY]”]</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>带*号的是必需配置</p>
+</blockquote>
+<h3 id="集群">集群</h3><p>复制去其他机器，修改node.name,启动即可。</p>
+<h3 id="插件安装">插件安装</h3><p>安装插件使用bin/plugin命令<br>先看下plugin的命令有哪些<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#查看命令</span><br><span class="line">./bin/<span class="keyword">plugin</span> -<span class="literal">h</span></span><br><span class="line">#返回结果如下：</span><br><span class="line">NAME</span><br><span class="line">    <span class="keyword">plugin</span> - Manages plugins</span><br><span class="line">SYNOPSIS</span><br><span class="line">    <span class="keyword">plugin</span> &lt;command&gt;</span><br><span class="line">DESCRIPTION</span><br><span class="line">    Manage plugins</span><br><span class="line">COMMANDS</span><br><span class="line">    install    Install a <span class="keyword">plugin</span></span><br><span class="line">    remove     Remove a <span class="keyword">plugin</span></span><br><span class="line">    <span class="keyword">list</span>       <span class="keyword">List</span> installed plugins</span><br><span class="line"><span class="keyword">NOTES</span></span><br><span class="line">    [*] <span class="keyword">For</span> usage <span class="keyword">help</span> <span class="keyword">on</span> specific commands please <span class="keyword">type</span> <span class="string">"plugin &lt;command&gt; -h"</span></span><br></pre></td></tr></table></figure></p>
+<p>安装插件命令即为<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装kopf 后面的参数为github地址</span></span><br><span class="line">./bin/plugin <span class="keyword">install</span> lmenezes/elasticsearch-kopf</span><br></pre></td></tr></table></figure></p>
+<h2 id="集成篇">集成篇</h2><p>参考<a href="https://www.elastic.co/guide/en/elasticsearch/hadoop/index.html" target="_blank" rel="external">官网</a>下的介绍。<br>其中与spark的集成在<a href="https://www.elastic.co/guide/en/elasticsearch/hadoop/current/spark.html" target="_blank" rel="external">这里</a>。</p>
+<h3 id="导入jar">导入jar</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.elasticsearch<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>elasticsearch-spark_2.10<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">version</span>&gt;</span>2.3.2<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="配置ES参数">配置ES参数</h3><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.spark.&#123;SparkConf, SparkContext&#125;</span><br><span class="line">val <span class="keyword">conf</span> = new SparkConf().setAppName(this.getClass.getSimpleName)</span><br><span class="line"></span><br><span class="line"><span class="comment">//自动创建index</span></span><br><span class="line"><span class="keyword">conf</span>.<span class="keyword">set</span>(<span class="string">"es.index.auto.create"</span>, <span class="string">"true"</span>)</span><br><span class="line"><span class="comment">//    conf.set("es.nodes.wan.only", "true")</span></span><br><span class="line"><span class="comment">//对外服务地址</span></span><br><span class="line"><span class="keyword">conf</span>.<span class="keyword">set</span>(<span class="string">"es.nodes"</span>, <span class="string">"10.10.40.111"</span>)</span><br><span class="line"><span class="comment">//对外服务端口，默认是9200</span></span><br><span class="line"><span class="keyword">conf</span>.<span class="keyword">set</span>(<span class="string">"es.port"</span>,<span class="string">"9222"</span>);</span><br><span class="line"><span class="comment">//非必须，本文需要用mid作为_id，故加上当前配置</span></span><br><span class="line"><span class="comment">//其他配置参考：https://www.elastic.co/guide/en/elasticsearch/hadoop/current/configuration.html</span></span><br><span class="line"><span class="keyword">conf</span>.<span class="keyword">set</span>(<span class="string">"es.mapping.id"</span>,<span class="string">"mid"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="写入ES">写入ES</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import org<span class="class">.elasticsearch</span><span class="class">.spark</span>._</span><br><span class="line"></span><br><span class="line">val sc = new <span class="function"><span class="title">SparkContext</span><span class="params">(conf)</span></span>         </span><br><span class="line"></span><br><span class="line">val numbers = <span class="function"><span class="title">Map</span><span class="params">(<span class="string">"one"</span> -&gt; <span class="number">1</span>, <span class="string">"two"</span> -&gt; <span class="number">2</span>, <span class="string">"three"</span> -&gt; <span class="number">3</span>)</span></span></span><br><span class="line">val airports = <span class="function"><span class="title">Map</span><span class="params">(<span class="string">"arrival"</span> -&gt; <span class="string">"Otopeni"</span>, <span class="string">"SFO"</span> -&gt; <span class="string">"San Fran"</span>)</span></span></span><br><span class="line">val rdd = sc.<span class="function"><span class="title">makeRDD</span><span class="params">(Seq(numbers, airports)</span></span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//方法一</span></span><br><span class="line"><span class="comment">//saveToEs方法的参数即为：index/type</span></span><br><span class="line">rdd.<span class="function"><span class="title">saveToEs</span><span class="params">(<span class="string">"spark/docs"</span>)</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//方法二</span></span><br><span class="line">import org<span class="class">.elasticsearch</span><span class="class">.spark</span><span class="class">.rdd</span><span class="class">.EsSpark</span></span><br><span class="line">EsSpark.<span class="function"><span class="title">saveToEs</span><span class="params">(rdd, <span class="string">"spark/docs"</span>)</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="读取ES">读取ES</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import org<span class="class">.apache</span><span class="class">.spark</span><span class="class">.SparkContext</span></span><br><span class="line">import org<span class="class">.apache</span><span class="class">.spark</span><span class="class">.SparkContext</span>._</span><br><span class="line"></span><br><span class="line">import org<span class="class">.elasticsearch</span><span class="class">.spark</span>._ </span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">val conf = ...</span><br><span class="line">val sc = new <span class="function"><span class="title">SparkContext</span><span class="params">(conf)</span></span></span><br><span class="line"></span><br><span class="line">val RDD = sc.<span class="function"><span class="title">esRDD</span><span class="params">(<span class="string">"radio/artists"</span>)</span></span></span><br><span class="line"><span class="comment">//带参数的</span></span><br><span class="line">val rdd2 = sc.<span class="function"><span class="title">esRDD</span><span class="params">(<span class="string">"radio/artists"</span>, <span class="string">"?q=me*"</span>)</span></span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>其他的使用方式请参照官网介绍。</p>
+</blockquote>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/elasticsearch/" rel="tag">#elasticsearch</a>
+          
+            <a href="/tags/spark/" rel="tag">#spark</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/22/Zookeeper安装/" rel="next">Zookeeper安装</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+            <!-- 多说热评文章-->
+            <p>热评文章</p>
+            <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2016/08/20/ElasticSearch-安装与Spark集成/"
+                   data-title="ElasticSearch 安装与Spark集成" data-url="http://3iter.com/2016/08/20/ElasticSearch-安装与Spark集成/">
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Hoocoln" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Hoocoln</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装篇"><span class="nav-number">1.</span> <span class="nav-text">安装篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载"><span class="nav-number">1.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">1.3.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集群"><span class="nav-number">1.4.</span> <span class="nav-text">集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件安装"><span class="nav-number">1.5.</span> <span class="nav-text">插件安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集成篇"><span class="nav-number">2.</span> <span class="nav-text">集成篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入jar"><span class="nav-number">2.1.</span> <span class="nav-text">导入jar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置ES参数"><span class="nav-number">2.2.</span> <span class="nav-text">配置ES参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写入ES"><span class="nav-number">2.3.</span> <span class="nav-text">写入ES</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取ES"><span class="nav-number">2.4.</span> <span class="nav-text">读取ES</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hoocoln</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"3iter"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>
