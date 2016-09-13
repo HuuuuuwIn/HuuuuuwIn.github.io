@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="spark,推荐系统," />
+  <meta name="keywords" content="azkaban," />
 
 
 
@@ -37,22 +37,25 @@
   <link rel="shorticon icon" type="image/x-icon" href="/images/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="最近使用spark ALS做推荐，故写一篇文章记录所得。
+<meta name="description" content="安装下载项目地址：http://azkaban.github.io/下载地址：http://azkaban.github.io/downloads.html文档地址：http://azkaban.github.io/azkaban/docs/latest/因为本文选择web和executor单独部署，采用mysql做存储（其他模式请看文档）。所以需下载以下文件：
 
-算法介绍spark实现的推荐算法是基于矩阵分解的ALS-WR(alternating-least-squares with weighted-λ-regularization)的协同过滤算法。矩阵r表示用户对物品的评分矩阵，矩阵u,m表示用户和物品的特征矩阵。$$r\approx u \cdot m$$损失函数为$$f(U,M)=\sum">
+
+azkaban-web-ser">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spark ALS学习">
-<meta property="og:url" content="http://3iter.com/2015/11/19/spark-ALS学习/index.html">
+<meta property="og:title" content="Azkaban 安装与使用">
+<meta property="og:url" content="http://3iter.com/2016/09/13/Azkaban-安装与使用/index.html">
 <meta property="og:site_name" content="Hoocoln个人博客">
-<meta property="og:description" content="最近使用spark ALS做推荐，故写一篇文章记录所得。
+<meta property="og:description" content="安装下载项目地址：http://azkaban.github.io/下载地址：http://azkaban.github.io/downloads.html文档地址：http://azkaban.github.io/azkaban/docs/latest/因为本文选择web和executor单独部署，采用mysql做存储（其他模式请看文档）。所以需下载以下文件：
 
-算法介绍spark实现的推荐算法是基于矩阵分解的ALS-WR(alternating-least-squares with weighted-λ-regularization)的协同过滤算法。矩阵r表示用户对物品的评分矩阵，矩阵u,m表示用户和物品的特征矩阵。$$r\approx u \cdot m$$损失函数为$$f(U,M)=\sum">
-<meta property="og:updated_time" content="2015-11-19T09:27:53.478Z">
+
+azkaban-web-ser">
+<meta property="og:updated_time" content="2016-09-13T01:57:49.117Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spark ALS学习">
-<meta name="twitter:description" content="最近使用spark ALS做推荐，故写一篇文章记录所得。
+<meta name="twitter:title" content="Azkaban 安装与使用">
+<meta name="twitter:description" content="安装下载项目地址：http://azkaban.github.io/下载地址：http://azkaban.github.io/downloads.html文档地址：http://azkaban.github.io/azkaban/docs/latest/因为本文选择web和executor单独部署，采用mysql做存储（其他模式请看文档）。所以需下载以下文件：
 
-算法介绍spark实现的推荐算法是基于矩阵分解的ALS-WR(alternating-least-squares with weighted-λ-regularization)的协同过滤算法。矩阵r表示用户对物品的评分矩阵，矩阵u,m表示用户和物品的特征矩阵。$$r\approx u \cdot m$$损失函数为$$f(U,M)=\sum">
+
+azkaban-web-ser">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -62,7 +65,7 @@
   };
 </script>
 
-  <title> spark ALS学习 | Hoocoln个人博客 </title>
+  <title> Azkaban 安装与使用 | Hoocoln个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -200,7 +203,7 @@
           
           
             
-              spark ALS学习
+              Azkaban 安装与使用
             
           
         </h1>
@@ -209,8 +212,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-11-19T17:20:15+08:00" content="2015-11-19">
-            2015-11-19
+          <time itemprop="dateCreated" datetime="2016-09-13T09:56:22+08:00" content="2016-09-13">
+            2016-09-13
           </time>
         </span>
 
@@ -219,20 +222,8 @@
             &nbsp; | &nbsp; 分类于
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/spark/" itemprop="url" rel="index">
-                  <span itemprop="name">spark</span>
-                </a>
-              </span>
-
-              
-              
-                ， 
-              
-
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/spark/推荐系统/" itemprop="url" rel="index">
-                  <span itemprop="name">推荐系统</span>
+                <a href="/categories/azkaban/" itemprop="url" rel="index">
+                  <span itemprop="name">azkaban</span>
                 </a>
               </span>
 
@@ -247,8 +238,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/11/19/spark-ALS学习/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/19/spark-ALS学习/" itemprop="commentsCount"></span>
+              <a href="/2016/09/13/Azkaban-安装与使用/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/13/Azkaban-安装与使用/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -262,17 +253,36 @@
       
 
       
-        <span itemprop="articleBody"><blockquote>
-<p>最近使用spark ALS做推荐，故写一篇文章记录所得。</p>
-</blockquote>
-<h2 id="算法介绍">算法介绍</h2><p>spark实现的推荐算法是基于矩阵分解的ALS-WR(alternating-least-squares with weighted-λ-regularization)的协同过滤算法。<br>矩阵r表示用户对物品的评分矩阵，矩阵u,m表示用户和物品的特征矩阵。<br>$$r\approx u \cdot m$$<br>损失函数为<br>$$f(U,M)=\sum(r_{ij}-u_i^T m_j)^2+\lambda(\sum n_{u_i} ||u_i||^2+\sum n_{m_j}||m_j||^2)$$<br>$n_{u_i}$和$n_{m_i}$分别表示user评分数和电影数，$I_i$表示user i评分过的物品，$I_j$表示评论过物品j的所有用户。<br>损失函数前一部分为真实值与分解矩阵计算值得误差平方和，后一部分为正则范数，防止过拟合，目的即变成求f函数的最小值。<br>每次迭代，<br>固定M，逐个更新每个user的特征u(对u求偏导，令偏导为0求解)。<br>固定U，逐个更新每个item的特征m(对m求偏导，令偏导为0求解)。<br>给定的U的一列，称为$u_i$，由解正则化线性最小平方问题得到，这个问题由user i评分记录，以及i评分过的电影的特征向量组成</p>
+        <span itemprop="articleBody"><h2 id="安装">安装</h2><h3 id="下载">下载</h3><p>项目地址：<a href="http://azkaban.github.io/" target="_blank" rel="external">http://azkaban.github.io/</a><br>下载地址：<a href="http://azkaban.github.io/downloads.html" target="_blank" rel="external">http://azkaban.github.io/downloads.html</a><br>文档地址：<a href="http://azkaban.github.io/azkaban/docs/latest/" target="_blank" rel="external">http://azkaban.github.io/azkaban/docs/latest/</a><br>因为本文选择web和executor单独部署，采用mysql做存储（其他模式请看文档）。所以需下载以下文件：</p>
 <blockquote>
-<p>$\frac 1 2\frac{\partial f}{\partial u_{ki}}=0,\forall{i,k}\tag 1$<br>$\Rightarrow \sum_{j\in I_i}(u_i^Tm_j-r_{ij})m_{kj}+\lambda n_{ui}u_{ki}=0,\forall{i,k}\tag 2$<br>$\Rightarrow \sum_{j\in I_i}m_{kj}m_j^Tu_i+\lambda n_{ui}u_{ki}=\sum_{j\in I_i}m_{kj}r_{ij},\forall{i,k}\tag 3$<br>$\Rightarrow (M_{I_i}M_{I_i}^T+\lambda n_{u_i}E)u_i=M_{I_i}R^T(i,I_i),\forall i \tag 4$<br>$\Rightarrow u_i=A_i^{-1}V_i,\forall i\tag 5$</p>
+<ul>
+<li>azkaban-web-server-2.5.0.tar.gz</li>
+<li>azkaban-executor-server-2.5.0.tar.gz</li>
+<li>azkaban-sql-script-2.5.0.tar.gz </li>
+</ul>
 </blockquote>
-<p>其中$A_i=M_{I_i}M_{I_i}^T+\lambda n_{u_i}E=M_{I_i}R^T(i,I_i)$E是单位矩阵,$M_{I_i}$表示M的子矩阵，它的列是user i评分过的物品，$R(i,I_i)$是以评分物品为列的矩阵R的第i行向量。<br>同理$m_j=A_j^{-1}V_j$</p>
-<h2 id="代码实现">代码实现</h2><p>本文从spark中的LocalALS分析（SparkALS与其原理一样，只不过用RDD实现并行计算处理）<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ITERATIONS 为迭代次数</span></span><br><span class="line"><span class="keyword">for</span> (iter &lt;- <span class="number">1</span> to <span class="type">ITERATIONS</span>) &#123;</span><br><span class="line">  println(s<span class="string">"Iteration $iter:"</span>)</span><br><span class="line">  <span class="comment">//固定用户,逐个更新所有物品的特征</span></span><br><span class="line">  ms = (<span class="number">0</span> until <span class="type">M</span>).map(i =&gt; updateMovie(i, ms(i), us, <span class="type">R</span>)).toArray</span><br><span class="line">  <span class="comment">//固定物品,逐个更新所有用户的特征</span></span><br><span class="line">  us = (<span class="number">0</span> until <span class="type">U</span>).map(j =&gt; updateUser(j, us(j), ms, <span class="type">R</span>)).toArray</span><br><span class="line">  <span class="comment">//计算均方根误差</span></span><br><span class="line">  println(<span class="string">"RMSE = "</span> + rmse(<span class="type">R</span>, ms, us))</span><br><span class="line">  println()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>迭代更新的方法为updateMovie和updateUser，实现原理一致，取其一介绍<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">updateUser</span>(</span>j: <span class="type">Int</span>, u: <span class="type">RealVector</span>, ms: <span class="type">Array</span>[<span class="type">RealVector</span>], <span class="type">R</span>:<span class="type">RealMatrix</span>) : <span class="type">RealVector</span> = &#123;</span><br><span class="line">    <span class="comment">//F为隐性因子的个数，M为电影的总数，U为用户的总数</span></span><br><span class="line">    <span class="keyword">var</span> <span class="type">XtX</span>: <span class="type">RealMatrix</span> = <span class="keyword">new</span> <span class="type">Array2DRowRealMatrix</span>(<span class="type">F</span>, <span class="type">F</span>)</span><br><span class="line">    <span class="keyword">var</span> <span class="type">Xty</span>: <span class="type">RealVector</span> = <span class="keyword">new</span> <span class="type">ArrayRealVector</span>(<span class="type">F</span>)</span><br><span class="line">    <span class="comment">// For each movie that the user rated</span></span><br><span class="line">    <span class="comment">// 迭代所有电影，应取该用户评论过的电影集</span></span><br><span class="line">    <span class="keyword">for</span> (i &lt;- <span class="number">0</span> until <span class="type">M</span>) &#123;</span><br><span class="line">      <span class="function"><span class="keyword">val</span> <span class="title">m</span> =</span> ms(i)<span class="comment">//取出电影的特征向量</span></span><br><span class="line">      <span class="comment">// Add m * m^t to XtX</span></span><br><span class="line">      <span class="comment">// outProduct即为矩阵叉乘另一个矩阵的转置矩阵</span></span><br><span class="line">      <span class="comment">// add方法会把两个矩阵每个对应位置相加</span></span><br><span class="line">      <span class="type">XtX</span> = <span class="type">XtX</span>.add(m.outerProduct(m))</span><br><span class="line">      <span class="comment">// Add m * rating to Xty</span></span><br><span class="line">      <span class="comment">// mapMultiply方法会用将原向量中的每个值都乘以入参（此处即用户j对电影i的评分）</span></span><br><span class="line">      <span class="comment">// add方法会把每个向量的对应位置相加</span></span><br><span class="line">      <span class="type">Xty</span> = <span class="type">Xty</span>.add(m.mapMultiply(<span class="type">R</span>.getEntry(i, j)))</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Add regularization coefficients to diagonal terms</span></span><br><span class="line">    <span class="keyword">for</span> (d &lt;- <span class="number">0</span> until <span class="type">F</span>) &#123;</span><br><span class="line">      <span class="comment">// addToEntry方法将2维数组中当前参数1行和参数2列确定的对应元素加上参数3形成新值</span></span><br><span class="line">      <span class="type">XtX</span>.addToEntry(d, d, <span class="type">LAMBDA</span> * <span class="type">M</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Solve it with Cholesky</span></span><br><span class="line">    <span class="comment">// 使用乔里斯基分解求解，mllib中还提供非负最小二乘分解(NNLS)</span></span><br><span class="line">    <span class="keyword">new</span> <span class="type">CholeskyDecomposition</span>(<span class="type">XtX</span>).getSolver.solve(<span class="type">Xty</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>结合公式4,$(M_{I_i}M_{I_i}^T+\lambda n_{u_i}E)u_i=M_{I_i}R^T(i,I_i)$,其中XtX即为公式中$u_i$前的计算结果，Xty为等号后的计算结果。</p>
+<p>2.5.0是当前的版本号，根据版本不同修改之。下载完后解压。</p>
+<h3 id="Mysql">Mysql</h3><p>azkaban-sql-script解压完之后有很多sql，新建一个数据库（本文azkaban）和用户,然后去执行create-all-sql-2.5.0.sql。</p>
+<blockquote>
+<p>mysql&gt;CREATE DATABASE azkaban;<br>mysql&gt;CREATE USER ‘username’@’%’ IDENTIFIED BY ‘password’;<br>mysql&gt;GRANT SELECT,INSERT,UPDATE,DELETE ON <database>.* to ‘<username>‘@’%’ WITH GRANT OPTION;<br>mysql&gt;source /PATH/create-all-sql-2.5.0.sql;</username></database></p>
+</blockquote>
+<h3 id="配置web">配置web</h3><p>修改conf/azkaban.properties，主要是以下属性：<br><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置项目名称</span></span><br><span class="line">azkaban.name=BigData</span><br><span class="line"><span class="comment">#设置项目副标题</span></span><br><span class="line">azkaban.<span class="keyword">label</span>=besttone</span><br><span class="line"><span class="comment">#一定要设置为上海，否则按美国时间执行</span></span><br><span class="line"><span class="keyword">default</span>.timezone.id=Asia/Shanghai</span><br><span class="line"></span><br><span class="line">database.type=mysql</span><br><span class="line">mysql.<span class="keyword">port</span>=<span class="number">3306</span></span><br><span class="line">mysql.host=localhost</span><br><span class="line"><span class="comment">#改为自己的数据库名称</span></span><br><span class="line">mysql.database=azkaban</span><br><span class="line"><span class="comment">#改为自己的数据库账号</span></span><br><span class="line">mysql.<span class="keyword">user</span>=azkaban</span><br><span class="line"><span class="comment">#改为自己的数据库密码</span></span><br><span class="line">mysql.password=azkaban</span><br><span class="line"></span><br><span class="line">mail.sender=email账号</span><br><span class="line">mail.host=email服务器</span><br><span class="line">mail.<span class="keyword">user</span>=email账号</span><br><span class="line">mail.password=email密码</span><br><span class="line"></span><br><span class="line"><span class="comment">#Azkaban Jetty 服务设置，先安装此配置，后面再详细介绍生产方法.</span></span><br><span class="line">jetty.<span class="keyword">max</span>Threads=<span class="number">25</span></span><br><span class="line">jetty.ssl.<span class="keyword">port</span>=<span class="number">8443</span></span><br><span class="line">jetty.<span class="keyword">port</span>=<span class="number">8081</span></span><br><span class="line">jetty.keystore=keystore</span><br><span class="line">jetty.password=keystore密码</span><br><span class="line">jetty.keypassword=keystore密码</span><br><span class="line">jetty.truststore=keystore</span><br><span class="line">jetty.trustpassword=keystore密码</span><br></pre></td></tr></table></figure></p>
+<h3 id="生成keystore">生成keystore</h3><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#命令行执行以下命令，密码输入上一步keystore的密码，组织结构和国家（<span class="preprocessor">CN</span>）省份城市随便填。</span><br><span class="line">/PATH/TO/JAVA_HOME/<span class="keyword">bin/keytool </span>-genkey -keystore keystore -<span class="preprocessor">alias</span> jetty -keyalg RSA</span><br></pre></td></tr></table></figure>
+<p>执行完，在当前目录下就有一个keystore文件，复制到azkaban-web-2.5.0目录下。如果想新建文件夹放置，则对应修改配置里面jetty.keystore和jetty.truststore的路径。</p>
+<h3 id="启动web">启动web</h3><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#后台启动</span></span><br><span class="line">nohup ./bin/azkaban-web-<span class="built_in">start</span>.sh &amp;</span><br></pre></td></tr></table></figure>
+<p>启动玩访问<a href="http://localhost:8443/,输入azkaban/azkaban即可进入（用户名和密码在conf/azkaban-users.xml中配置）。" target="_blank" rel="external">http://localhost:8443/,输入azkaban/azkaban即可进入（用户名和密码在conf/azkaban-users.xml中配置）。</a><br>如需停止，执行bin下的shutdown.sh即可。</p>
+<h3 id="配置executor">配置executor</h3><p>进入executor目录，修改azkaban.properties<br><figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">default</span>.timezone.id=<span class="type">Asia</span>/<span class="type">Shanghai</span></span><br><span class="line"><span class="title">database</span>.<span class="typedef"><span class="keyword">type</span>=mysql</span></span><br><span class="line"><span class="title">mysql</span>.<span class="foreign"><span class="keyword">port</span>=3306</span></span><br><span class="line"><span class="title">mysql</span>.host=localhost</span><br><span class="line"><span class="title">mysql</span>.database=azkaban</span><br><span class="line"><span class="title">mysql</span>.user=azkaban</span><br><span class="line"><span class="title">mysql</span>.password=azkaban</span><br></pre></td></tr></table></figure></p>
+<h3 id="启动executor">启动executor</h3><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#后台启动</span></span><br><span class="line">nohup ./bin/azkaban-executor-<span class="built_in">start</span>.sh &amp;</span><br></pre></td></tr></table></figure>
+<p>如需停止，执行bin下的shutdown.sh即可。</p>
+<h3 id="完成">完成</h3><p>至此，程序启动完成，可以开始使用了。</p>
+<h2 id="使用">使用</h2><p>下面就介绍下如何使用azkaban调度spark。</p>
+<h3 id="写job">写job</h3><p>新建文件，以.job结尾命名。<br>写文件，文件包含type,command,dependencies（非必须）等<br>例如：<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span>=command</span><br><span class="line"><span class="comment"># 执行sh脚本，建议这样做，后期只需维护脚本就行了，azkaban定义工作流程</span></span><br><span class="line">command=<span class="regexp">/PATH/</span><span class="constant">TO</span>/<span class="constant">SPARK</span>/bin/spark-submit --<span class="class"><span class="keyword">class</span> <span class="title">x</span>.<span class="title">x</span>.<span class="title">x</span>.<span class="title">XX</span> --<span class="title">master</span> <span class="title">spark</span>://<span class="title">x</span>.<span class="title">x</span>.<span class="title">x</span>.<span class="title">x</span>:8070 <span class="title">xxx</span>.<span class="title">jar</span></span></span><br><span class="line">dependencies=其他的job文件的名字（如果有前置任务的时候才加）</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注：command中的x自行替换，也可以把指令写成脚本，然后command写sh xxxxx.sh，以后维护这个脚本即可。</p>
+</blockquote>
+<p>多个任务，就写多个job文件。dependencies中写好前置关系，不可成环。</p>
+<h3 id="打包上传">打包上传</h3><p>将job文件和spark程序打出的jar包放置在同一目录，然后一起压缩成zip文件。<br>在azkaban的web页面上新建项目，然后选择zip压缩文件上传。</p>
+<h3 id="执行">执行</h3><p>在项目页面点击进入项目，点击execute flow，可以选择直接执行，或者定时执行，根据自己的实际情况选择。</p>
 </span>
       
     </div>
@@ -281,9 +291,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/spark/" rel="tag">#spark</a>
-          
-            <a href="/tags/推荐系统/" rel="tag">#推荐系统</a>
+            <a href="/tags/azkaban/" rel="tag">#azkaban</a>
           
         </div>
       
@@ -292,13 +300,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/11/19/spark-SGD学习/" rel="prev">spark SGD学习</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/10/22/BLAS方法简介（一）/" rel="next">BLAS方法简介（一）</a>
+              <a href="/2016/08/20/spark读写Hbase/" rel="next">spark读写Hbase</a>
             
           </div>
         </div>
@@ -327,8 +333,8 @@
         
           <div class="comments" id="comments">
             
-              <div class="ds-thread" data-thread-key="2015/11/19/spark-ALS学习/"
-                   data-title="spark ALS学习" data-url="http://3iter.com/2015/11/19/spark-ALS学习/">
+              <div class="ds-thread" data-thread-key="2016/09/13/Azkaban-安装与使用/"
+                   data-title="Azkaban 安装与使用" data-url="http://3iter.com/2016/09/13/Azkaban-安装与使用/">
               </div>
             
           </div>
@@ -410,7 +416,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法介绍"><span class="nav-number">1.</span> <span class="nav-text">算法介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">2.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载"><span class="nav-number">1.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql"><span class="nav-number">1.2.</span> <span class="nav-text">Mysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置web"><span class="nav-number">1.3.</span> <span class="nav-text">配置web</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成keystore"><span class="nav-number">1.4.</span> <span class="nav-text">生成keystore</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动web"><span class="nav-number">1.5.</span> <span class="nav-text">启动web</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置executor"><span class="nav-number">1.6.</span> <span class="nav-text">配置executor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动executor"><span class="nav-number">1.7.</span> <span class="nav-text">启动executor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完成"><span class="nav-number">1.8.</span> <span class="nav-text">完成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#写job"><span class="nav-number">2.1.</span> <span class="nav-text">写job</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打包上传"><span class="nav-number">2.2.</span> <span class="nav-text">打包上传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行"><span class="nav-number">2.3.</span> <span class="nav-text">执行</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
